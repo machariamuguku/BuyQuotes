@@ -9,7 +9,56 @@
                 <!-- First column -->
                 <div class="column">
 
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title is-centered">
+                                Choose a Quote category
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+
+                                <!-- media content -->
+                                <article class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-128x128">
+                                            <img src="https://bulma.io/images/placeholders/128x128.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <strong>Buy 5 Quotes</strong> <small>at 10/=</small>
+                                                <br>
+                                            </p>
+
+                                            <!-- select item -->
+                                            <div class="field">
+                                                <div class="control has-icons-left">
+                                                    <div class="select">
+                                                        <select>
+                                                            <option selected>Programming</option>
+                                                            <option>Workout</option>
+                                                            <option>Motivation</option>
+                                                            <option>Love</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="icon is-small is-left">
+                                                        <i class="fas fa-quote-left"></i>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- /select item-->
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- /media content -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- /first column -->
 
                 <!-- Second column -->
                 <div class="column">
@@ -24,37 +73,43 @@
                             <div class="content">
                                 <h5 class="title">Total: KES 10/=</h5>
                                 <!-- the form -->
-                                <div class="field">
-                                    <p class="control has-icons-left has-icons-right">
-                                        <input class="input" type="email" placeholder="Email to deliver quotes">
-                                        <span class="icon is-small is-left">
-                                            <i class="fas fa-envelope"></i>
-                                        </span>
-                                    </p>
-                                </div>
+                                <form method="POST" action="/pay">
+                                    <div class="field">
+                                        <p class="control has-icons-left has-icons-right">
+                                            <input class="input" type="email" placeholder="Email to deliver quotes"
+                                                required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-envelope"></i>
+                                            </span>
+                                        </p>
+                                    </div>
 
-                                <div class="field">
-                                    <p class="control has-icons-left">
-                                        <input class="input" type="tel" placeholder="Mpesa Phone Number">
-                                        <span class="icon is-small is-left">
-                                            <i class="fas fa-phone"></i>
-                                        </span>
-                                    </p>
-                                </div>
+                                    <div class="field">
+                                        <p class="control has-icons-left">
+                                            <input class="input" type="tel" placeholder="Mpesa Phone Number" required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-phone"></i>
+                                            </span>
+                                        </p>
+                                    </div>
 
-                                <div class="field">
-                                    <p class="control has-text-centered">
-                                        <button class="button is-success">
-                                            Login
-                                        </button>
-                                    </p>
-                                </div>
+                                    <div class="field">
+                                        <p class="control has-text-centered">
+                                            <button class="button is-success" type="submit">
+                                                Login
+                                            </button>
+                                        </p>
+                                    </div>
                             </div>
+                            </form>
                             <!-- /the form -->
-                            <p class="has-text-centered is-size-6 has-text-danger"> N/b: Include the country code e.g +254</p>
+                            <p class="has-text-centered is-size-6 has-text-danger"> N/b: Include the
+                                country code e.g
+                                +254</p>
                         </div>
                     </div>
                 </div>
+                <!-- /second column -->
             </div>
             <!-- /columns -->
         </div>
