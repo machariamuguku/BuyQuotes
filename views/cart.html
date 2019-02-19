@@ -1,44 +1,62 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12 text-center p-5">
-            <h1>Shopping Cart</h1>
-        </div>
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-3">
-                    <img src="https://via.placeholder.com/150/007BFF/FFFFFF?text=Cool%20Product" class="img-thumbnail" alt="Cool Product">
+<section class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title has-text-centered">
+                Buy Quotes With M-PESA
+            </h1>
+            <!-- columns -->
+            <div class="columns">
+                <!-- First column -->
+                <div class="column">
+
                 </div>
-                <div class="col-md-9">
-                    <h5>Cool Product</h5>
-                    <p class="font-weight-bold">KES 500</p>
-                </div>
-            </div>
-            <hr/>
-            <div class="row">
-                <div class="col-md-3">
-                    <img src="https://via.placeholder.com/150/007BFF/FFFFFF?text=Cooler%20Product" class="img-thumbnail" alt="Cooler Product">
-                </div>
-                <div class="col-md-9">
-                    <h5>Cooler Product</h5>
-                    <p class="font-weight-bold">KES 1,000</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">Order Summary</div>
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Total: KES 1,500</h5>
-                    <form action="/pay" method="POST">
-                        <div class="form-group">
-                            <label for="phoneNumber">Phone Number</label>
-                            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" aria-describedby="phoneHelp" />
-                            <small id="phoneHelp">Remember to include the country code e.g +254</small>
+
+                <!-- Second column -->
+                <div class="column">
+
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title is-centered">
+                                Order Summary
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <h5 class="title">Total: KES 10/=</h5>
+                                <!-- the form -->
+                                <div class="field">
+                                    <p class="control has-icons-left has-icons-right">
+                                        <input class="input" type="email" placeholder="Email to deliver quotes">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-envelope"></i>
+                                        </span>
+                                    </p>
+                                </div>
+
+                                <div class="field">
+                                    <p class="control has-icons-left">
+                                        <input class="input" type="tel" placeholder="Mpesa Phone Number">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-phone"></i>
+                                        </span>
+                                    </p>
+                                </div>
+
+                                <div class="field">
+                                    <p class="control has-text-centered">
+                                        <button class="button is-success">
+                                            Login
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- /the form -->
+                            <p class="has-text-centered is-size-6 has-text-danger"> N/b: Include the country code e.g +254</p>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Buy</button>
-                    </form>
+                    </div>
                 </div>
             </div>
+            <!-- /columns -->
         </div>
     </div>
-</div>
+</section>
