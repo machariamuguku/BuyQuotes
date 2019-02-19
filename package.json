@@ -1,0 +1,28 @@
+{
+  "name": "buyquotes",
+  "version": "1.0.0",
+  "description": "buy quotes app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/machariamuguku/BuyQuotes.git"
+  },
+  "keywords": [
+    "fullstack"
+  ],
+  "author": "http://muguku.co.ke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/machariamuguku/BuyQuotes/issues"
+  },
+  "homepage": "https://github.com/machariamuguku/BuyQuotes#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "hbs": "^4.0.2",
+    "morgan": "^1.9.1"
+  }
+}
