@@ -1,5 +1,72 @@
 <section class="hero">
-    <div class="hero-body add-margin-top">
+
+    <!-- if errors -->
+    <!-- {{#if errors}}
+    <div class="container">
+        <div class="columns">
+            <div class="column has-text-centered">
+
+                <div class="bd-snippet-preview ">
+                    <div class="notification is-danger">
+                        <button class="delete" onclick="tmpCallback()"></button>
+                        <h1 class="title">{{title}}</h1>
+                        <ul>
+                            {{#each errors}}
+                            <li>{{this.msg}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{/if}} -->
+    {{#if errors}}
+    <div class="column has-text-centered">
+        <div class="bd-snippet-preview ">
+            <article class="{{cssalertclass}}">
+                <div class="message-header">
+                    <h1 class="title">{{title}}</h1>
+                    <button class="delete" aria-label="delete"></button>
+                </div>
+                <div class="message-body">
+                    <ul>
+                        {{#each errors}}
+                        <li>{{this.msg}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </div>
+    {{/if}}
+
+    <!-- /if errors -->
+
+    <!-- if success -->
+    {{#if newuserdata}}
+    <div class="column">
+        <div class="bd-snippet-preview ">
+            <article class="{{cssalertclass}}">
+                <div class="message-header has-text-centered is-centered">
+                    <h1 class="title">{{title}}</h1>
+                    <button class="delete" aria-label="delete"></button>
+                </div>
+                <div class="message-body">
+                    <ul>
+                        {{#each newuserdata}}
+                        <li>{{this.msg}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </div>
+    {{/if}}
+    <!-- /if success -->
+
+    <div class="hero-body">
         <div class="container">
             <h1 class="title has-text-centered">
                 Buy Quotes With M-PESA
@@ -76,8 +143,7 @@
                                 <form method="POST" action="/pay">
                                     <div class="field">
                                         <p class="control has-icons-left has-icons-right">
-                                            <input class="input" type="email" placeholder="Email to deliver quotes"
-                                                required>
+                                            <input name="email" class="input" type="email" placeholder="Email to deliver quotes">
                                             <span class="icon is-small is-left">
                                                 <i class="fas fa-envelope"></i>
                                             </span>
@@ -86,7 +152,7 @@
 
                                     <div class="field">
                                         <p class="control has-icons-left">
-                                            <input class="input" type="tel" placeholder="Mpesa Phone Number" required>
+                                            <input name="phonenumber" class="input" type="tel" placeholder="Mpesa Phone Number">
                                             <span class="icon is-small is-left">
                                                 <i class="fas fa-phone"></i>
                                             </span>

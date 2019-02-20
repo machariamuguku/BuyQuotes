@@ -4,8 +4,8 @@ const path = require('path');
 const logger = require('morgan');
 const cors = require('cors')
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
-
+const bodyParser = require('body-parser');
+const expressValidator = require("express-validator");
 
 // add moongose and connect to db
 mongoose.connect("mongodb://localhost:27017/buyquotes", {
@@ -27,6 +27,9 @@ const app = express();
 // add bodyparser and cors
 app.use(bodyParser.json());
 app.use(cors());
+
+// express-validator middleware
+app.use(expressValidator());
 
 // const port = process.env.PORT;
 const port = process.env.PORT || 1800;

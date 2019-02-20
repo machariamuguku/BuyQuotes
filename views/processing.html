@@ -1,3 +1,28 @@
+<section class="hero">
+    <!-- if errors -->
+    {{#if newuserdata}}
+    <div class="container">
+        <div class="columns">
+            <div class="column has-text-centered">
+
+                <div class="bd-snippet-preview ">
+                    <div class="notification is-danger">
+                        <button class="delete" onclick="tmpCallback()"></button>
+                        <h1 class="title">{{title}}</h1>
+                        <ul>
+                            {{#each errors}}
+                            <li>{{this.msg}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    <!-- /if errors -->
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4 p-5">
@@ -8,3 +33,5 @@
         </div>
     </div>
 </div>
+
+</section>
