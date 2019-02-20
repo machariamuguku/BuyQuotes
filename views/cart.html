@@ -21,30 +21,9 @@
     {{/if}}
     <!-- /if the form has errors on click -->
 
-    <!-- if submit succeeds -->
+    <!-- If submit succeeds -->
+    <!-- Show Processing M-PESA Payments -->
     {{#if newuserdata}}
-    <div class="column">
-        <div class="bd-snippet-preview ">
-            <article class="{{cssalertclass}}">
-                <div class="message-header has-text-centered is-centered">
-                    <h1 class="title">{{title}}</h1>
-                    <button class="delete" aria-label="delete"></button>
-                </div>
-                <div class="message-body">
-                    <ul>
-                        {{#each newuserdata}}
-                        <li>Phone:{{this.phonenumber}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </article>
-        </div>
-    </div>
-    {{/if}}
-    <!-- /if submit succeeds -->
-
-    <!-- Processing M-PESA Payments -->
-    {{#if processingmpesa}}
     <div class="column">
         <div class="bd-snippet-preview ">
             <article class="{{cssalertforloading}}">
@@ -53,13 +32,18 @@
                     <button class="delete" aria-label="delete"></button>
                 </div>
                 <div class="message-body">
-                   <!-- show loading thingy here -->
+                    <!-- show loading thingy here -->
+                    <div class="has-text-centered">
+                        <a class="button is-success is-loading">Processing</a>
+                        Processing Payments, Check Your Phone For STK Push message!
+                    </div>
                 </div>
             </article>
         </div>
     </div>
     {{/if}}
-    <!-- /Processing M-PESA Payments -->
+    <!-- /Show Processing M-PESA Payments -->
+    <!-- /if submit succeeds -->
 
     <div class="hero-body">
         <div class="container">

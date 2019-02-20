@@ -22,8 +22,6 @@ router.post('/pay', (req, res) => {
 
     let errors = req.validationErrors();
     let newuserdata = "";
-    let processingmpesa = false;
-
 
     if (errors) {
         res.render("cart", {
@@ -40,50 +38,24 @@ router.post('/pay', (req, res) => {
 
         if (newuserdata) {
             res.render("cart", {
-                title: "Successfully submitted",
-                processingtitle:"Check Your Phone For STK Push message!",
+                processingtitle: "Order complete; Submission Successful; Processing Payment",
                 newuserdata: newuserdata,
-                cssalertclass: "message is-success",
-                cssalertforloading: "is-primary",
-                processingmpesa: true
+                cssalertforloading: "message is-success",
             });
+            // insert transaction history to DB here 
+            // default success false on every transaction whether successful or not
 
             // Process Payment here
             console.log(newuserdata);
         }
 
-
-        // insert to DB here .. or call model or schema or whatever
-        // res.redirect('/');
+        // Send Quotes here
+        // If successfull res.render transaction successful to message
+        // write success true message to DB if success
     }
 
-    // const phoneNumber = req.body.phoneNumber;
-    // const productName = 'YOUR-PRODUCT-NAME-HERE';
-
-    // const paymentOptions = {
-    //     productName: productName,
-    //     phoneNumber: phoneNumber,
-    //     currencyCode: 'KES',
-    //     amount: 1500,
-    //     narration: 'Online store payment',
-    //     metadata: {
-    //         customerEmail: 'jane@doe.com',
-    //     },
-    // };
-    // payments.mobileCheckout(paymentOptions)
-    //     .then((response) => {
-    //         console.log(JSON.stringify(response, 0, 4));
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     });
-    //  res.redirect('/processing');
 });
 
 // Receive payment notification here ...
-
-router.get('/processing', (req, res) => {
-    res.render('processing');
-});
 
 module.exports = router;
