@@ -15,7 +15,7 @@ module.exports = {
                 }
             },
             function (error, response, body) {
-                body = JSON.parse(body);
+                body = JSON.stringify(body);
                 accessToken = body.access_token;
 
                 if (error) {
