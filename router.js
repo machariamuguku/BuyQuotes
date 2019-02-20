@@ -13,7 +13,8 @@ router.get('/', (req, res) => {
 
 // confirmation URL
 router.get('/confirmation', (req, res) => {
-let kwapa = mpesamethods.generateValidationURL();
+let kwapa1 = mpesamethods.generateAcessToken();  
+let kwapa = mpesamethods.generateValidationURL(kwapa1);
     res.render('confirmation', {
         title: kwapa
     });
