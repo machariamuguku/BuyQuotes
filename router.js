@@ -13,11 +13,57 @@ router.get('/', (req, res) => {
 
 // confirmation URL
 router.get('/confirmation', (req, res) => {
-let kwapa1 = mpesamethods.generateAcessToken();  
-let kwapa = mpesamethods.generateValidationURL(kwapa1);
+
+    funct2 = function(
+funct1= function(){
+    var request = require('request'),
+    consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N",
+    consumer_secret = "YOUR_APP_TEYbiahbnSmUErPVCONSUMER_SECRET",
+    url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
+    auth = "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
+  
+    request(
+      {
+        url : url,
+        headers : {
+          "Authorization" : auth
+        }
+      },
+      function (error, response, body) {
+        // TODO: Use the body object to extract OAuth access token
+      }
+    )
+}){
+        var request = require('request'),
+  oauth_token = funct1(),
+  url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
+  auth = "Bearer " + oauth_token;
+
+  request(
+    {
+      method: 'POST',
+      url : url,
+      headers : {
+        "Authorization" : auth
+      },
+      json : {
+        "ShortCode": "600000",
+        "ResponseType": "confirmed",
+        "ConfirmationURL": "https://buyquotes.herokuapp.com/confirmation",
+        "ValidationURL": "https://buyquotes.herokuapp.com/confirmation/validation"
+      }
+    },
+    function (error, response, body) {
+      // TODO: Use the body object to extract the 
+      console.log(body)
+    }
+  )
+
+    }
     res.render('confirmation', {
-        title: kwapa
+        title: funct2()
     });
+    res.redirect('/confirmation');
 });
 
 // ValidationURL
