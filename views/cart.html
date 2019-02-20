@@ -12,6 +12,7 @@
                     <ul>
                         {{#each errors}}
                         <li>{{this.msg}}</li>
+                        <br/>
                         {{/each}}
                     </ul>
                 </div>
@@ -27,8 +28,8 @@
     <div class="column">
         <div class="bd-snippet-preview ">
             <article class="{{cssalertforloading}}">
-                <div class="message-header has-text-centered is-centered">
-                    <h1 class="title">{{processingtitle}}</h1>
+                <div class="message-header">
+                    <p class="title">{{processingtitle}}</p>
                     <button class="delete" aria-label="delete"></button>
                 </div>
                 <div class="message-body">
@@ -76,7 +77,7 @@
 
                                             <h5>Buy 5 Quotes @ 10/=</h5>
                                             <br>
-                                            <p> And have them delivered in your <strong>Email</strong> Instantly
+                                            <p> And have them delivered to your <strong>Email</strong> Instantly
                                             </p>
 
                                         </div>
@@ -106,7 +107,7 @@
                                 </div>
 
                                 <!-- the form -->
-                                <form method="POST" action="/pay">
+                                <form method="POST" action="/">
 
                                     <!-- select item -->
                                     <div class="field">

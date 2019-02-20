@@ -14,9 +14,9 @@ router.get('/', (req, res) => {
 });
 
 // Payment processing code here ...
-router.post('/pay', (req, res) => {
+router.post('/', (req, res) => {
 
-    req.checkBody("phonenumber", "Enter an M-PESA registered Phone number to receive payment prompt").notEmpty().isMobilePhone("en-KE").withMessage('Please use a Kenyan phone number format (eg., +254712345678)');
+    req.checkBody("phonenumber", "Enter an M-PESA registered Phone number to receive the payment prompt ").notEmpty().isMobilePhone("en-KE").withMessage('Please use a Kenyan phone number format (eg., +254712345678)');
     req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
     req.checkBody("selector", "Please select a Quotes category").notEmpty();
 
