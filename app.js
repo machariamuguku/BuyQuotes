@@ -20,6 +20,9 @@ app.engine('html', require('hbs').__express);
 // set views folder
 app.set('views', path.join(__dirname, 'views'));
 
+// Set resources folder
+app.use(express.static(path.join(__dirname, "resources")));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
