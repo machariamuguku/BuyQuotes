@@ -1,27 +1,5 @@
 <section class="hero">
-
-    <!-- if errors -->
-    <!-- {{#if errors}}
-    <div class="container">
-        <div class="columns">
-            <div class="column has-text-centered">
-
-                <div class="bd-snippet-preview ">
-                    <div class="notification is-danger">
-                        <button class="delete" onclick="tmpCallback()"></button>
-                        <h1 class="title">{{title}}</h1>
-                        <ul>
-                            {{#each errors}}
-                            <li>{{this.msg}}</li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    {{/if}} -->
+    <!-- if the form has errors on click -->
     {{#if errors}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
@@ -41,10 +19,9 @@
         </div>
     </div>
     {{/if}}
+    <!-- /if the form has errors on click -->
 
-    <!-- /if errors -->
-
-    <!-- if success -->
+    <!-- if submit succeeds -->
     {{#if newuserdata}}
     <div class="column">
         <div class="bd-snippet-preview ">
@@ -56,7 +33,7 @@
                 <div class="message-body">
                     <ul>
                         {{#each newuserdata}}
-                        <li>{{this.msg}}</li>
+                        <li>Phone:{{this.phonenumber}}</li>
                         {{/each}}
                     </ul>
                 </div>
@@ -64,7 +41,29 @@
         </div>
     </div>
     {{/if}}
-    <!-- /if success -->
+    <!-- /if submit succeeds -->
+
+    <!-- Processing M-PESA Payments -->
+    {{#if processingmpesa}}
+    <div class="column">
+        <div class="bd-snippet-preview ">
+            <article class="{{cssalertclass}}">
+                <div class="message-header has-text-centered is-centered">
+                    <h1 class="title">{{title}}</h1>
+                    <button class="delete" aria-label="delete"></button>
+                </div>
+                <div class="message-body">
+                    <ul>
+                        {{#each newuserdata}}
+                        <li>Phone:{{this.phonenumber}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </div>
+    {{/if}}
+    <!-- /Processing M-PESA Payments -->
 
     <div class="hero-body">
         <div class="container">
@@ -79,7 +78,7 @@
                     <div class="card">
                         <header class="card-header">
                             <p class="card-header-title is-centered">
-                                Choose a Quote category
+                                Motivation is a Push, Inspiration is a Pull
                             </p>
                         </header>
                         <div class="card-content">
@@ -93,30 +92,13 @@
                                         </p>
                                     </figure>
                                     <div class="media-content">
-                                        <div class="content">
-                                            <p>
-                                                <strong>Buy 5 Quotes</strong> <small>at 10/=</small>
-                                                <br>
+                                        <div class="content has-margin-top-2">
+
+                                            <h5>Buy 5 Quotes @ 10/=</h5>
+                                            <br>
+                                            <p> And have them delivered in your <strong>Email</strong> Instantly
                                             </p>
 
-                                            <!-- select item -->
-                                            <div class="field">
-                                                <div class="control has-icons-left">
-                                                    <div class="select">
-                                                        <select>
-                                                            <option selected>Programming</option>
-                                                            <option>Workout</option>
-                                                            <option>Motivation</option>
-                                                            <option>Love</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="icon is-small is-left">
-                                                        <i class="fas fa-quote-left"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <!-- /select item-->
                                         </div>
                                     </div>
                                 </article>
@@ -138,11 +120,32 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                <h5 class="title">Total: KES 10/=</h5>
+
+                                <div class="has-text-centered">
+                                    <h5 class="title">Total: KES 10/=</h5>
+                                </div>
+
                                 <!-- the form -->
                                 <form method="POST" action="/pay">
+
+                                    <!-- select item -->
                                     <div class="field">
-                                        <p class="control has-icons-left has-icons-right">
+                                        <div class="control has-text-centered">
+                                            <div class="select">
+                                                <select name="selector">
+                                                    <option selected disabled>Choose a Quote category</option>
+                                                    <option>Programming</option>
+                                                    <option>Workout</option>
+                                                    <option>Motivation</option>
+                                                    <option>Love</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /select item-->
+
+                                    <div class="field">
+                                        <p class="control has-icons-left">
                                             <input name="email" class="input" type="email" placeholder="Email to deliver quotes">
                                             <span class="icon is-small is-left">
                                                 <i class="fas fa-envelope"></i>

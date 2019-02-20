@@ -18,28 +18,40 @@ router.post('/pay', (req, res) => {
 
     req.checkBody("phonenumber", "Enter an M-PESA registered Phone number to receive payment prompt").notEmpty().isMobilePhone("en-KE").withMessage('Please use a Kenyan phone number format (eg., +254712345678)');
     req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
+    req.checkBody("selector", "Please select a Quotes category").notEmpty();
 
     let errors = req.validationErrors();
-    let newuserdata;
-    console.log(newuserdata);
- 
+    let newuserdata = "";
+    let processingmpesa = false;
+
+
     if (errors) {
         res.render("cart", {
-            title: "There were errors submiting the form",
+            title: "Please Correct the following errors",
             errors: errors,
             cssalertclass: "message is-danger"
         });
     } else {
-            newuserdata = {
+        newuserdata = {
             phonenumber: req.body.phonenumber,
             email: req.body.email,
+            selector: req.body.selector
         };
-        console.log(newuserdata);
-        res.render("cart", {
-            title: "Successfully submitted",
-            newuserdata: newuserdata,
-            cssalertclass: "message is-success"
-        });
+
+        if (newuserdata) {
+            res.render("cart", {
+                title: "Successfully submitted",
+                newuserdata: newuserdata,
+                cssalertclass: "message is-success",
+                cssalertforloading: "is-primary",
+                processingmpesa: true
+            });
+
+            // Process Payment here
+            console.log(newuserdata);
+        }
+
+
         // insert to DB here .. or call model or schema or whatever
         // res.redirect('/');
     }
