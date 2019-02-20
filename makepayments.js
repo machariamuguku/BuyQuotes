@@ -1,5 +1,6 @@
-// Function 1: generate access token
-generateAcessToken = () => {
+module.exports = {
+    // Function 1: generate access token
+generateAcessToken: function(){
     var accessToken;
     var request = require('request'),
         consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N",
@@ -21,22 +22,19 @@ generateAcessToken = () => {
                 // TODO: Use the body object to extract OAuth access token
                 body = JSON.parse(body);
                 accessToken = body.access_token;
-                console.log("method1 "+accessToken);
+                console.log("method1 " + accessToken);
             }
 
         }
     )
 
-};
-
-module.exports = {
+},
     // Function 2: generate ValidationURL
-    generateValidationURL: function () {
-        let accessToken = generateAcessToken();
+    generateValidationURL: function (accesstokn) {
         var request = require('request'),
-            oauth_token = accessToken,
+            oauth_token = accesstokn,
             url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
-        auth = "Bearer " + accessToken;
+        auth = "Bearer " + oauth_token;
 
         request({
                 method: 'POST',
@@ -45,18 +43,44 @@ module.exports = {
                     "Authorization": auth
                 },
                 json: {
-                    "ShortCode": "174379",
-                    "ResponseType": "completed successfully!",
-                    "ConfirmationURL": "/confirmation",
-                    "ValidationURL": "/validation"
+                    "ShortCode": "601465",
+                    "ResponseType": "completed",
+                    "ConfirmationURL": "https://buyquotes.herokuapp.com/confirmation",
+                    "ValidationURL": "https://buyquotes.herokuapp.com/confirmation/validation"
                 }
             },
             function (error, response, body) {
                 // TODO: Use the body object to extract the 
-                body = JSON.stringify(body);
-                console.log("method2 "+body);
-
+                console.log(body)
             }
         )
-    },
+
+        //     let accessToken = generateAcessToken();
+        //     var request = require('request'),
+        //         oauth_token = accessToken,
+        //         url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
+        //     auth = "Bearer " + accessToken;
+
+        //     request({
+        //             method: 'POST',
+        //             url: url,
+        //             headers: {
+        //                 "Authorization": auth
+        //             },
+        //             json: {
+        //                 "ShortCode": "174379",
+        //                 "ResponseType": "completed successfully!",
+        //                 "ConfirmationURL": "/confirmation",
+        //                 "ValidationURL": "/validation"
+        //             }
+        //         },
+        //         function (error, response, body) {
+        //             // TODO: Use the body object to extract the 
+        //             body = JSON.stringify(body);
+        //             console.log("method2 "+body);
+
+        //         }
+        //     )
+        // },
+    }
 };
