@@ -47,17 +47,13 @@
     {{#if processingmpesa}}
     <div class="column">
         <div class="bd-snippet-preview ">
-            <article class="{{cssalertclass}}">
+            <article class="{{cssalertforloading}}">
                 <div class="message-header has-text-centered is-centered">
-                    <h1 class="title">{{title}}</h1>
+                    <h1 class="title">{{processingtitle}}</h1>
                     <button class="delete" aria-label="delete"></button>
                 </div>
                 <div class="message-body">
-                    <ul>
-                        {{#each newuserdata}}
-                        <li>Phone:{{this.phonenumber}}</li>
-                        {{/each}}
-                    </ul>
+                   <!-- show loading thingy here -->
                 </div>
             </article>
         </div>

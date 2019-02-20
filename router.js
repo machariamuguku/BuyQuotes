@@ -41,6 +41,7 @@ router.post('/pay', (req, res) => {
         if (newuserdata) {
             res.render("cart", {
                 title: "Successfully submitted",
+                processingtitle:"Check Your Phone For STK Push message!",
                 newuserdata: newuserdata,
                 cssalertclass: "message is-success",
                 cssalertforloading: "is-primary",
