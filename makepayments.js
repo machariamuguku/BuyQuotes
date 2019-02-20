@@ -1,36 +1,37 @@
 module.exports = {
     // Function 1: generate access token
-generateAcessToken: function(){
-    var accessToken;
-    var request = require('request'),
-        consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N",
-        consumer_secret = "TEYbiahbnSmUErPV",
-        url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
-    auth = "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
+    generateAcessToken: function () {
+        var accessToken;
+        var request = require('request'),
+            consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N",
+            consumer_secret = "TEYbiahbnSmUErPV",
+            url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
+        auth = "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
 
-    request({
-            url: url,
-            headers: {
-                "Authorization": auth
+        request({
+                url: url,
+                headers: {
+                    "Authorization": auth
+                }
+            },
+            function (error, response, body) {
+
+                if (error) {
+                    console.log(error);
+                } else {
+                    // TODO: Use the body object to extract OAuth access token
+                    body = JSON.parse(body);
+                    accessToken = body.access_token;
+                }
+
             }
-        },
-        function (error, response, body) {
-
-            if (error) {
-                console.log(error);
-            } else {
-                // TODO: Use the body object to extract OAuth access token
-                body = JSON.parse(body);
-                accessToken = body.access_token;
-                console.log("method1 " + accessToken);
-            }
-
-        }
-    )
-
-},
+        )
+        console.log("method1 " + accessToken);
+        return accessToken;
+    },
     // Function 2: generate ValidationURL
     generateValidationURL: function (accesstokn) {
+        console.log("method2.1 " + accesstokn);
         var request = require('request'),
             oauth_token = accesstokn,
             url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
