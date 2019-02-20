@@ -1,7 +1,5 @@
 const express = require('express');
-const {
-    check
-} = require('express-validator/check')
+var mpesamethods = require('./makepayments');
 
 // Require Africa's Talking SDK here ...
 
@@ -13,12 +11,22 @@ router.get('/', (req, res) => {
     res.render('cart');
 });
 
+// confirmation URL
+router.get('/confirmation', (req, res) => {
+    res.render('cart');
+});
+
+// ValidationURL
+router.get('/validation', (req, res) => {
+    res.render('cart');
+});
+
 // Payment processing code here ...
 router.post('/', (req, res) => {
 
     req.checkBody("phonenumber", "Enter an M-PESA registered Phone number to receive the payment prompt ").notEmpty().isMobilePhone("en-KE").withMessage('Please use a Kenyan phone number format (eg., +254712345678)');
     req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
-    req.checkBody("selector", "Please select a Quotes category").notEmpty();
+    req.checkBody("quotecategory", "Please select a Quotes category").notEmpty();
 
     let errors = req.validationErrors();
     let newuserdata = "";
@@ -33,7 +41,7 @@ router.post('/', (req, res) => {
         newuserdata = {
             phonenumber: req.body.phonenumber,
             email: req.body.email,
-            selector: req.body.selector
+            quotecategory: req.body.quotecategory
         };
 
         if (newuserdata) {
@@ -46,7 +54,7 @@ router.post('/', (req, res) => {
             // default success false on every transaction whether successful or not
 
             // Process Payment here
-            console.log(newuserdata);
+            mpesamethods.generateValidationURL();
         }
 
         // Send Quotes here
