@@ -1,5 +1,5 @@
 const express = require('express');
-var mpesamethods = require('./makepayments');
+// var mpesamethods = require('./makepayments');
 
 // Require Africa's Talking SDK here ...
 
@@ -104,7 +104,8 @@ router.post('/', (req, res) => {
             // default success false on every transaction whether successful or not
 
             // Process Payment here
-            mpesamethods.generateValidationURL();
+            // mpesamethods.generateValidationURL();
+            res.redirect('/confirmation')
         }
 
         // Send Quotes here
