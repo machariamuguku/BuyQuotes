@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.get('/confirmation', (req, res) => {
     let kwapa = mpesamethods.generateValidationURL();
     res.render('confirmation', {
-        title: kwapa()
+        title: kwapa
     });
 });
 

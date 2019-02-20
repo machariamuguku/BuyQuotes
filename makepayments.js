@@ -21,7 +21,7 @@ module.exports = {
                     // TODO: Use the body object to extract OAuth access token
                     body = JSON.parse(body);
                     accessToken = body.access_token;
-                    console.log("method1 "+ accessToken);
+                    console.log("method1 " + accessToken);
                 }
 
             }
@@ -29,7 +29,7 @@ module.exports = {
     },
     // Function 2: generate ValidationURL
     generateValidationURL: function (accesstokn) {
-        console.log("method21"+accesstokn);
+        console.log("method21" + accesstokn);
         var request = require('request'),
             oauth_token = accesstokn,
             url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
