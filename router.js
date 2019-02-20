@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
 // confirmation URL
 router.get('/confirmation', (req, res) => {
-    res.render('cart');
+   return mpesamethods.generateValidationURL();
 });
 
 // ValidationURL
