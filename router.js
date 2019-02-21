@@ -1,5 +1,8 @@
 const express = require('express');
-var mpesamethods = require('./makepayments');
+
+// mpesa test thingy
+// const emitter = require('.tests/helpers/callbacksemitter');
+const emitter = require('./mpesa-node-library/tests/helpers/callbacksemitter');
 
 // Require Africa's Talking SDK here ...
 
@@ -11,18 +14,111 @@ router.get('/', (req, res) => {
     res.render('cart');
 });
 
-// confirmation URL
-router.get('/confirmation', (req, res) => {
-    let kwapa = mpesamethods.generateValidationURL();
-    res.render('confirmation', {
-        title: kwapa
-    });
-});
+// Mpesa functions
 
-// ValidationURL
-router.get('/validation', (req, res) => {
-    res.render('cart');
-});
+// AccountBalance
+router.post('/accountbalance/timeout', (req, res) => {
+    emitter.emit('accountBalanceTimeout', { simulation: true, success: true })
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  router.post('/accountbalance/success', (req, res) => {
+    emitter.emit('accountBalanceCallback', req.body)
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  
+  // B2B Call
+  router.post('/b2b/timeout', (req, res) => {
+    emitter.emit('b2bTimeout', { simulation: true, success: true })
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  router.post('/b2b/success', (req, res) => {
+    emitter.emit('b2bSuccessCallback', req.body)
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  // B2C Call
+  router.post('/b2c/timeout', (req, res) => {
+    emitter.emit('b2cTimeout', { simulation: true, success: true })
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  router.post('/b2c/success', (req, res) => {
+    emitter.emit('b2cSuccessCallback', req.body)
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  // C2B
+  router.post('/c2b/confirmation', (req, res) => {
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  router.post('/c2b/success', (req, res) => {
+    emitter.emit('c2bSuccessCallback', req.body)
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  
+  // Lipa na mpesa
+  router.post('/lipanampesa/success', (req, res) => {
+    emitter.emit('lipaNaMpesaOnlineSuccessCallback', req.body)
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  
+  // Reversal
+  router.post('/reversal/timeout', (req, res) => {
+    emitter.emit('reversalTimeout', { simulation: true, success: true })
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  router.post('/reversal/success', (req, res) => {
+    emitter.emit('reversalSuccessCallback', req.body)
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  
+  // Transaction Status
+  router.post('/transactionstatus/timeout', (req, res) => {
+    emitter.emit('transactionStatusTimeout', { simulation: true, success: true })
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+  router.post('/transactionstatus/success', (req, res) => {
+    emitter.emit('transactionStatusSuccessCallback', req.body)
+    res.json({
+      'ResponseCode': '00000000',
+      'ResponseDesc': 'success'
+    })
+  })
+// Mpesa functions
+
 
 // Payment processing code here ...
 router.post('/', (req, res) => {
@@ -57,7 +153,6 @@ router.post('/', (req, res) => {
             // default success false on every transaction whether successful or not
 
             // Process Payment here
-            mpesamethods.generateValidationURL();
         }
 
         // Send Quotes here
