@@ -1,6 +1,21 @@
 const express = require('express');
+const path = require('path');
 
-// Require Africa's Talking SDK here ...
+// Require MPESA SDK here ...
+const Mpesa = require('mpesa-node')
+const mpesaApi = new Mpesa({
+  consumerKey: '9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N',
+  consumerSecret: 'TEYbiahbnSmUErPV',
+  environment: 'sandbox',
+  shortCode: '600111',
+  initiatorName: 'Test Initiator',
+  lipaNaMpesaShortCode: 123456,
+  lipaNaMpesaShortPass: '<some key here>',
+  securityCredential: '<credential here>',
+  certPath: path.resolve('keys/myKey.cert'),
+})
+
+const emitter = require('mpesa-node/src/helpers/callbacksemitter')
 
 const router = express.Router();
 
@@ -11,6 +26,14 @@ router.get('/', (req, res) => {
 });
 
 // Mpesa functions
+// Lipa na mpesa
+router.post('/lipanampesa/success', (req, res) => {
+  emitter.emit('lipaNaMpesaOnlineSuccessCallback', req.body)
+  res.json({
+    'ResponseCode': '00000000',
+    'ResponseDesc': 'success'
+  })
+})
 
 // Mpesa functions
 
@@ -38,15 +61,32 @@ router.post('/', (req, res) => {
     };
 
     if (newuserdata) {
-      res.render("cart", {
-        processingtitle: "Order complete; Submission Successful; Processing Payment",
-        newuserdata: newuserdata,
-        cssalertforloading: "message is-success",
-      });
+      // res.render("cart", {
+      //   processingtitle: "Order complete; Submission Successful; Processing Payment",
+      //   newuserdata: newuserdata,
+      //   cssalertforloading: "message is-success",
+      // });
       // insert transaction history to DB here 
       // default success false on every transaction whether successful or not
 
       // Process Payment here
+      let msdin = newuserdata.phonenumber
+      console.log("what am looking for "+ msdin)
+      let senderMsisdn = newuserdata.phonenumber
+      let amount = 10
+      let callbackUrl = ""
+      let accountRef = "ujuuui"
+
+      mpesaApi
+        .lipaNaMpesaOnline(senderMsisdn, amount, callbackUrl, accountRef, transactionDesc = 'Lipa na mpesa online', transactionType = 'CustomerPayBillOnline', shortCode = null, passKey = null)
+        .then((result) => {
+          //do something
+          console.log("this is the " + result)
+        })
+        .catch((err) => {
+          // retry?
+        })
+
     }
 
     // Send Quotes here
