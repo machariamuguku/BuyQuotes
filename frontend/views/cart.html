@@ -6,13 +6,15 @@
             <article class="{{cssalertclass}}">
                 <div class="message-header">
                     <h1 class="title">{{title}}</h1>
-                    <button class="delete" aria-label="delete"></button>
+                    <form method="GET" action="/">
+                        <button class="delete" aria-label="delete" type="submit"></button>
+                    </form>
                 </div>
                 <div class="message-body">
                     <ul>
                         {{#each errors}}
                         <li>{{this.msg}}</li>
-                        <br/>
+                        <br />
                         {{/each}}
                     </ul>
                 </div>
@@ -30,7 +32,9 @@
             <article class="{{cssalertforloading}}">
                 <div class="message-header">
                     <p class="title">{{processingtitle}}</p>
-                    <button class="delete" aria-label="delete"></button>
+                    <form method="GET" action="/">
+                        <button class="delete" aria-label="delete" type="submit"></button>
+                    </form>
                 </div>
                 <div class="message-body">
                     <!-- show loading thingy here -->
