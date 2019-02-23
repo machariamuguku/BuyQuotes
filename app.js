@@ -45,7 +45,7 @@ app.set('views', path.join(__dirname, './frontend/views'));
 
 // Set resources folder
 app.use(express.static(path.join(__dirname, "./frontend/resources")));
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.urlencoded({
     extended: false
 }));
