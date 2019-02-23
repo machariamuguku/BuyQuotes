@@ -41,6 +41,8 @@
                     <div class="has-text-centered">
                         <a class="button is-success is-loading">Processing</a>
                         Processing Payments, Check Your Phone For STK Push message!
+
+                        {{mpesaerror}}
                     </div>
                 </div>
             </article>
@@ -111,7 +113,7 @@
                                 </div>
 
                                 <!-- the form -->
-                                <form method="POST" action="/">
+                                <form method="POST" action="/pay">
 
                                     <!-- select item -->
                                     <div class="field">

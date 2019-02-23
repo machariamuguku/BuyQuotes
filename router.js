@@ -83,6 +83,22 @@ router.post('/c2b/confirmation', (req, res) => {
 
 	res.json(message);
 });
+/*
+	LipaNaMPesa SuccessURL
+	URL: /lipanampesa/success
+*/
+router.post('/lipanampesa/success', (req, res) => {
+	console.log('-----------LipaNaMPesa Success------------');
+	console.log(prettyjson.render(req.body, options));
+	console.log('-----------------------');
+
+	let message = {
+		"ResponseCode": "00000000",
+		"ResponseDesc": "success"
+	};
+
+	res.json(message);
+});
 
 /*
 	B2B ResultURL
@@ -121,7 +137,7 @@ router.post('/b2b/timeout', (req, res) => {
 // Mpesa functions
 
 // Payment processing code here ...
-router.post('/', (req, res) => {
+router.post('/pay', (req, res) => {
 
 	req.checkBody("phonenumber", "Enter an M-PESA registered Phone number to receive the payment prompt ").notEmpty().isMobilePhone("en-KE").withMessage('Please use a Kenyan phone number format (eg., +254712345678)');
 	req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
@@ -129,6 +145,7 @@ router.post('/', (req, res) => {
 
 	let errors = req.validationErrors();
 	let newuserdata = "";
+	let mpesaerror = "";
 
 	if (errors) {
 		res.render("cart", {
@@ -143,21 +160,13 @@ router.post('/', (req, res) => {
 			quotecategory: req.body.quotecategory
 		};
 
-
-		// res.render("cart", {
-		// 	processingtitle: "Order complete; Submission Successful; Processing Payment",
-		// 	newuserdata: newuserdata,
-		// 	cssalertforloading: "message is-success",
-		// });
-
-
 		// insert transaction history to DB here 
 		// default success false on every transaction whether successful or not
 
 		// Process Payment here
 		let testMSISDN = newuserdata.phonenumber
 		let amount = 10
-		let callbackUrl = "https://buyquotes.herokuapp.com/c2b/confirmation"
+		let callbackUrl = "/lipanampesa/success"
 		const accountRef = Math.random().toString(35).substr(2, 7)
 
 		const mpesaApi = new Mpesa({
@@ -180,13 +189,22 @@ router.post('/', (req, res) => {
 		mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
 			.then((result) => {
 				//do something
-				console.log(JSON.stringify(result, 0, 4));
+				console.log(prettyjson.render(result));
 			})
 			.catch((err) => {
 				// retry?
+				// console.log(err);
+				console.log(prettyjson.render(err));
+				mpesaerror: err
 			})
 
-		console.log("whats wrong?")
+		// send processing message
+		res.render("cart", {
+			processingtitle: "Order complete; Submission Successful; Processing Payment",
+			newuserdata: newuserdata,
+			mpesaerror,
+			cssalertforloading: "message is-success",
+		});
 
 		// Send Quotes here
 		// If successfull res.render transaction successful to message
