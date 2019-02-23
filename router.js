@@ -155,7 +155,7 @@ router.post('/', (req, res) => {
 			// Process Payment here
 			let testMSISDN = newuserdata.phonenumber
 			let amount = 10
-			let callbackUrl = "/c2b/confirmation"
+			let callbackUrl = "https://buyquotes.herokuapp.com/c2b/confirmation"
 			const accountRef = Math.random().toString(35).substr(2, 7)
 
 			const mpesaApi = new Mpesa({
