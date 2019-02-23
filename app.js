@@ -8,7 +8,8 @@ const bodyParser = require('body-parser');
 const expressValidator = require("express-validator");
 
 // add moongose and connect to db
-mongoose.connect("mongodb://localhost:27017/buyquotes", {
+let mongoport = process.env.PORT||27017;
+mongoose.connect("mongodb://localhost:"+mongoport+"/buyquotes", {
     useNewUrlParser: true
 }).then(
     () => {
