@@ -143,49 +143,50 @@ router.post('/', (req, res) => {
 			quotecategory: req.body.quotecategory
 		};
 
-		if (newuserdata) {
-			res.render("cart", {
-				processingtitle: "Order complete; Submission Successful; Processing Payment",
-				newuserdata: newuserdata,
-				cssalertforloading: "message is-success",
-			});
-			// insert transaction history to DB here 
-			// default success false on every transaction whether successful or not
 
-			// Process Payment here
-			let testMSISDN = newuserdata.phonenumber
-			let amount = 10
-			let callbackUrl = "https://buyquotes.herokuapp.com/c2b/confirmation"
-			const accountRef = Math.random().toString(35).substr(2, 7)
+		// res.render("cart", {
+		// 	processingtitle: "Order complete; Submission Successful; Processing Payment",
+		// 	newuserdata: newuserdata,
+		// 	cssalertforloading: "message is-success",
+		// });
 
-			const mpesaApi = new Mpesa({
-				consumerKey: '9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N',
-				consumerSecret: 'TEYbiahbnSmUErPV',
-				environment: 'sandbox',
-				shortCode: '601465',
-				initiatorName: 'apitest465',
-				lipaNaMpesaShortCode: 123456,
-				lipaNaMpesaShortPass: '<some key here>',
-				securityCredential: '465reset',
-				certPath: path.resolve('keys/myKey.cert')
+
+		// insert transaction history to DB here 
+		// default success false on every transaction whether successful or not
+
+		// Process Payment here
+		let testMSISDN = newuserdata.phonenumber
+		let amount = 10
+		let callbackUrl = "https://peternjeru.co.ke/safdaraja/api/callback.php"
+		const accountRef = Math.random().toString(35).substr(2, 7)
+
+		const mpesaApi = new Mpesa({
+			consumerKey: '9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N',
+			consumerSecret: 'TEYbiahbnSmUErPV',
+			environment: 'sandbox',
+			shortCode: '601465',
+			initiatorName: 'apitest465',
+			lipaNaMpesaShortCode: 123456,
+			lipaNaMpesaShortPass: '<some key here>',
+			securityCredential: '465reset',
+			certPath: path.resolve('keys/myKey.cert')
+		})
+
+		/*
+		 * lipaNaMpesaOnline(senderMsisdn, amount, callbackUrl, accountRef, transactionDesc = 'Lipa na mpesa online', transactionType = 'CustomerPayBillOnline', shortCode = null, passKey = null)
+		 * Example:
+		 */
+
+		mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
+			.then((result) => {
+				//do something
+				console.log(JSON.stringify(result, 0, 4));
+			})
+			.catch((err) => {
+				// retry?
 			})
 
-			/*
-			 * lipaNaMpesaOnline(senderMsisdn, amount, callbackUrl, accountRef, transactionDesc = 'Lipa na mpesa online', transactionType = 'CustomerPayBillOnline', shortCode = null, passKey = null)
-			 * Example:
-			 */
-
-			mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
-				.then((result) => {
-					//do something
-					console.log("watchu think?");
-					result.json(message);
-				})
-				.catch((err) => {
-					// retry?
-				})
-
-		}
+		console.log("whats wrong?")
 
 		// Send Quotes here
 		// If successfull res.render transaction successful to message
