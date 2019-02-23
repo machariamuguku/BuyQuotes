@@ -186,17 +186,31 @@ router.post('/pay', (req, res) => {
 		 * Example:
 		 */
 
-		mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
+		mpesaApi
+			.c2bSimulate(
+				254708374149,
+				500,
+				'h6dk0Ue2'
+			)
 			.then((result) => {
 				//do something
 				console.log(prettyjson.render(result));
 			})
 			.catch((err) => {
 				// retry?
-				// console.log(err);
 				console.log(prettyjson.render(err));
-				mpesaerror: err
 			})
+		// mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
+		// 	.then((result) => {
+		// 		//do something
+		// 		console.log(prettyjson.render(result));
+		// 	})
+		// 	.catch((err) => {
+		// 		// retry?
+		// 		// console.log(err);
+		// 		console.log(prettyjson.render(err));
+		// 		mpesaerror: err
+		// 	})
 
 		// send processing message
 		res.render("cart", {
