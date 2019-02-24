@@ -84,7 +84,7 @@ router.post('/pay', (req, res) => {
 				res.render("cart", {
 					errortitle: "My request just failed, and everything is worse now",
 					mpesafails: mpesaerr,
-					cssalertforloading: "message is-success",
+					csserroralertclass: "message is-danger",
 				});
 			})
 
