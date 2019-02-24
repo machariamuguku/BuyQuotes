@@ -153,6 +153,19 @@ router.post('/lipanampesa/success', (req, res) => {
 
 	res.json(message);
 });
+
+router.get('/lipanampesa/success', (req, res) => {
+	console.log('-----------LipaNaMPesa Success------------');
+	console.log(prettyjson.render(req.body, options));
+	console.log('-----------------------');
+
+	let message = {
+		"ResponseCode": "00000000",
+		"ResponseDesc": "success"
+	};
+
+	res.json(message);
+});
 // Mpesa functions
 
 // Receive payment notification here ...
