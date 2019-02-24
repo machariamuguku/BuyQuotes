@@ -9,7 +9,8 @@ const expressValidator = require("express-validator");
 
 // add moongose and connect to db
 let mongoport = process.env.PORT||27017;
-mongoose.connect("mongodb://localhost:"+mongoport+"/buyquotes", {
+let mongourl = "mongodb://localhost:"+mongoport+"/buyquotes";
+mongoose.connect(mongourl, {
     useNewUrlParser: true
 }).then(
     () => {

@@ -9,45 +9,99 @@ router.get('/', (req, res) => {
 	res.render('cart');
 });
 
+// Payment processing code here ...
+router.post('/pay', (req, res) => {
+
+	req.checkBody("phonenumber", "Enter an M-PESA registered Phone number to receive the payment prompt ").notEmpty().isMobilePhone("en-KE").withMessage('Please use a Kenyan phone number format (eg., +254712345678)');
+	req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
+	req.checkBody("quotecategory", "Please select a Quotes category").notEmpty();
+
+	let errors = req.validationErrors();
+	let newuserdata = "";
+	let mpesaerror = "";
+
+	if (errors) {
+		res.render("cart", {
+			title: "Please Correct the following errors",
+			errors: errors,
+			cssalertclass: "message is-danger"
+		});
+	} else {
+		newuserdata = {
+			phonenumber: req.body.phonenumber,
+			email: req.body.email,
+			quotecategory: req.body.quotecategory
+		};
+
+		// insert transaction history to DB here 
+		// default success false on every transaction whether successful or not
+
+		// Process Payment here
+		let testMSISDN = newuserdata.phonenumber
+		let amount = 10
+		let callbackUrl = "/lipanampesa/success"
+		const accountRef = Math.random().toString(35).substr(2, 7)
+
+		const mpesaApi = new Mpesa({
+			consumerKey: '9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N',
+			consumerSecret: 'TEYbiahbnSmUErPV',
+			environment: 'sandbox',
+			shortCode: '601465',
+			initiatorName: 'apitest465',
+			lipaNaMpesaShortCode: 123456,
+			lipaNaMpesaShortPass: '<some key here>',
+			securityCredential: '465reset',
+			certPath: path.resolve('keys/myKey.cert')
+		})
+
+		/*
+		 * lipaNaMpesaOnline(senderMsisdn, amount, callbackUrl, accountRef, transactionDesc = 'Lipa na mpesa online', transactionType = 'CustomerPayBillOnline', shortCode = null, passKey = null)
+		 * Example:
+		 */
+		/*
+		 * lipaNaMpesaOnline(senderMsisdn, amount, callbackUrl, accountRef, transactionDesc = 'Lipa na mpesa online', transactionType = 'CustomerPayBillOnline', shortCode = null, passKey = null)
+		 * Example:
+		 */
+		mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
+			// mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
+			.then((result) => {
+				//do something
+				console.log(prettyjson.render(result));
+				// send processing message
+				res.render("cart", {
+					processingtitle: "Order complete; Submission Successful; Processing Payment",
+					newuserdata: newuserdata,
+					mpesaerror,
+					cssalertforloading: "message is-success",
+				});
+			})
+			.catch((err) => {
+				// retry?
+				// console.log(err);
+				console.log(prettyjson.render(err));
+				// send processing message
+				res.render("cart", {
+					processingtitle: "My request just failed, and everything is worse now",
+					newuserdata: newuserdata,
+					mpesaerror,
+					cssalertforloading: "message is-success",
+				});
+			})
+
+
+
+		// Send Quotes here
+		// If successfull res.render transaction successful to message
+		// write success true message to DB if success
+	}
+
+});
+
 // Mpesa functions
 
 const options = {
 	noColor: true
 };
-/*
-	B2C ResultURL
-	URL: /b2c/result
-*/
-router.post('/b2c/result', (req, res) => {
-	console.log('-----------B2C CALLBACK------------');
-	console.log(prettyjson.render(req.body, options));
-	console.log('-----------------------');
-
-	let message = {
-		"ResponseCode": "00000000",
-		"ResponseDesc": "success"
-	};
-
-	res.json(message);
-});
-
-/*
-	B2C QueueTimeoutURL
-	URL: /b2c/timeout
-*/
-router.post('/b2c/timeout', (req, res) => {
-	console.log('-----------B2C TIMEOUT------------');
-	console.log(prettyjson.render(req.body, options));
-	console.log('-----------------------');
-
-	let message = {
-		"ResponseCode": "00000000",
-		"ResponseDesc": "success"
-	};
-
-	res.json(message);
-});
-
 /*
 	C2B ValidationURL
 	URL: /c2b/validation
@@ -99,133 +153,7 @@ router.post('/lipanampesa/success', (req, res) => {
 
 	res.json(message);
 });
-
-/*
-	B2B ResultURL
-	URL: /b2b/result
-*/
-router.post('/b2b/result', (req, res) => {
-	console.log('-----------B2B CALLBACK------------');
-	console.log(prettyjson.render(req.body, options));
-	console.log('-----------------------');
-
-	let message = {
-		"ResponseCode": "00000000",
-		"ResponseDesc": "success"
-	};
-
-	res.json(message);
-});
-
-/*
-	B2B QueueTimeoutURL
-	URL: /api/v1/b2b/timeout
-*/
-router.post('/b2b/timeout', (req, res) => {
-	console.log('-----------B2B TIMEOUT------------');
-	console.log(prettyjson.render(req.body, options));
-	console.log('-----------------------');
-
-	let message = {
-		"ResponseCode": "00000000",
-		"ResponseDesc": "success"
-	};
-
-	res.json(message);
-});
-
 // Mpesa functions
-
-// Payment processing code here ...
-router.post('/pay', (req, res) => {
-
-	req.checkBody("phonenumber", "Enter an M-PESA registered Phone number to receive the payment prompt ").notEmpty().isMobilePhone("en-KE").withMessage('Please use a Kenyan phone number format (eg., +254712345678)');
-	req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
-	req.checkBody("quotecategory", "Please select a Quotes category").notEmpty();
-
-	let errors = req.validationErrors();
-	let newuserdata = "";
-	let mpesaerror = "";
-
-	if (errors) {
-		res.render("cart", {
-			title: "Please Correct the following errors",
-			errors: errors,
-			cssalertclass: "message is-danger"
-		});
-	} else {
-		newuserdata = {
-			phonenumber: req.body.phonenumber,
-			email: req.body.email,
-			quotecategory: req.body.quotecategory
-		};
-
-		// insert transaction history to DB here 
-		// default success false on every transaction whether successful or not
-
-		// Process Payment here
-		let testMSISDN = newuserdata.phonenumber
-		let amount = 10
-		let callbackUrl = "/lipanampesa/success"
-		const accountRef = Math.random().toString(35).substr(2, 7)
-
-		const mpesaApi = new Mpesa({
-			consumerKey: '9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N',
-			consumerSecret: 'TEYbiahbnSmUErPV',
-			environment: 'sandbox',
-			shortCode: '601465',
-			initiatorName: 'apitest465',
-			lipaNaMpesaShortCode: 123456,
-			lipaNaMpesaShortPass: '<some key here>',
-			securityCredential: '465reset',
-			certPath: path.resolve('keys/myKey.cert')
-		})
-
-		/*
-		 * lipaNaMpesaOnline(senderMsisdn, amount, callbackUrl, accountRef, transactionDesc = 'Lipa na mpesa online', transactionType = 'CustomerPayBillOnline', shortCode = null, passKey = null)
-		 * Example:
-		 */
-
-		mpesaApi
-			.c2bSimulate(
-				254708374149,
-				500,
-				'h6dk0Ue2'
-			)
-			.then((result) => {
-				//do something
-				console.log(prettyjson.render(result));
-			})
-			.catch((err) => {
-				// retry?
-				console.log(prettyjson.render(err));
-			})
-		// mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
-		// 	.then((result) => {
-		// 		//do something
-		// 		console.log(prettyjson.render(result));
-		// 	})
-		// 	.catch((err) => {
-		// 		// retry?
-		// 		// console.log(err);
-		// 		console.log(prettyjson.render(err));
-		// 		mpesaerror: err
-		// 	})
-
-		// send processing message
-		res.render("cart", {
-			processingtitle: "Order complete; Submission Successful; Processing Payment",
-			newuserdata: newuserdata,
-			mpesaerror,
-			cssalertforloading: "message is-success",
-		});
-
-		// Send Quotes here
-		// If successfull res.render transaction successful to message
-		// write success true message to DB if success
-	}
-
-});
 
 // Receive payment notification here ...
 
