@@ -3,7 +3,7 @@
     {{#if errors}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
-            <article class="{{cssalertclass}}">
+            <article class="{{csserroralertclass}}">
                 <div class="message-header">
                     <h1 class="title">{{title}}</h1>
                     <form method="GET" action="/">
@@ -56,9 +56,9 @@
     {{#if mpesafails}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
-            <article class="{{cssalertforloading}}">
+            <article class="{{csserroralertclass}}">
                 <div class="message-header">
-                    <p class="title">{{processingtitle}}</p>
+                    <p class="title">{{errortitle}}</p>
                     <form method="GET" action="/">
                         <button class="delete" aria-label="delete" type="submit"></button>
                     </form>
@@ -67,7 +67,6 @@
                     <!-- show loading thingy here -->
                     <div class="has-text-centered">
                         <a class="button is-success is-loading">Processing</a>
-                        Processing Payments, Check Your Phone For STK Push message!
                         {{mpesafails}}
                     </div>
                 </div>

@@ -25,7 +25,7 @@ router.post('/pay', (req, res) => {
 		res.render("cart", {
 			title: "Please Correct the following errors",
 			errors: errors,
-			cssalertclass: "message is-danger"
+			csserroralertclass: "message is-danger"
 		});
 	} else {
 		newuserdata = {
@@ -82,7 +82,7 @@ router.post('/pay', (req, res) => {
 				let mpesaerr = prettyjson.render(err);
 				// send processing message
 				res.render("cart", {
-					processingtitle: "My request just failed, and everything is worse now",
+					errortitle: "My request just failed, and everything is worse now",
 					mpesafails: mpesaerr,
 					cssalertforloading: "message is-success",
 				});
