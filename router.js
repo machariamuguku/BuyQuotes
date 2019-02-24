@@ -50,7 +50,7 @@ router.post('/pay', (req, res) => {
 			initiatorName: 'apitest465',
 			lipaNaMpesaShortCode: '174379',
 			lipaNaMpesaShortPass: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
-			securityCredential: 'C6qFy6xURhJrJofYp049MyRapegoRziqLj83DC82duHo82go519JheRmcCXfEUJV9r83LXMLwZKZ0umj/YMF8KmM6vNnWyd2yBgd5hHtspIKO7nJPAkVcVjVOQO15BX9zcZqAyig/dQvhXKmWPsYmjvVT4khhWhDRWnT+55SYCGyR2mA01+Y4aiZV5ErYD0u75gSGgYLmVn52X57G/tCdHbfqRxl0FZIIOBwkR+rw2cpruFSaYyMjXljV1FE02EH3d+gtqVPVBrJWKxFFJZm+358q2z/8Yxdyp/0MuZQEcVnsWOcWuLr2xYXWqfj49yfFEyEfpNMys8lm4GDw5WPLw==',
+			securityCredential: 'ORJuymNbqKOS/JK/GTYj7zlTqRgJnpHUWZsSGZ21WRwb6CiEb0LUL6MFhjkgdn3m27/9BbRXqEaJu6ew65nT3iUZKd87IsmO/HcSat0V8qkUhySBbgESNjILbHraPmMU+taex4cggz1aEQh8F3zBIo6x1MxaKw2tZ9BN20FUEqXsGaNYhHMplGG4KYjN1f7QN1iF+lF0CJGA1qG/DimcN7/gM69jkTtj2/0m/8fJr91CBsZmSZJ0vl6m6DO1Rq9tuU5kStLV3FNfSu3iZbSWKmSelujwbYMqRuUr3XAkxL56xJdY24iYRk4K4Nxr5cwcHzkB8BRxm+aVhgeWbX8iAw==',
 			certPath: path.resolve('keys/myKey.cert')
 		})
 
@@ -87,9 +87,6 @@ router.post('/pay', (req, res) => {
 					cssalertforloading: "message is-success",
 				});
 			})
-
-
-
 		// Send Quotes here
 		// If successfull res.render transaction successful to message
 		// write success true message to DB if success
