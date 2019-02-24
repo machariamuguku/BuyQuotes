@@ -50,7 +50,7 @@ router.post('/pay', (req, res) => {
 			initiatorName: 'apitest465',
 			lipaNaMpesaShortCode: '174379',
 			lipaNaMpesaShortPass: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
-			securityCredential: '465reset',
+			securityCredential: 'C6qFy6xURhJrJofYp049MyRapegoRziqLj83DC82duHo82go519JheRmcCXfEUJV9r83LXMLwZKZ0umj/YMF8KmM6vNnWyd2yBgd5hHtspIKO7nJPAkVcVjVOQO15BX9zcZqAyig/dQvhXKmWPsYmjvVT4khhWhDRWnT+55SYCGyR2mA01+Y4aiZV5ErYD0u75gSGgYLmVn52X57G/tCdHbfqRxl0FZIIOBwkR+rw2cpruFSaYyMjXljV1FE02EH3d+gtqVPVBrJWKxFFJZm+358q2z/8Yxdyp/0MuZQEcVnsWOcWuLr2xYXWqfj49yfFEyEfpNMys8lm4GDw5WPLw==',
 			certPath: path.resolve('keys/myKey.cert')
 		})
 
