@@ -27,8 +27,8 @@
     "hbs": "^4.0.2",
     "mongoose": "^5.4.7",
     "morgan": "^1.9.1",
+    "mpesa-node": "^0.1.3",
     "prettyjson": "^1.2.1",
-    "request": "^2.88.0",
-    "mpesa-node": "git://github.com/machariamuguku/mpesa-node-library.git#master"
+    "request": "^2.88.0"
   }
 }
