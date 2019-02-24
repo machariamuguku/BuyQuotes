@@ -6,7 +6,6 @@
         <!-- columns -->
         <!-- If submit succeeds -->
         <!-- Show Processing M-PESA Payments -->
-        {{#if message}}
         <div class="column has-text-centered">
             <div class="bd-snippet-preview ">
                 <article class="{{cssalertforloading}}">
@@ -27,9 +26,8 @@
                 </article>
             </div>
         </div>
-        {{/if}}
 
-        <form method="POST" action="/c2b/validation">
+        <form method="POST" action="/simulate">
             <input type="submit" class="button is-success" />
         </form>
 

@@ -34,7 +34,7 @@ app.use(cors());
 app.use(expressValidator());
 
 // const port = process.env.PORT;
-const port = process.env.PORT || 1800;
+const port = process.env.PORT||1800;
 
 app.set('port', port);
 
