@@ -48,8 +48,8 @@ router.post('/pay', (req, res) => {
 			environment: 'sandbox',
 			shortCode: '601465',
 			initiatorName: 'apitest465',
-			lipaNaMpesaShortCode: 123456,
-			lipaNaMpesaShortPass: '<some key here>',
+			lipaNaMpesaShortCode: '174379',
+			lipaNaMpesaShortPass: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
 			securityCredential: '465reset',
 			certPath: path.resolve('keys/myKey.cert')
 		})
