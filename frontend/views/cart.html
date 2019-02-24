@@ -26,7 +26,7 @@
 
     <!-- If submit succeeds -->
     <!-- Show Processing M-PESA Payments -->
-    {{#if newuserdata}}
+    {{#if mpesasucceeds}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
             <article class="{{cssalertforloading}}">
@@ -41,8 +41,7 @@
                     <div class="has-text-centered">
                         <a class="button is-success is-loading">Processing</a>
                         Processing Payments, Check Your Phone For STK Push message!
-
-                        {{mpesaerror}}
+                        {{mpesasucceeds}}
                     </div>
                 </div>
             </article>
@@ -51,6 +50,33 @@
     {{/if}}
     <!-- /Show Processing M-PESA Payments -->
     <!-- /if submit succeeds -->
+
+    <!-- If submit fails -->
+    <!-- Show M-PESA error-->
+    {{#if mpesafails}}
+    <div class="column has-text-centered">
+        <div class="bd-snippet-preview ">
+            <article class="{{cssalertforloading}}">
+                <div class="message-header">
+                    <p class="title">{{processingtitle}}</p>
+                    <form method="GET" action="/">
+                        <button class="delete" aria-label="delete" type="submit"></button>
+                    </form>
+                </div>
+                <div class="message-body">
+                    <!-- show loading thingy here -->
+                    <div class="has-text-centered">
+                        <a class="button is-success is-loading">Processing</a>
+                        Processing Payments, Check Your Phone For STK Push message!
+                        {{mpesafails}}
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    {{/if}}
+    <!-- /Show M-PESA error -->
+    <!-- /if submit fails -->
 
     <div class="hero-body">
         <div class="container">

@@ -18,7 +18,8 @@ router.post('/pay', (req, res) => {
 
 	let errors = req.validationErrors();
 	let newuserdata = "";
-	let mpesaerror = "";
+	let mpesafails = "";
+	let mpesasucceeds = "";
 
 	if (errors) {
 		res.render("cart", {
@@ -67,23 +68,22 @@ router.post('/pay', (req, res) => {
 			.then((result) => {
 				//do something
 				console.log(prettyjson.render(result));
+				let mpesaresult = prettyjson.render(result);
 				// send processing message
 				res.render("cart", {
 					processingtitle: "Order complete; Submission Successful; Processing Payment",
-					newuserdata: newuserdata,
-					mpesaerror,
+					mpesasucceeds: mpesaresult,
 					cssalertforloading: "message is-success",
 				});
 			})
 			.catch((err) => {
 				// retry?
-				// console.log(err);
 				console.log(prettyjson.render(err));
+				let mpesaerr = prettyjson.render(err);
 				// send processing message
 				res.render("cart", {
 					processingtitle: "My request just failed, and everything is worse now",
-					newuserdata: newuserdata,
-					mpesaerror,
+					mpesafails: mpesaerr,
 					cssalertforloading: "message is-success",
 				});
 			})
