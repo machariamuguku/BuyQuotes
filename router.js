@@ -66,15 +66,15 @@ router.post('/pay', (req, res) => {
 		mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
 			// mpesaApi.lipaNaMpesaOnline(testMSISDN, amount, callbackUrl, accountRef)
 			.then((result) => {
-				//do something
-				console.log(prettyjson.render(result));
-				let mpesaresult = prettyjson.render(result);
 				// send processing message
 				res.render("cart", {
 					processingtitle: "Order complete; Submission Successful; Processing Payment",
 					mpesasucceeds: mpesaresult,
 					cssalertforloading: "message is-success",
 				});
+				//do something
+				console.log(prettyjson.render(result));
+				let mpesaresult = prettyjson.render(result);
 			})
 			.catch((err) => {
 				// retry?
