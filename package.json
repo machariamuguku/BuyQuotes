@@ -20,15 +20,16 @@
   },
   "homepage": "https://github.com/machariamuguku/BuyQuotes#readme",
   "dependencies": {
+    "base-64": "^0.1.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "expect.js": "^0.3.1",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "hbs": "^4.0.2",
+    "moment": "^2.22.2",
     "mongoose": "^5.4.7",
     "morgan": "^1.9.1",
-    "mpesa-node": "^0.1.3",
     "prettyjson": "^1.2.1",
     "request": "^2.88.0"
   }
