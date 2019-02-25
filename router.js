@@ -150,10 +150,6 @@ router.post("/pay", (req, res) => {
 	URL: /lipanampesa/success
 */
 router.post("/lipanampesa/success", (req, res) => {
-  console.log("-----------LipaNaMPesa Success------------");
-  console.log(prettyjson.render(req.body, options));
-  console.log("-----------------------");
-
   let message = {
     ResponseCode: "00000000",
     ResponseDesc: "success"
