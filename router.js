@@ -110,12 +110,19 @@ router.post("/pay", (req, res) => {
           }
         },
         function (error, response, body) {
-          if (!error) {
+          if (body.CustomerMessage) {
             console.log(prettyjson.render(body));
             res.render("cart", {
               processingtitle: "Order complete; Submission Successful; Processing Payment",
-              mpesasucceeds: body,
+              mpesasucceeds: body.CustomerMessage,
               cssalertforloading: "message is-success"
+            });
+          } else if (body.errorMessage) {
+            console.log(prettyjson.render(error));
+            res.render("cart", {
+              errortitle: "My request just failed, and everything is worse now",
+              mpesafails: body.errorMessage,
+              csserroralertclass: "message is-danger"
             });
           } else if (response) {
             console.log(prettyjson.render(response));
@@ -123,13 +130,6 @@ router.post("/pay", (req, res) => {
               processingtitle: "Order complete; Submission Successful; we done did it!",
               mpesasucceeds: response,
               cssalertforloading: "message is-success"
-            });
-          } else {
-            console.log(prettyjson.render(error));
-            res.render("cart", {
-              errortitle: "My request just failed, and everything is worse now",
-              mpesafails: error,
-              csserroralertclass: "message is-danger"
             });
           }
         }

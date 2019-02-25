@@ -39,9 +39,9 @@
                 <div class="message-body">
                     <!-- show loading thingy here -->
                     <div class="has-text-centered">
-                        <a class="button is-success is-loading">Processing</a>
-                        Processing Payments, Check Your Phone For STK Push message!
-                        {{mpesasucceeds}}
+                        <a class="button is-success is-loading">""</a>
+                        {{mpesasucceeds}}!
+                        Please Check Your Phone For the STK Push message. Enter your Pin and press OK.
                     </div>
                 </div>
             </article>
@@ -166,6 +166,9 @@
                                     </div>
 
                                     <div class="field">
+                                        <p class="help is-danger">N/b: Include the
+                                            country code but without the plus e.g:
+                                            254712345678</p>
                                         <p class="control has-icons-left">
                                             <input name="phonenumber" class="input" type="tel" placeholder="Mpesa Phone Number">
                                             <span class="icon is-small is-left">
@@ -184,9 +187,6 @@
                             </div>
                             </form>
                             <!-- /the form -->
-                            <p class="has-text-centered is-size-6 has-text-danger"> N/b: Include the
-                                country code e.g
-                                +254</p>
                         </div>
                     </div>
                 </div>

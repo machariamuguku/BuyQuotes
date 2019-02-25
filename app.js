@@ -42,10 +42,10 @@ app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
 
 // set views folder
-app.set('views', path.join(__dirname, './frontend/views'));
+app.set('views', path.join(__dirname, './src/frontend/views'));
 
 // Set resources folder
-app.use(express.static(path.join(__dirname, "./frontend/resources")));
+app.use(express.static(path.join(__dirname, "./src/frontend/resources")));
 app.use(logger('dev'));
 app.use(express.urlencoded({
     extended: false
