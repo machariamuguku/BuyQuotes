@@ -26,7 +26,7 @@
 
     <!-- If submit succeeds -->
     <!-- Show Processing M-PESA Payments -->
-    {{#if mpesasucceeds}}
+    {{#if sendingToMpesaSucceeds}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
             <article class="{{cssalertforloading}}">
@@ -40,7 +40,7 @@
                     <!-- show loading thingy here -->
                     <div class="has-text-centered">
                         <a class="button is-success is-loading">""</a>
-                        {{mpesasucceeds}}!
+                        {{sendingToMpesaSucceeds}}!
                         Please Check Your Phone For the STK Push message. Enter your Pin and press OK.
                     </div>
                 </div>
@@ -53,7 +53,7 @@
 
     <!-- If submit fails -->
     <!-- Show M-PESA error-->
-    {{#if mpesafails}}
+    {{#if sendingToMpesaFails}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
             <article class="{{csserroralertclass}}">
@@ -67,7 +67,32 @@
                     <!-- show loading thingy here -->
                     <div class="has-text-centered">
                         <a class="button is-success is-loading">Processing</a>
-                        {{mpesafails}}
+                        {{sendingToMpesaFails}}
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    {{/if}}
+    <!-- /Show M-PESA error -->
+    <!-- /if submit fails -->
+
+    <!-- If submit fails -->
+    <!-- Show M-PESA error-->
+    {{#if lipanampesaAllResponse}}
+    <div class="column has-text-centered">
+        <div class="bd-snippet-preview ">
+            <article class="{{cssalertforloading}}">
+                <div class="message-header">
+                    <p class="title">{{lipanaMpesaSuccessOrFailedTitle}}</p>
+                    <form method="GET" action="/">
+                        <button class="delete" aria-label="delete" type="submit"></button>
+                    </form>
+                </div>
+                <div class="message-body">
+                    <!-- show loading thingy here -->
+                    <div class="has-text-centered">
+                        {{lipanampesaAllResponse}}
                     </div>
                 </div>
             </article>

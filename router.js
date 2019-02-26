@@ -132,23 +132,15 @@ router.post("/pay", (req, res) => {
             res.render("cart", {
               processingtitle:
                 "Order complete; Submission Successful; Processing Payment",
-              mpesasucceeds: body.CustomerMessage,
+              sendingToMpesaSucceeds: body.CustomerMessage,
               cssalertforloading: "message is-success"
             });
-          } else if (body.errorMessage) {
+          } else {
             console.log(prettyjson.render(error));
             res.render("cart", {
               errortitle: "My request just failed, and everything is worse now",
-              mpesafails: body.errorMessage,
+              sendingToMpesaFails: body.errorMessage,
               csserroralertclass: "message is-danger"
-            });
-          } else if (response) {
-            console.log(prettyjson.render(response));
-            res.render("cart", {
-              processingtitle:
-                "Order complete; Submission Successful; we done did it!",
-              mpesasucceeds: response,
-              cssalertforloading: "message is-success"
             });
           }
         }
@@ -174,14 +166,34 @@ router.post("/lipanampesa/success", (req, res) => {
     ResponseCode: "00000000",
     ResponseDesc: "success"
   };
-
   res.json(message);
 
+  console.log("");
   console.log("-----------Received M-Pesa webhook-----------");
+  console.log("");
   // format and dump the request payload recieved from safaricom in the terminal
   console.log(prettyjson.render(req.body));
-  console.log("-----------------------");
+  console.log("");
+  console.log("-----------Received M-Pesa webhook------------");
+  console.log("");
 
+  // if mpesa succeeds
+  let lipanampesasuccess = req.body.ResultCode;
+  let lipanampesaAllResponse = req.body;
+  if (lipanampesasuccess == 0) {
+    res.render("cart", {
+      lipanampesaAllResponse: lipanampesaAllResponse,
+      lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+      cssalertforloading: "message is-success"
+    });
+  }
+  else {
+    res.render("cart", {
+      lipanampesaAllResponse: lipanampesaAllResponse,
+      lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+      cssalertforloading: "message is-danger"
+    });
+  }
 });
 // Mpesa functions
 
