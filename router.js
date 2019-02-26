@@ -166,20 +166,19 @@ router.post("/lipanampesa/success", (req, res) => {
     ResponseCode: "00000000",
     ResponseDesc: "success"
   };
-  res.json(message);
 
   // if mpesa succeeds
-  let lipanampesaAllResponse = req.body;
+  let lipanampesaAllResponse = res.body;
   // let lipanampesasuccess = req.body.ResultCode;
   if (lipanampesaAllResponse.ResponseCode == 0) {
-    req.render("cart", {
+    res.render("cart", {
       lipanampesaAllResponse: lipanampesaAllResponse,
       lipanaMpesaSuccessOrFailedTitle:
         "Money recived!; we done did it!; whose the goat fam?",
       cssalertforloading: "message is-success"
     });
   } else {
-    req.render("cart", {
+    res.render("cart", {
       lipanampesaAllResponse: lipanampesaAllResponse,
       lipanaMpesaSuccessOrFailedTitle:
         "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
@@ -195,6 +194,8 @@ router.post("/lipanampesa/success", (req, res) => {
     console.log("-----------Received M-Pesa webhook------------");
     console.log("");
   }
+
+  res.json(message);
 });
 
 // Mpesa functions
