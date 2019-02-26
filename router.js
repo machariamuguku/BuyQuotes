@@ -161,29 +161,31 @@ router.post("/pay", (req, res) => {
 	LipaNaMPesa SuccessURL
 	URL: /lipanampesa/success
 */
-router.post("/lipanampesa/success", (req, res) => {
-  let message = {
-    ResponseCode: "00000000",
-    ResponseDesc: "success"
-  };
+router.post(
+  "/lipanampesa/success",
+  (req, res, next) => {
+    let message = {
+      ResponseCode: "00000000",
+      ResponseDesc: "success"
+    };
 
-  console.log("");
-  console.log("-----------Received M-Pesa webhook-----------");
-  console.log("");
-  // format and dump the request payload recieved from safaricom in the terminal
-  console.log(prettyjson.render(req.body));
-  console.log("");
-  console.log("-----------Received M-Pesa webhook------------");
-  console.log("");
+    res.json(message);
 
-  // if mpesa succeeds
-  // let lipanampesasuccess = req.body.ResultCode;
-  let lipanampesaAllResponse = req.body;
-  let lipanampesaAllResponser;
+    next();
+  },
+  function(req, res) {
+    console.log("");
+    console.log("-----------Received M-Pesa webhook-----------");
+    console.log("");
+    // format and dump the request payload recieved from safaricom in the terminal
+    console.log(prettyjson.render(req.body));
+    console.log("");
+    console.log("-----------Received M-Pesa webhook------------");
+    console.log("");
 
-  if (lipanampesaAllResponse) {
-    lipanampesaAllResponser: lipanampesaAllResponse;
-    let lipanampesasuccess = lipanampesaAllResponser.ResultCode;
+    // if mpesa succeeds
+    let lipanampesasuccess = req.body.ResultCode;
+    let lipanampesaAllResponse = req.body;
     if (lipanampesasuccess == 0) {
       res.render("cart", {
         lipanampesaAllResponse: lipanampesaAllResponse,
@@ -200,8 +202,8 @@ router.post("/lipanampesa/success", (req, res) => {
       });
     }
   }
-  res.json(message);
-});
+);
+
 // Mpesa functions
 
 // Receive payment notification here ...
