@@ -172,14 +172,14 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipanampesaAllResponse = req.body;
   // let lipanampesasuccess = req.body.ResultCode;
   if (lipanampesaAllResponse.ResponseCode == 0) {
-    res.render("cart", {
+    req.render("cart", {
       lipanampesaAllResponse: lipanampesaAllResponse,
       lipanaMpesaSuccessOrFailedTitle:
         "Money recived!; we done did it!; whose the goat fam?",
       cssalertforloading: "message is-success"
     });
   } else {
-    res.render("cart", {
+    req.render("cart", {
       lipanampesaAllResponse: lipanampesaAllResponse,
       lipanaMpesaSuccessOrFailedTitle:
         "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
