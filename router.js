@@ -177,22 +177,28 @@ router.post("/lipanampesa/success", (req, res) => {
   console.log("");
 
   // if mpesa succeeds
-  let lipanampesasuccess = req.body.ResultCode;
+  // let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
-  if (lipanampesasuccess == 0) {
-    res.render("cart", {
-      lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanaMpesaSuccessOrFailedTitle:
-        "Money recived!; we done did it!; whose the goat fam?",
-      cssalertforloading: "message is-success"
-    });
-  } else {
-    res.render("cart", {
-      lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanaMpesaSuccessOrFailedTitle:
-        "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
-      cssalertforloading: "message is-danger"
-    });
+  let lipanampesaAllResponser;
+
+  if (lipanampesaAllResponse) {
+    lipanampesaAllResponser: lipanampesaAllResponse;
+    let lipanampesasuccess = lipanampesaAllResponser.ResultCode;
+    if (lipanampesasuccess == 0) {
+      res.render("cart", {
+        lipanampesaAllResponse: lipanampesaAllResponse,
+        lipanaMpesaSuccessOrFailedTitle:
+          "Money recived!; we done did it!; whose the goat fam?",
+        cssalertforloading: "message is-success"
+      });
+    } else {
+      res.render("cart", {
+        lipanampesaAllResponse: lipanampesaAllResponse,
+        lipanaMpesaSuccessOrFailedTitle:
+          "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+        cssalertforloading: "message is-danger"
+      });
+    }
   }
   res.json(message);
 });
