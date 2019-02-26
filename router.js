@@ -151,51 +151,6 @@ router.post("/pay", (req, res) => {
               cssalertforloading: "message is-success"
             });
           }
-        },
-
-        function() {
-          // var reqId = reqId;
-          var request = require("request"),
-            oauth_token = token,
-            url = "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
-          auth = "Bearer " + oauth_token;
-
-          request(
-            {
-              method: "POST",
-              url: url,
-              headers: {
-                Authorization: auth
-              },
-              json: {
-                BusinessShortCode: shortCode,
-                Password: password,
-                Timestamp: timestamp,
-                CheckoutRequestID: reqId
-              }
-            },
-
-            function(error, response, body) {
-              // TODO: Use the body object to extract the response
-              console.log(prettyjson.render(""));
-              console.log(
-                prettyjson.render(
-                  "............Results Parameters.................."
-                )
-              );
-              console.log(prettyjson.render(""));
-              console.log(prettyjson.render(body));
-              console.log(prettyjson.render(""));
-              console.log(
-                prettyjson.render(
-                  "............/Results Parameters................."
-                )
-              );
-              console.log(prettyjson.render(""));
-              console.log(prettyjson.render("deez nuts!"));
-              console.log(prettyjson.render(body));
-            }
-          );
         }
       );
     });
@@ -207,6 +162,7 @@ router.post("/pay", (req, res) => {
     // write success true message to DB if success
   }
 });
+
 // Mpesa functions
 
 /*
@@ -214,17 +170,18 @@ router.post("/pay", (req, res) => {
 	URL: /lipanampesa/success
 */
 router.post("/lipanampesa/success", (req, res) => {
-  console.log("-----------Received M-Pesa webhook-----------");
-  // format and dump the request payload recieved from safaricom in the terminal
-  console.log(prettyjson.render(req.body, options));
-  console.log("-----------------------");
-
   let message = {
     ResponseCode: "00000000",
     ResponseDesc: "success"
   };
 
   res.json(message);
+
+  console.log("-----------Received M-Pesa webhook-----------");
+  // format and dump the request payload recieved from safaricom in the terminal
+  console.log(prettyjson.render(req.body));
+  console.log("-----------------------");
+
 });
 // Mpesa functions
 
