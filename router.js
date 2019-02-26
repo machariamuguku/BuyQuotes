@@ -168,33 +168,34 @@ router.post("/lipanampesa/success", (req, res) => {
   };
   res.json(message);
 
-  console.log("");
-  console.log("-----------Received M-Pesa webhook-----------");
-  console.log("");
-  // format and dump the request payload recieved from safaricom in the terminal
-  console.log(prettyjson.render(req.body));
-  console.log("");
-  console.log("-----------Received M-Pesa webhook------------");
-  console.log("");
-
   // if mpesa succeeds
-  let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
-  if (lipanampesasuccess == 0) {
+  // let lipanampesasuccess = req.body.ResultCode;
+  if (lipanampesaAllResponse.ResponseCode == 0) {
     res.render("cart", {
       lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+      lipanaMpesaSuccessOrFailedTitle:
+        "Money recived!; we done did it!; whose the goat fam?",
       cssalertforloading: "message is-success"
     });
-  }
-  else {
+  } else {
     res.render("cart", {
       lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+      lipanaMpesaSuccessOrFailedTitle:
+        "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
       cssalertforloading: "message is-danger"
     });
   }
 });
+console.log("");
+console.log("-----------Received M-Pesa webhook-----------");
+console.log("");
+// format and dump the request payload recieved from safaricom in the terminal
+console.log(prettyjson.render(lipanampesaAllResponse));
+console.log("");
+console.log("-----------Received M-Pesa webhook------------");
+console.log("");
+
 // Mpesa functions
 
 // Receive payment notification here ...
