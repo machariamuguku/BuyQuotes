@@ -178,6 +178,7 @@ router.post("/lipanampesa/success", (req, res) => {
   // if mpesa succeeds
   let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
+
   if (lipanampesasuccess == 0) {
     res.render("cart", {
       lipanampesaAllResponse: lipanampesaAllResponse,
@@ -186,7 +187,7 @@ router.post("/lipanampesa/success", (req, res) => {
       cssalertforloading: "message is-success"
     });
     // console.log(prettyjson.render('you actually paid! touche'));
-  } else {
+  } else if (lipanampesasuccess == 01032){
     res.render("cart", {
       lipanampesaAllResponse: lipanampesaAllResponse,
       lipanaMpesaSuccessOrFailedTitle:
