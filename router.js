@@ -44,7 +44,6 @@ router.post("/pay", (req, res) => {
       quotecategory: req.body.quotecategory
     };
     // Process Payment here
-    // let callbackUrl = "https://buyquotes.herokuapp.com/lipanampesa/success"
     const consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N";
     const consumer_secret = "TEYbiahbnSmUErPV";
     const url =
@@ -68,13 +67,14 @@ router.post("/pay", (req, res) => {
 
     function getToken(tokenParam) {
       let oauth_token;
-      request({
+      request(
+        {
           url: url,
           headers: {
             Authorization: auth
           }
         },
-        function (error, response, body) {
+        function(error, response, body) {
           let oauth_body = JSON.parse(body);
           oauth_token = oauth_body.access_token;
           tokenParam(oauth_token);
@@ -82,14 +82,14 @@ router.post("/pay", (req, res) => {
       );
     }
 
-    getToken(function (token) {
+    getToken(function(token) {
+      let reqId;
       let oauth_token = token;
-
       let auth_for_api = "Bearer " + oauth_token;
-
       password = base64.encode(shortCode + passkey + timestamp);
 
-      request({
+      request(
+        {
           method: "POST",
           url: url_for_api,
           headers: {
@@ -109,11 +109,29 @@ router.post("/pay", (req, res) => {
             TransactionDesc: transactionDesc
           }
         },
-        function (error, response, body) {
+
+        function(error, response, body) {
           if (body.CustomerMessage) {
+            reqId = body.CheckoutRequestID;
+            module.exports = reqId;
+            console.log(prettyjson.render(""));
+            console.log(
+              prettyjson.render(
+                ".............Response Parameters.................."
+              )
+            );
+            console.log(prettyjson.render(""));
             console.log(prettyjson.render(body));
+            console.log(prettyjson.render(""));
+            console.log(
+              prettyjson.render(
+                "............./Response Parameters................."
+              )
+            );
+            console.log(prettyjson.render(""));
             res.render("cart", {
-              processingtitle: "Order complete; Submission Successful; Processing Payment",
+              processingtitle:
+                "Order complete; Submission Successful; Processing Payment",
               mpesasucceeds: body.CustomerMessage,
               cssalertforloading: "message is-success"
             });
@@ -127,11 +145,57 @@ router.post("/pay", (req, res) => {
           } else if (response) {
             console.log(prettyjson.render(response));
             res.render("cart", {
-              processingtitle: "Order complete; Submission Successful; we done did it!",
+              processingtitle:
+                "Order complete; Submission Successful; we done did it!",
               mpesasucceeds: response,
               cssalertforloading: "message is-success"
             });
           }
+        },
+
+        function() {
+          // var reqId = reqId;
+          var request = require("request"),
+            oauth_token = token,
+            url = "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
+          auth = "Bearer " + oauth_token;
+
+          request(
+            {
+              method: "POST",
+              url: url,
+              headers: {
+                Authorization: auth
+              },
+              json: {
+                BusinessShortCode: shortCode,
+                Password: password,
+                Timestamp: timestamp,
+                CheckoutRequestID: reqId
+              }
+            },
+
+            function(error, response, body) {
+              // TODO: Use the body object to extract the response
+              console.log(prettyjson.render(""));
+              console.log(
+                prettyjson.render(
+                  "............Results Parameters.................."
+                )
+              );
+              console.log(prettyjson.render(""));
+              console.log(prettyjson.render(body));
+              console.log(prettyjson.render(""));
+              console.log(
+                prettyjson.render(
+                  "............/Results Parameters................."
+                )
+              );
+              console.log(prettyjson.render(""));
+              console.log(prettyjson.render("deez nuts!"));
+              console.log(prettyjson.render(body));
+            }
+          );
         }
       );
     });
@@ -150,6 +214,11 @@ router.post("/pay", (req, res) => {
 	URL: /lipanampesa/success
 */
 router.post("/lipanampesa/success", (req, res) => {
+  console.log("-----------Received M-Pesa webhook-----------");
+  // format and dump the request payload recieved from safaricom in the terminal
+  console.log(prettyjson.render(req.body, options));
+  console.log("-----------------------");
+
   let message = {
     ResponseCode: "00000000",
     ResponseDesc: "success"
