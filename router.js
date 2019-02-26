@@ -179,22 +179,22 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
 
-  if (lipanampesasuccess == 0) {
-    res.render("cart", {
-      lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanaMpesaSuccessOrFailedTitle:
-        "Money recived!; we done did it!; whose the goat fam?",
-      cssalertforloading: "message is-success"
-    });
-    // console.log(prettyjson.render('you actually paid! touche'));
-  } else if (lipanampesasuccess == 01032){
-    res.render("cart", {
-      lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanaMpesaSuccessOrFailedTitle:
-        "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
-      cssalertforloading: "message is-danger"
-    });
-    // console.log(prettyjson.render('i F knewed you aint gonna pay'))
+  if (lipanampesaAllResponse) {
+    if (lipanampesasuccess == 0) {
+      res.render("cart", {
+        lipanampesaAllResponse: lipanampesaAllResponse,
+        lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+        cssalertforloading: "message is-success"
+      });
+      // console.log(prettyjson.render('you actually paid! touche'));
+    } else if (lipanampesasuccess == 01032) {
+      res.render("cart", {
+        lipanampesaAllResponse: lipanampesaAllResponse,
+        lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+        cssalertforloading: "message is-danger"
+      });
+      // console.log(prettyjson.render('i F knewed you aint gonna pay'))
+    }
   }
 });
 
