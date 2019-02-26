@@ -168,7 +168,7 @@ router.post("/lipanampesa/success", (req, res) => {
   };
 
   // if mpesa succeeds
-  let  = res.body;
+  let lipanampesaAllResponse = res.body;
   // let lipanampesasuccess = res.body.ResultCode;
   if (lipanampesaAllResponse) {
     res.render("cart", {
