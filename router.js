@@ -187,7 +187,7 @@ router.post("/lipanampesa/success", (req, res) => {
         cssalertforloading: "message is-success"
       });
       // console.log(prettyjson.render('you actually paid! touche'));
-    } else if (lipanampesasuccess == 01032) {
+    } else if (lipanampesasuccess == 1032) {
       res.render("cart", {
         lipanampesaAllResponse: lipanampesaAllResponse,
         lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
