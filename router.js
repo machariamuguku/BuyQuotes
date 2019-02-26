@@ -182,7 +182,7 @@ router.post("/lipanampesa/success", (req, res) => {
   // let lipanampesasuccess = req.body.ResultCode;
   // let lipanampesaAllResponse = req.body;
 
-  if (req.body.ResultCode == 0) {
+  if (req.body.ResultCode == '0') {
     res.render("cart", {
       // lipanampesaAllResponse: lipanampesaAllResponse,
       lipanampesaAllResponse: true,
@@ -190,7 +190,7 @@ router.post("/lipanampesa/success", (req, res) => {
       cssalertforloading: "message is-success"
     });
     console.log(prettyjson.render('you actually paid! touche'));
-  } else if (req.body.ResultCode == 1032) {
+  } else if (req.body.ResultCode == '1032') {
     res.render("cart", {
       // lipanampesaAllResponse: lipanampesaAllResponse,
       lipanampesaAllResponse: false,
