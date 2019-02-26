@@ -185,16 +185,17 @@ router.post("/lipanampesa/success", (req, res) => {
         "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
       cssalertforloading: "message is-danger"
     });
+
+    console.log("");
+    console.log("-----------Received M-Pesa webhook-----------");
+    console.log("");
+    // format and dump the request payload recieved from safaricom in the terminal
+    console.log(prettyjson.render(lipanampesaAllResponse));
+    console.log("");
+    console.log("-----------Received M-Pesa webhook------------");
+    console.log("");
   }
 });
-console.log("");
-console.log("-----------Received M-Pesa webhook-----------");
-console.log("");
-// format and dump the request payload recieved from safaricom in the terminal
-console.log(prettyjson.render(lipanampesaAllResponse));
-console.log("");
-console.log("-----------Received M-Pesa webhook------------");
-console.log("");
 
 // Mpesa functions
 
