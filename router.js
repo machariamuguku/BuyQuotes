@@ -30,6 +30,7 @@ router.post("/pay", (req, res) => {
 
   let errors = req.validationErrors();
   let newuserdata = "";
+  lipanampesaAllResponse = false;
 
   if (errors) {
     res.render("cart", {
@@ -82,7 +83,6 @@ router.post("/pay", (req, res) => {
     }
 
     getToken(function (token) {
-      let reqId;
       let oauth_token = token;
       let auth_for_api = "Bearer " + oauth_token;
       password = base64.encode(shortCode + passkey + timestamp);
@@ -110,8 +110,6 @@ router.post("/pay", (req, res) => {
 
         function (error, response, body) {
           if (body.CustomerMessage) {
-            reqId = body.CheckoutRequestID;
-            module.exports = reqId;
             console.log(prettyjson.render(""));
             console.log(
               prettyjson.render(
@@ -176,25 +174,25 @@ router.post("/lipanampesa/success", (req, res) => {
   console.log("");
 
   // if mpesa succeeds
-  let lipanampesasuccess = req.body.ResultCode;
-  let lipanampesaAllResponse = req.body;
+  // let lipanampesasuccess = req.body.ResultCode;
+  // let lipanampesaAllResponse = req.body;
 
-  if (lipanampesaAllResponse) {
-    if (lipanampesasuccess == 0) {
-      res.render("cart", {
-        lipanampesaAllResponse: lipanampesaAllResponse,
-        lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
-        cssalertforloading: "message is-success"
-      });
-      // console.log(prettyjson.render('you actually paid! touche'));
-    } else if (lipanampesasuccess == 1032) {
-      res.render("cart", {
-        lipanampesaAllResponse: lipanampesaAllResponse,
-        lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
-        cssalertforloading: "message is-danger"
-      });
-      // console.log(prettyjson.render('i F knewed you aint gonna pay'))
-    }
+  if (req.body.ResultCode == 0) {
+    res.render("cart", {
+      // lipanampesaAllResponse: lipanampesaAllResponse,
+      lipanampesaAllResponse: true,
+      lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+      cssalertforloading: "message is-success"
+    });
+    // console.log(prettyjson.render('you actually paid! touche'));
+  } else if (req.body.ResultCode == 1032) {
+    res.render("cart", {
+      // lipanampesaAllResponse: lipanampesaAllResponse,
+      lipanampesaAllResponse: false,
+      lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+      cssalertforloading: "message is-danger"
+    });
+    // console.log(prettyjson.render('i F knewed you aint gonna pay'))
   }
 });
 
