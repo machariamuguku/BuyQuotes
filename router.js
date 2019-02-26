@@ -11,6 +11,11 @@ router.get("/", (req, res) => {
   res.render("cart");
 });
 
+// home router
+router.get("/paidnot", (req, res) => {
+  res.render("cart");
+});
+
 // Payment processing code here ...
 router.post("/pay", (req, res) => {
   req
@@ -184,7 +189,7 @@ router.post("/lipanampesa/success", (req, res) => {
       lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
       cssalertforloading: "message is-success"
     });
-    // console.log(prettyjson.render('you actually paid! touche'));
+    console.log(prettyjson.render('you actually paid! touche'));
   } else if (req.body.ResultCode == 1032) {
     res.render("cart", {
       // lipanampesaAllResponse: lipanampesaAllResponse,
@@ -192,7 +197,7 @@ router.post("/lipanampesa/success", (req, res) => {
       lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
       cssalertforloading: "message is-danger"
     });
-    // console.log(prettyjson.render('i F knewed you aint gonna pay'))
+    console.log(prettyjson.render('i F knewed you aint gonna pay'))
   }
 });
 
