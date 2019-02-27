@@ -170,7 +170,7 @@ router.post("/lipanampesa/success", (req, res) => {
 
   // if mpesa succeeds
   // let lipanampesasuccess = req.body.ResultCode;
-  let lipanampesaAllResponse = req.body.stkCallback.MerchantRequestID.ResultCode;
+  let lipanampesaAllResponse = req.body;
   console.log(lipanampesaAllResponse);
 
   // res.render("cart", {
