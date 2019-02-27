@@ -130,7 +130,8 @@ router.post("/pay", (req, res) => {
               sendingToMpesaSucceeds: body.CustomerMessage,
               cssalertforloading: "message is-success"
             });
-            res.redirect('/lipanampesa/success');
+            // this it
+            redirect('/lipanampesa/success');
           } else {
             console.log(prettyjson.render(error));
             res.render("cart", {
