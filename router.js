@@ -175,7 +175,7 @@ router.post("/lipanampesa/success", (req, res) => {
     console.log(lipanampesaAllResponse);
     console.log('........................');
 
-    res.redirect('http://google.com');
+    res.redirect(200, 'http://google.com');
   };
   // res.render("cart", {
   //   lipanampesaAllResponse: lipanampesaAllResponse,
