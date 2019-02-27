@@ -170,7 +170,8 @@ router.post("/lipanampesa/success", (req, res) => {
 
   // if mpesa succeeds
   // let lipanampesasuccess = req.body.ResultCode;
-  let lipanampesaAllResponse = req.body;
+  let lipanampesaAllResponse = JSON.parse(req.body);
+  
   // let lipanampesasuccess = req.body.ResultCode;
   console.log(lipanampesaAllResponse);
 
