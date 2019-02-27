@@ -172,7 +172,7 @@ router.post("/lipanampesa/success", (req, res) => {
   if (lipanampesaAllResponse) {
     console.log('it should work!');
     // console.log(req.body);
-    console.log(JSON.stringify(req.body, 0, 4));
+    console.log(JSON.stringify(req.body));
     res.redirect('/youpaid');
   }
   // res.render("cart", {
