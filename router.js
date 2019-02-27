@@ -184,7 +184,7 @@ router.post("/lipanampesa/success", (req, res) => {
     //  configure email preferences
     const mailOptions = {
       from: 'mugukuwrites@gmail.com', // sender address
-      to: 'machariamuguku@gmail..com', // list of receivers
+      to: 'machariamuguku@gmail.com', // list of receivers
       subject: 'testing nodemailer', // Subject line
       html: '<p>am just testing nodemailer!</p>' // plain text body
     };
