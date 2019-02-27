@@ -162,43 +162,46 @@ router.post("/pay", (req, res) => {
 	URL: /lipanampesa/success
 */
 router.post("/lipanampesa/success", (req, res) => {
-  let message = {
-    ResponseCode: "00000000",
-    ResponseDesc: "success"
-  };
-
+  // let message = {
+  //   ResponseCode: "00000000",
+  //   ResponseDesc: "success"
+  // };
   // res.json(message);
-
-  console.log("");
-  console.log("-----------Received M-Pesa webhook-----------");
-  console.log("");
-  // format and dump the request payload recieved from safaricom in the terminal
-  console.log(prettyjson.render(req.body));
-  console.log("");
-  console.log("-----------Received M-Pesa webhook------------");
-  console.log("");
 
   // if mpesa succeeds
   // let lipanampesasuccess = req.body.ResultCode;
-  // let lipanampesaAllResponse = req.body;
+  let lipanampesaAllResponse = req.body;
+  let lipanampesasuccess = req.body.ResultCode;
+  console.log(prettyjson.render(lipanampesasuccess));
 
-  if (req.body.ResultCode == '0') {
-    res.render("cart", {
-      // lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanampesaAllResponse: true,
-      lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
-      cssalertforloading: "message is-success"
-    });
-    console.log(prettyjson.render('you actually paid! touche'));
-  } else if (req.body.ResultCode == '1032') {
-    res.render("cart", {
-      // lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanampesaAllResponse: false,
-      lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
-      cssalertforloading: "message is-danger"
-    });
-    console.log(prettyjson.render('i F knewed you aint gonna pay'))
-  }
+  // if (req.body.ResultCode == '0') {
+  //   res.render("cart", {
+  //     // lipanampesaAllResponse: lipanampesaAllResponse,
+  //     lipanampesaAllResponse: true,
+  //     lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+  //     cssalertforloading: "message is-success"
+  //   });
+  //   console.log(prettyjson.render('you actually paid! touche'));
+  // } else if (req.body.ResultCode == '1032') {
+  //   res.render("cart", {
+  //     // lipanampesaAllResponse: lipanampesaAllResponse,
+  //     lipanampesaAllResponse: false,
+  //     lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+  //     cssalertforloading: "message is-danger"
+  //   });
+  //   console.log(prettyjson.render('i F knewed you aint gonna pay'))
+  // }
+
+  // console.log("");
+  // console.log("-----------Received M-Pesa webhook-----------");
+  // console.log("");
+  // // format and dump the request payload recieved from safaricom in the terminal
+  // console.log(prettyjson.render(req.body));
+  // console.log("");
+  // console.log("-----------Received M-Pesa webhook------------");
+  // console.log("");
+
+
 });
 
 // Mpesa functions
