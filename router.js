@@ -174,10 +174,9 @@ router.post("/lipanampesa/success", (req, res) => {
     lipanampesaAllResponse = JSON.stringify(req.body);
     console.log(lipanampesaAllResponse);
     console.log('........................');
-    console.log(lipanampesaAllResponse.stkCallback.ResultCode);   
 
-    res.redirect('/youpaid');
-  }
+    res.redirect('http://google.com');
+  };
   // res.render("cart", {
   //   lipanampesaAllResponse: lipanampesaAllResponse,
   //   lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
