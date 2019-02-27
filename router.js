@@ -145,7 +145,7 @@ router.post("/pay", (req, res) => {
       );
     });
 
-    res.redirect('http://google.com');
+    res.redirect('/youpaid');
     // insert transaction history to DB here
     // default success false on every transaction whether successful or not
     // Send Quotes here
