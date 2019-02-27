@@ -168,20 +168,34 @@ router.post("/lipanampesa/success", (req, res) => {
 
   // if mpesa succeeds
   // let lipanampesasuccess = req.body.ResultCode;
-  let lipanampesaAllResponse = req.body;
 
-  if (lipanampesaAllResponse) {
-    lipanampesaAllResponse = JSON.stringify(req.body);
+  async function showAvatar() {
+
+    let lipanampesaAllResponse = await JSON.stringify(req.body);
+    let iszero = await lipanampesaAllResponse.stkCallback;
+
     console.log(lipanampesaAllResponse);
-    console.log('........................');
+    console.log(iszero);
 
-    res.render("youpaid", {
-      lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
-    });
+    // wait 13 seconds
+    await new Promise((resolve, reject) => setTimeout(resolve, 13000));
 
-    res.sendStatus(200);
-  };
+  }
+
+  showAvatar();
+
+  // if (lipanampesaAllResponse) {
+  //   lipanampesaAllResponse = JSON.stringify(req.body);
+  //   console.log(lipanampesaAllResponse);
+  //   console.log('........................');
+
+  //   res.render("youpaid", {
+  //     lipanampesaAllResponse: lipanampesaAllResponse,
+  //     lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
+  //   });
+
+
+  // };
   // res.render("cart", {
   //   lipanampesaAllResponse: lipanampesaAllResponse,
   //   lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
@@ -216,6 +230,8 @@ router.post("/lipanampesa/success", (req, res) => {
   // console.log("");
   // console.log("-----------Received M-Pesa webhook------------");
   // console.log("");
+
+  res.sendStatus(200);
 });
 
 // Mpesa functions
