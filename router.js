@@ -170,7 +170,8 @@ router.post("/lipanampesa/success", (req, res) => {
   // let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
   if (lipanampesaAllResponse) {
-    res.redirect('/youpaid')
+    console.log('it should work!');
+    res.redirect('/youpaid');
   }
   // res.render("cart", {
   //   lipanampesaAllResponse: lipanampesaAllResponse,
