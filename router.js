@@ -171,7 +171,8 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipanampesaAllResponse = req.body;
   if (lipanampesaAllResponse) {
     console.log('it should work!');
-    console.log(req.body.MerchantRequestID);
+    // console.log(req.body);
+    console.log(JSON.stringify(req.body, 0, 4));
     res.redirect('/youpaid');
   }
   // res.render("cart", {
