@@ -171,8 +171,8 @@ router.post("/lipanampesa/success", (req, res) => {
   // if mpesa succeeds
   // let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
-  let lipanampesasuccess = req.body.ResultCode;
-  console.log(prettyjson.render(lipanampesasuccess));
+  // let lipanampesasuccess = req.body.ResultCode;
+  console.log(prettyjson.render(lipanampesaAllResponse));
 
   // if (req.body.ResultCode == '0') {
   //   res.render("cart", {
