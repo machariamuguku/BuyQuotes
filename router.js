@@ -170,14 +170,14 @@ router.post("/lipanampesa/success", (req, res) => {
 
   // if mpesa succeeds
   // let lipanampesasuccess = req.body.ResultCode;
-  let lipanampesaAllResponse = req.body;
+  let lipanampesaAllResponse = req.body.stkCallback.MerchantRequestID.ResultCode;
   console.log(lipanampesaAllResponse);
 
-  res.render("cart", {
-    lipanampesaAllResponse: lipanampesaAllResponse,
-    lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
-    cssalertforloading: "message is-success"
-  });
+  // res.render("cart", {
+  //   lipanampesaAllResponse: lipanampesaAllResponse,
+  //   lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+  //   cssalertforloading: "message is-success"
+  // });
 
   // let lipanampesasuccess = req.body.ResultCode;
 
