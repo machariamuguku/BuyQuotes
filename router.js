@@ -11,6 +11,9 @@ router.get("/", (req, res) => {
   res.render("cart");
 });
 
+router.get('/youpaid', (req, res) => {
+  res.render('youpaid')
+});
 // Payment processing code here ...
 router.post("/pay", (req, res) => {
   req
@@ -130,8 +133,6 @@ router.post("/pay", (req, res) => {
               sendingToMpesaSucceeds: body.CustomerMessage,
               cssalertforloading: "message is-success"
             });
-            // this it
-            redirect('/lipanampesa/success');
           } else {
             console.log(prettyjson.render(error));
             res.render("cart", {
@@ -168,12 +169,14 @@ router.post("/lipanampesa/success", (req, res) => {
   // if mpesa succeeds
   // let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
-
-  res.render("cart", {
-    lipanampesaAllResponse: lipanampesaAllResponse,
-    lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
-    cssalertforloading: "message is-success"
-  });
+  if (lipanampesaAllResponse) {
+    res.redirect('/youpaid')
+  }
+  // res.render("cart", {
+  //   lipanampesaAllResponse: lipanampesaAllResponse,
+  //   lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+  //   cssalertforloading: "message is-success"
+  // });
 
   // let lipanampesasuccess = req.body.ResultCode;
 
@@ -203,8 +206,6 @@ router.post("/lipanampesa/success", (req, res) => {
   // console.log("");
   // console.log("-----------Received M-Pesa webhook------------");
   // console.log("");
-
-
 });
 
 // Mpesa functions
