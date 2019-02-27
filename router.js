@@ -172,7 +172,7 @@ router.post("/lipanampesa/success", (req, res) => {
   // let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
   // let lipanampesasuccess = req.body.ResultCode;
-  console.log(prettyjson.render(lipanampesaAllResponse));
+  console.log(lipanampesaAllResponse);
 
   // if (req.body.ResultCode == '0') {
   //   res.render("cart", {
