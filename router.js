@@ -12,8 +12,8 @@ router.get("/", (req, res) => {
 });
 
 // home router
-router.get("/paidnot", (req, res) => {
-  res.render("cart");
+router.get("/youpaid", (req, res) => {
+  res.render("youpaid");
 });
 
 // Payment processing code here ...
@@ -171,13 +171,16 @@ router.post("/lipanampesa/success", (req, res) => {
   // if mpesa succeeds
   // let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
-  console.log(lipanampesaAllResponse);
 
-  // res.render("cart", {
-  //   lipanampesaAllResponse: lipanampesaAllResponse,
-  //   lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
-  //   cssalertforloading: "message is-success"
-  // });
+  if (lipanampesaAllResponse) {
+    res.render("youpaid", {
+      lipanampesaAllResponse: lipanampesaAllResponse,
+      lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+      cssalertforloading: "message is-success"
+    });
+
+    res.redirect('/youpaid');
+  }
 
   // let lipanampesasuccess = req.body.ResultCode;
 
