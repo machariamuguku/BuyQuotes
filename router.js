@@ -145,7 +145,6 @@ router.post("/pay", (req, res) => {
       );
     });
 
-    res.redirect('/youpaid');
     // insert transaction history to DB here
     // default success false on every transaction whether successful or not
     // Send Quotes here
@@ -176,11 +175,12 @@ router.post("/lipanampesa/success", (req, res) => {
     console.log(lipanampesaAllResponse);
     console.log('........................');
 
-    res.render('youpaid', () => {
-      lipanampesaAllResponse : lipanampesaAllResponse;
-      lipanaMpesaSuccessOrFailedTitle: 'watchuthink?';
+    res.render("youpaid", {
+      lipanampesaAllResponse: lipanampesaAllResponse,
+      lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
+    });
 
-    })
+    res.sendStatus(200);
   };
   // res.render("cart", {
   //   lipanampesaAllResponse: lipanampesaAllResponse,
