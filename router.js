@@ -150,36 +150,6 @@ router.post("/pay", (req, res) => {
     // default success false on every transaction whether successful or not
     // Send Quotes here
 
-    // nodemailer method
-
-    function sendEmail() {
-
-      // set nodemailer transport
-      var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'mugukuwrites@gmail.com',
-          pass: '@chiever#1'
-        }
-      });
-
-      //  configure email preferences
-      const mailOptions = {
-        from: 'mugukuwrites@gmail.com', // sender address
-        to: 'machariamuguku@gmail..com', // list of receivers
-        subject: 'testing nodemailer', // Subject line
-        html: '<p>am just testing nodemailer!</p>' // plain text body
-      };
-
-      // send email
-      transporter.sendMail(mailOptions, function (err, info) {
-        if (err)
-          console.log(err)
-        else
-          console.log(info);
-      });
-
-    }
 
     // If successfull res.render transaction successful to message
     // write success true message to DB if success
@@ -199,27 +169,65 @@ router.post("/lipanampesa/success", (req, res) => {
   // };
   // res.json(message);
 
-  // if mpesa succeeds
-  // let lipanampesasuccess = req.body.ResultCode;
+  // nodemailer method
+  function sendEmail() {
 
-  async function showAvatar() {
-
-    let lipanampesaAllResponse = await JSON.stringify(req.body);
-    let iszero = await lipanampesaAllResponse.stkCallback;
-
-    console.log(lipanampesaAllResponse);
-
-    res.render("youpaid", {
-      lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
+    // set nodemailer transport
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'mugukuwrites@gmail.com',
+        pass: '@chiever#1'
+      }
     });
 
-    // wait 13 seconds
-    await new Promise((resolve, reject) => setTimeout(resolve, 13000));
+    //  configure email preferences
+    const mailOptions = {
+      from: 'mugukuwrites@gmail.com', // sender address
+      to: 'machariamuguku@gmail..com', // list of receivers
+      subject: 'testing nodemailer', // Subject line
+      html: '<p>am just testing nodemailer!</p>' // plain text body
+    };
+
+    // send email
+    transporter.sendMail(mailOptions, function (err, info) {
+      if (err)
+        console.log(err)
+      else
+        console.log(info);
+    });
 
   }
 
-  showAvatar();
+
+  let lipanampesaAllResponse = JSON.stringify(req.body);
+  console.log(lipanampesaAllResponse);
+
+  if (lipanampesaAllResponse) {
+    sendEmail();
+  }
+
+  // if mpesa succeeds
+  // let lipanampesasuccess = req.body.ResultCode;
+
+  // async function showAvatar() {
+
+  //   let lipanampesaAllResponse = await JSON.stringify(req.body);
+  //   let iszero = await lipanampesaAllResponse.stkCallback;
+
+  //   console.log(lipanampesaAllResponse);
+
+  //   res.render("youpaid", {
+  //     lipanampesaAllResponse: lipanampesaAllResponse,
+  //     lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
+  //   });
+
+  //   // wait 13 seconds
+  //   await new Promise((resolve, reject) => setTimeout(resolve, 13000));
+
+  // }
+
+  // showAvatar();
   // if (lipanampesaAllResponse) {
   //   lipanampesaAllResponse = JSON.stringify(req.body);
   //   console.log(lipanampesaAllResponse);
