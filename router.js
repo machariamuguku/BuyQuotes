@@ -209,8 +209,6 @@ router.post("/lipanampesa/success", (req, res) => {
 
     console.log(lipanampesaAllResponse);
 
-    sendEmail();
-
     res.render("youpaid", {
       lipanampesaAllResponse: lipanampesaAllResponse,
       lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
@@ -222,7 +220,6 @@ router.post("/lipanampesa/success", (req, res) => {
   }
 
   showAvatar();
-
   // if (lipanampesaAllResponse) {
   //   lipanampesaAllResponse = JSON.stringify(req.body);
   //   console.log(lipanampesaAllResponse);
