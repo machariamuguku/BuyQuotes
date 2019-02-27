@@ -171,6 +171,7 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipanampesaAllResponse = req.body;
   if (lipanampesaAllResponse) {
     console.log('it should work!');
+    console.log(req.body.stkCallback);
     res.redirect('/youpaid');
   }
   // res.render("cart", {
