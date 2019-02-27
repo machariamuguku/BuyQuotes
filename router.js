@@ -169,10 +169,13 @@ router.post("/lipanampesa/success", (req, res) => {
   // if mpesa succeeds
   // let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
+
   if (lipanampesaAllResponse) {
-    console.log('it should work!');
-    // console.log(req.body);
-    console.log(JSON.stringify(req.body));
+    lipanampesaAllResponse = JSON.stringify(req.body);
+    console.log(lipanampesaAllResponse);
+    console.log('........................');
+    console.log(lipanampesaAllResponse.stkCallback.ResultCode);   
+
     res.redirect('/youpaid');
   }
   // res.render("cart", {
