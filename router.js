@@ -173,12 +173,11 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipanampesaAllResponse = req.body;
 
   if (lipanampesaAllResponse) {
-    res.render("youpaid", {
-      lipanampesaAllResponse: lipanampesaAllResponse,
-      lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
-      cssalertforloading: "message is-success"
-    });
-
+    // res.render("youpaid", {
+    //   lipanampesaAllResponse: lipanampesaAllResponse,
+    //   lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+    //   cssalertforloading: "message is-success"
+    // });
     res.redirect('/youpaid');
   }
 
