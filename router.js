@@ -3,6 +3,7 @@ const prettyjson = require("prettyjson");
 const request = require("request");
 const moment = require("moment");
 const base64 = require("base-64");
+var nodemailer = require('nodemailer');
 
 const router = express.Router();
 
@@ -148,6 +149,38 @@ router.post("/pay", (req, res) => {
     // insert transaction history to DB here
     // default success false on every transaction whether successful or not
     // Send Quotes here
+
+    // nodemailer method
+
+    function sendEmail() {
+
+      // set nodemailer transport
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'mugukuwrites@gmail.com',
+          pass: '@chiever#1'
+        }
+      });
+
+      //  configure email preferences
+      const mailOptions = {
+        from: 'mugukuwrites@gmail.com', // sender address
+        to: 'machariamuguku@gmail..com', // list of receivers
+        subject: 'testing nodemailer', // Subject line
+        html: '<p>am just testing nodemailer!</p>' // plain text body
+      };
+
+      // send email
+      transporter.sendMail(mailOptions, function (err, info) {
+        if (err)
+          console.log(err)
+        else
+          console.log(info);
+      });
+
+    }
+
     // If successfull res.render transaction successful to message
     // write success true message to DB if success
   }
@@ -175,9 +208,10 @@ router.post("/lipanampesa/success", (req, res) => {
     let iszero = await lipanampesaAllResponse.stkCallback;
 
     console.log(lipanampesaAllResponse);
-    console.log(iszero);
 
-    res.render("cart", {
+    sendEmail();
+
+    res.render("youpaid", {
       lipanampesaAllResponse: lipanampesaAllResponse,
       lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
     });
