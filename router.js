@@ -11,11 +11,6 @@ router.get("/", (req, res) => {
   res.render("cart");
 });
 
-// home router
-router.get("/youpaid", (req, res) => {
-  res.render("youpaid");
-});
-
 // Payment processing code here ...
 router.post("/pay", (req, res) => {
   req
@@ -135,6 +130,7 @@ router.post("/pay", (req, res) => {
               sendingToMpesaSucceeds: body.CustomerMessage,
               cssalertforloading: "message is-success"
             });
+            res.redirect('/lipanampesa/success');
           } else {
             console.log(prettyjson.render(error));
             res.render("cart", {
@@ -172,14 +168,11 @@ router.post("/lipanampesa/success", (req, res) => {
   // let lipanampesasuccess = req.body.ResultCode;
   let lipanampesaAllResponse = req.body;
 
-  if (lipanampesaAllResponse) {
-    // res.render("youpaid", {
-    //   lipanampesaAllResponse: lipanampesaAllResponse,
-    //   lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
-    //   cssalertforloading: "message is-success"
-    // });
-    res.redirect('/youpaid');
-  }
+  res.render("cart", {
+    lipanampesaAllResponse: lipanampesaAllResponse,
+    lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
+    cssalertforloading: "message is-success"
+  });
 
   // let lipanampesasuccess = req.body.ResultCode;
 
