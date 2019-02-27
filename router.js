@@ -177,6 +177,11 @@ router.post("/lipanampesa/success", (req, res) => {
     console.log(lipanampesaAllResponse);
     console.log(iszero);
 
+    res.render("cart", {
+      lipanampesaAllResponse: lipanampesaAllResponse,
+      lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
+    });
+
     // wait 13 seconds
     await new Promise((resolve, reject) => setTimeout(resolve, 13000));
 
