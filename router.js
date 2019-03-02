@@ -176,16 +176,16 @@ router.post("/lipanampesa/success", (req, res) => {
       lipaNaMpesaCSS: "message is-danger"
     });
 
-      // log the success results in MOngoDB?
-      console.log('What happened?'+req.body)
+    // log the success results in MOngoDB?
+    console.log('What happened?' + req.body);
   }
 
   // Format and send success message to safaricom servers
-  // let message = {
-  //   ResponseCode: "00000000",
-  //   ResponseDesc: "success"
-  // };
-  // res.json(message);
+  let message = {
+    ResponseCode: "00000000",
+    ResponseDesc: "success"
+  };
+  res.json(message);
 });
 
 // End of Mpesa functions
