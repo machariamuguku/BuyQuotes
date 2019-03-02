@@ -20,17 +20,13 @@ router.post("/pay", (req, res) => {
   req
     .checkBody(
       "phonenumber",
-      "Enter an M-PESA registered Phone number to receive the payment prompt "
+      "Use an M-PESA registered, Kenyan phone number (in this format --> 254712345678)"
     )
-    .notEmpty()
     .isMobilePhone("en-KE")
-    .withMessage(
-      "Please use a Kenyan phone number format (eg., +254712345678)"
-    );
   req
     .checkBody("email", "Enter an Email Address to receive the quotes in")
     .notEmpty();
-  req.checkBody("quotecategory", "Please select a Quotes category").notEmpty();
+  req.checkBody("quotecategory", "Select a Quote category").notEmpty();
 
   let errors = req.validationErrors();
   let newuserdata = "";
