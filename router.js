@@ -3,7 +3,7 @@ const prettyjson = require("prettyjson");
 const request = require("request");
 const moment = require("moment");
 const base64 = require("base-64");
-var nodemailer = require('nodemailer');
+var nodemailer = require("nodemailer");
 
 const router = express.Router();
 
@@ -12,9 +12,6 @@ router.get("/", (req, res) => {
   res.render("cart");
 });
 
-router.get('/youpaid', (req, res) => {
-  res.render('youpaid')
-});
 // Payment processing code here ...
 router.post("/pay", (req, res) => {
   req
@@ -34,7 +31,6 @@ router.post("/pay", (req, res) => {
 
   let errors = req.validationErrors();
   let newuserdata = "";
-  lipanampesaAllResponse = false;
 
   if (errors) {
     res.render("cart", {
@@ -72,13 +68,14 @@ router.post("/pay", (req, res) => {
 
     function getToken(tokenParam) {
       let oauth_token;
-      request({
+      request(
+        {
           url: url,
           headers: {
             Authorization: auth
           }
         },
-        function (error, response, body) {
+        function(error, response, body) {
           let oauth_body = JSON.parse(body);
           oauth_token = oauth_body.access_token;
           tokenParam(oauth_token);
@@ -86,12 +83,13 @@ router.post("/pay", (req, res) => {
       );
     }
 
-    getToken(function (token) {
+    getToken(function(token) {
       let oauth_token = token;
       let auth_for_api = "Bearer " + oauth_token;
       password = base64.encode(shortCode + passkey + timestamp);
 
-      request({
+      request(
+        {
           method: "POST",
           url: url_for_api,
           headers: {
@@ -112,7 +110,7 @@ router.post("/pay", (req, res) => {
           }
         },
 
-        function (error, response, body) {
+        function(error, response, body) {
           if (body.CustomerMessage) {
             console.log(prettyjson.render(""));
             console.log(
@@ -130,7 +128,8 @@ router.post("/pay", (req, res) => {
             );
             console.log(prettyjson.render(""));
             res.render("cart", {
-              processingtitle: "Order complete; Submission Successful; Processing Payment",
+              processingtitle:
+                "Order complete; Submission Successful; Processing Payment",
               sendingToMpesaSucceeds: body.CustomerMessage,
               cssalertforloading: "message is-success"
             });
@@ -149,7 +148,6 @@ router.post("/pay", (req, res) => {
     // insert transaction history to DB here
     // default success false on every transaction whether successful or not
     // Send Quotes here
-
 
     // If successfull res.render transaction successful to message
     // write success true message to DB if success
@@ -171,34 +169,30 @@ router.post("/lipanampesa/success", (req, res) => {
 
   // nodemailer method
   function sendEmail() {
-
     // set nodemailer transport
     var transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
-        user: 'mugukuwrites@gmail.com',
-        pass: '@chiever#1'
+        user: "mugukuwrites@gmail.com",
+        pass: "@chiever#1"
       }
     });
 
     //  configure email preferences
     const mailOptions = {
-      from: 'mugukuwrites@gmail.com', // sender address
-      to: 'machariamuguku@gmail.com', // list of receivers
-      subject: 'testing nodemailer', // Subject line
-      html: '<p>am just testing nodemailer!</p>' // plain text body
+      from: "mugukuwrites@gmail.com", // sender address
+      to: "machariamuguku@gmail.com", // list of receivers
+      subject: "testing nodemailer", // Subject line
+      html: "<p>am just testing nodemailer!</p>" // plain text body
     };
 
     // send email
-    transporter.sendMail(mailOptions, function (err, info) {
-      if (err)
-        console.log(err)
-      else
-        console.log(info);
+    transporter.sendMail(mailOptions, function(err, info) {
+      if (err) console.log(err);
+      else console.log("Email sent: " + info);
+      // console.log('Email sent: ' + info.response);
     });
-
   }
-
 
   let lipanampesaAllResponse = JSON.stringify(req.body);
   console.log(lipanampesaAllResponse);
@@ -237,7 +231,6 @@ router.post("/lipanampesa/success", (req, res) => {
   //     lipanampesaAllResponse: lipanampesaAllResponse,
   //     lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
   //   });
-
 
   // };
   // res.render("cart", {

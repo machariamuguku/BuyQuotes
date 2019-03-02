@@ -56,7 +56,7 @@ app.use(router);
 
 // 404 handler
 app.use((req, res, next) => {
-    const err = new Error('Not Found');
+    const err = new Error('That Page Was Not Found. Go Back Home');
     err.status = 404;
     next(err);
 });
