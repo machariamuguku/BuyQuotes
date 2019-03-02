@@ -8,8 +8,8 @@ const bodyParser = require('body-parser');
 const expressValidator = require("express-validator");
 
 // add moongose and connect to db
-let mongoport = process.env.PORT || 27017;
-let mongourl = "mongodb://localhost:" + mongoport + "/buyquotes";
+let mongoport = 27017; //only local
+let mongourl = 'mongodb+srv://muguku:<@chiever#1>@buyquotes-ddg7d.mongodb.net/test?retryWrites=true' || "mongodb://localhost:" + mongoport + "/buyquotes";
 mongoose.connect(mongourl, {
     useNewUrlParser: true
 }).then(
