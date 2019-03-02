@@ -201,7 +201,7 @@ router.post("/lipanampesa/success", (req, res) => {
   // }
 
   // let lipanampesaAllResponse = JSON.stringify(req.body.Body.ResponseCode);
-  let lipanampesaAllResponse = req.body.Body.ResponseCode;
+  let lipanampesaAllResponse = req.body.Body;
   console.log(lipanampesaAllResponse);
 
   if (lipanampesaAllResponse) {
