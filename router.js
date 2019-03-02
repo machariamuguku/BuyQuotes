@@ -156,131 +156,63 @@ router.post("/pay", (req, res) => {
   }
 });
 
-// Mpesa functions
+// Start of Mpesa functions
 
 /*
 	LipaNaMPesa SuccessURL
 	URL: /lipanampesa/success
 */
 router.post("/lipanampesa/success", (req, res) => {
+  /*
+    Check the ResultCode from the response object,
+    if ResultCode is 0 the transaction was successfull,
+    if ResultCode is 1032 the transaction was either canceled by the user,
+    failed due to lack of enough funds or due to server overload
+  */
+
+  let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode; //The ResultCode
+  let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
+
+  console.log("The Lipa na Mpesa Result Code is: " + lipaNaMpesaResultCode);
+
+  if (lipaNaMpesaResultCode === 0) {
+    // Render the success message to the front end
+    res.render("cart", {
+      lipanampesaResponse: lipanaMpesaResponse,
+      lipaNaMpesaTitle: "Money recived!; we done did it!; whose the goat fam?",
+      lipaNaMpesaCSS: "message is-success"
+    });
+    // Send the email with Quotes
+    let sendTheEmail = require('./sendemail.js');
+    sendTheEmail.sendEmail("machariamuguku@gmail.com", "this is yet another test mate!");
+    // log the success results in MOngoDB?
+    console.log(prettyjson.render('you actually paid! respect!'));
+  } else if (lipaNaMpesaResultCode === 1032) {
+    // Render the failure message to the front end
+    res.render("cart", {
+      lipanampesaResponse: lipanaMpesaResponse,
+      lipaNaMpesaTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+      lipaNaMpesaCSS: "message is-danger"
+    });
+    // log the success results in MOngoDB?
+    console.log(prettyjson.render('i F knewed you aint gonna pay!'))
+  } else {
+    res.render("cart", {
+      lipanampesaResponse: lipanaMpesaResponse,
+      lipaNaMpesaTitle: "I don't even know what happened!",
+      lipaNaMpesaCSS: "message is-danger"
+    });
+    // log the success results in MOngoDB?
+    console.log(prettyjson.render('What happened?'))
+  }
+
+  // Format and send success message to safaricom servers
   // let message = {
   //   ResponseCode: "00000000",
   //   ResponseDesc: "success"
   // };
   // res.json(message);
-
-  // nodemailer method
-  // function sendEmail() {
-
-  //   // set nodemailer transport
-  //   var transporter = nodemailer.createTransport({
-  //     service: 'gmail',
-  //     auth: {
-  //       user: 'mugukuwrites@gmail.com',
-  //       pass: '@chiever#1'
-  //     }
-  //   });
-
-  //   //  configure email preferences
-  //   const mailOptions = {
-  //     from: 'mugukuwrites@gmail.com', // sender address
-  //     to: 'machariamuguku@gmail.com', // list of receivers
-  //     subject: 'testing nodemailer', // Subject line
-  //     html: '<p>am just testing nodemailer!</p>' // plain text body
-  //   };
-
-  //   // send email
-  //   transporter.sendMail(mailOptions, function (err, info) {
-  //     if (err)
-  //       console.log(err)
-  //     else
-  //     console.log('Email sent: ' + info);
-  //     // console.log('Email sent: ' + info.response);
-  //   });
-
-  // }
-
-  let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode;
-
-  if (lipaNaMpesaResultCode === 1032) {
-    console.log(lipanampesaAllResponse);
-    let sendTheEmail = require('./sendemail.js');
-    sendTheEmail.sendEmail("machariamuguku@gmail.com", "this is yet another testis mate!");
-  }
-
-  // if mpesa succeeds
-  // let lipanampesasuccess = req.body.ResultCode;
-
-  // async function showAvatar() {
-
-  //   let lipanampesaAllResponse = await JSON.stringify(req.body);
-  //   let iszero = await lipanampesaAllResponse.stkCallback;
-
-  //   console.log(lipanampesaAllResponse);
-
-  //   res.render("youpaid", {
-  //     lipanampesaAllResponse: lipanampesaAllResponse,
-  //     lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
-  //   });
-
-  //   // wait 13 seconds
-  //   await new Promise((resolve, reject) => setTimeout(resolve, 13000));
-
-  // }
-
-  // showAvatar();
-  // if (lipanampesaAllResponse) {
-  //   lipanampesaAllResponse = JSON.stringify(req.body);
-  //   console.log(lipanampesaAllResponse);
-  //   console.log('........................');
-
-  //   res.render("youpaid", {
-  //     lipanampesaAllResponse: lipanampesaAllResponse,
-  //     lipanaMpesaSuccessOrFailedTitle: 'watchuthink?'
-  //   });
-
-
-  // };
-  // res.render("cart", {
-  //   lipanampesaAllResponse: lipanampesaAllResponse,
-  //   lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
-  //   cssalertforloading: "message is-success"
-  // });
-
-  // let lipanampesasuccess = req.body.ResultCode;
-
-  // if (req.body.ResultCode == '0') {
-  //   res.render("cart", {
-  //     // lipanampesaAllResponse: lipanampesaAllResponse,
-  //     lipanampesaAllResponse: true,
-  //     lipanaMpesaSuccessOrFailedTitle: "Money recived!; we done did it!; whose the goat fam?",
-  //     cssalertforloading: "message is-success"
-  //   });
-  //   console.log(prettyjson.render('you actually paid! touche'));
-  // } else if (req.body.ResultCode == '1032') {
-  //   res.render("cart", {
-  //     // lipanampesaAllResponse: lipanampesaAllResponse,
-  //     lipanampesaAllResponse: false,
-  //     lipanaMpesaSuccessOrFailedTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
-  //     cssalertforloading: "message is-danger"
-  //   });
-  //   console.log(prettyjson.render('i F knewed you aint gonna pay'))
-  // }
-
-  // console.log("");
-  // console.log("-----------Received M-Pesa webhook-----------");
-  // console.log("");
-  // // format and dump the request payload recieved from safaricom in the terminal
-  // console.log(prettyjson.render(req.body));
-  // console.log("");
-  // console.log("-----------Received M-Pesa webhook------------");
-  // console.log("");
-
-  res.sendStatus(200);
 });
 
-// Mpesa functions
-
-// Receive payment notification here ...
-
+// End of Mpesa functions
 module.exports = router;

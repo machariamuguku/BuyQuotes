@@ -79,12 +79,12 @@
 
     <!-- If submit fails -->
     <!-- Show M-PESA error-->
-    {{#if lipanampesaAllResponse}}
+    {{#if lipanaMpesaResponse}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
             <article class="{{cssalertforloading}}">
                 <div class="message-header">
-                    <p class="title">{{lipanaMpesaSuccessOrFailedTitle}}</p>
+                    <p class="title">{{lipaNaMpesaTitle}}</p>
                     <form method="GET" action="/">
                         <button class="delete" aria-label="delete" type="submit"></button>
                     </form>
@@ -92,7 +92,7 @@
                 <div class="message-body">
                     <!-- show loading thingy here -->
                     <div class="has-text-centered">
-                        {{lipanampesaAllResponse}}
+                        {{lipanaMpesaResponse}}
                     </div>
                 </div>
             </article>
