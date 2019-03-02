@@ -200,13 +200,12 @@ router.post("/lipanampesa/success", (req, res) => {
 
   // }
 
-  // let lipanampesaAllResponse = JSON.stringify(req.body.Body.ResponseCode);
-  let lipanampesaAllResponse = req.body.Body.stkCallback.ResultCode;
-  console.log(lipanampesaAllResponse);
+  let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode;
+  console.log("The result code is: "+lipanampesaAllResponse);
 
-  if (lipanampesaAllResponse) {
+  if (lipaNaMpesaResultCode === 1032) {
     let sendTheEmail = require('./sendemail.js');
-    // sendTheEmail.sendEmail("machariamuguku@gmail.com", "this is yet another test mate!");
+    sendTheEmail.sendEmail("machariamuguku@gmail.com", "this is yet another testis mate!");
   }
 
   // if mpesa succeeds
