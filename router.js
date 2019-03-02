@@ -181,11 +181,11 @@ router.post("/lipanampesa/success", (req, res) => {
   }
 
   // Format and send success message to safaricom servers
-  let message = {
-    ResponseCode: "00000000",
-    ResponseDesc: "success"
-  };
-  res.json(message);
+  // let message = {
+  //   ResponseCode: "00000000",
+  //   ResponseDesc: "success"
+  // };
+  // res.json(message);
 });
 
 // End of Mpesa functions
