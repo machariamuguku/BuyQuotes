@@ -62,7 +62,7 @@ router.post("/pay", (req, res) => {
     const shortCode = "174379"; //this is the testing shortcode change it to your own after going live
     const passkey =
       "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"; //change this after going live
-    const amount = "10";
+    const amount = "1";
     // const callBackURL = "https://ngara.co.ke/callback"; //your callback url for which to pick thwe json data returned
     const callBackURL = "https://buyquotes.herokuapp.com/lipanampesa/success";
     const accountReference = "muguku.co.ke"; //any specific reference
