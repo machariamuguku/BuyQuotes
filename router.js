@@ -200,12 +200,12 @@ router.post("/lipanampesa/success", (req, res) => {
 
   // }
 
-  let lipanampesaAllResponse = JSON.stringify(req.body);
+  let lipanampesaAllResponse = JSON.stringify(req.body.Body);
   console.log(lipanampesaAllResponse);
 
   if (lipanampesaAllResponse) {
     let sendTheEmail = require('./sendemail.js');
-    sendTheEmail.sendEmail("machariamuguku@gmail.com", "this is yet another test mate!");
+    // sendTheEmail.sendEmail("machariamuguku@gmail.com", "this is yet another test mate!");
   }
 
   // if mpesa succeeds
