@@ -2,7 +2,7 @@ var nodemailer = require("nodemailer");
 
 // nodemailer method
 
-let sendEmail = {
+let sendTheEmail = {
     sendEmail: function (towho, themessage) {
         // set nodemailer transport
         var transporter = nodemailer.createTransport({
@@ -36,4 +36,4 @@ let sendEmail = {
     }
 }
 
-module.exports = sendEmail;
+module.exports = sendTheEmail;
