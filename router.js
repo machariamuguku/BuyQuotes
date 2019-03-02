@@ -53,10 +53,9 @@ router.post("/pay", (req, res) => {
     const passkey =
       "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"; //change this after going live
     const amount = "1";
-    // const callBackURL = "https://ngara.co.ke/callback"; //your callback url for which to pick thwe json data returned
-    const callBackURL = "https://buyquotes.herokuapp.com/lipanampesa/success";
+    const callBackURL = "https://buyquotes.herokuapp.com/lipanampesa/success"; //your callback url for which to pick thwe json data returned
     const accountReference = "muguku.co.ke"; //any specific reference
-    const transactionDesc = "Buy quotes muguku.co.ke";
+    const transactionDesc = "Buy quotes from muguku.co.ke";
     let timestamp = moment().format("YYYYMMDDHHmmss");
     let password;
 
@@ -105,21 +104,9 @@ router.post("/pay", (req, res) => {
         function (error, response, body) {
           // If Submission to M-Pesa succeeds log and render success message
           if (body.CustomerMessage) {
-            console.log(prettyjson.render(""));
-            console.log(
-              prettyjson.render(
-                ".............Response Parameters.................."
-              )
-            );
-            console.log(prettyjson.render(""));
-            console.log(prettyjson.render(body));
-            console.log(prettyjson.render(""));
-            console.log(
-              prettyjson.render(
-                "............./Response Parameters................."
-              )
-            );
-            console.log(prettyjson.render(""));
+            console.log(".............Response Parameters..................");
+            console.log(body);
+            console.log("............./Response Parameters.................");
             res.render("cart", {
               processingtitle: "Order complete; Submission Successful; Processing Payment",
               sendingToMpesaSucceeds: body.CustomerMessage,
@@ -129,7 +116,7 @@ router.post("/pay", (req, res) => {
           }
           // If Submission to M-Pesa fails 
           else {
-            console.log(prettyjson.render(error));
+            console.log(error);
             res.render("cart", {
               errortitle: "My request just failed, and everything is worse now",
               sendingToMpesaFails: body.errorMessage,
@@ -161,8 +148,6 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode; //The ResultCode
   let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
 
-  console.log("The Lipa na Mpesa Result Code is: " + lipaNaMpesaResultCode);
-
   if (lipaNaMpesaResultCode === 0) {
     // Render the success message to the front end
     res.render("cart", {
@@ -190,8 +175,9 @@ router.post("/lipanampesa/success", (req, res) => {
       lipaNaMpesaTitle: "I don't even know what happened!",
       lipaNaMpesaCSS: "message is-danger"
     });
-    // log the success results in MOngoDB?
-    console.log(prettyjson.render('What happened?'))
+
+      // log the success results in MOngoDB?
+      console.log('What happened?'+req.body)
   }
 
   // Format and send success message to safaricom servers
