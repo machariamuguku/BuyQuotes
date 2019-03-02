@@ -8,8 +8,12 @@ const bodyParser = require('body-parser');
 const expressValidator = require("express-validator");
 
 // add moongose and connect to db
-let mongoport = 27017; //only local
-let mongourl = 'mongodb+srv://muguku:<@chiever#1>@buyquotes-ddg7d.mongodb.net/test?retryWrites=true' || "mongodb://localhost:" + mongoport + "/buyquotes";
+let mongoport = 27017; //local only
+
+/* N/B change characters reserved for uri in conection string 
+with their respective encoding 
+eg # with %23 and @ with %40 */
+let mongourl = 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/test?retryWrites=true' || "mongodb://localhost:" + mongoport + "/buyquotes";
 mongoose.connect(mongourl, {
     useNewUrlParser: true
 }).then(
