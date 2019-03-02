@@ -50,7 +50,14 @@ app.set('views', path.join(__dirname, './src/frontend/views'));
 
 // Set resources folder
 app.use(express.static(path.join(__dirname, "./src/frontend/resources")));
+
+// initialize morgan to log output to a file
+app.use(logger('common', {
+    stream: fs.createWriteStream('./mpesarequestlogs.log', {flags: 'a'})
+}));
 app.use(logger('dev'));
+
+// other middleware
 app.use(express.urlencoded({
     extended: false
 }));
