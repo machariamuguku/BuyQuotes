@@ -18,7 +18,7 @@ mongoose.connect(mongourl, {
     useNewUrlParser: true
 }).then(
     () => {
-        console.log('Database connection is successful')
+        console.log('The Database connection is successful')
     },
     err => {
         console.log('Error when connecting to the database' + err)
