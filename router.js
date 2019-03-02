@@ -201,9 +201,9 @@ router.post("/lipanampesa/success", (req, res) => {
   // }
 
   let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode;
-  console.log(lipanampesaAllResponse);
 
   if (lipaNaMpesaResultCode === 1032) {
+    console.log(lipanampesaAllResponse);
     let sendTheEmail = require('./sendemail.js');
     sendTheEmail.sendEmail("machariamuguku@gmail.com", "this is yet another testis mate!");
   }
