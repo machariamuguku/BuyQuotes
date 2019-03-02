@@ -113,6 +113,7 @@ router.post("/pay", (req, res) => {
         },
 
         function (error, response, body) {
+          // If Submission to M-Pesa succeeds log and render success message
           if (body.CustomerMessage) {
             console.log(prettyjson.render(""));
             console.log(
@@ -134,27 +135,24 @@ router.post("/pay", (req, res) => {
               sendingToMpesaSucceeds: body.CustomerMessage,
               cssalertforloading: "message is-success"
             });
-          } else {
+            // insert transaction history to DB here?
+          }
+          // If Submission to M-Pesa fails 
+          else {
             console.log(prettyjson.render(error));
             res.render("cart", {
               errortitle: "My request just failed, and everything is worse now",
               sendingToMpesaFails: body.errorMessage,
               csserroralertclass: "message is-danger"
             });
+            // insert transaction history to DB here?
           }
         }
       );
     });
-
-    // insert transaction history to DB here
-    // default success false on every transaction whether successful or not
-    // Send Quotes here
-
-
-    // If successfull res.render transaction successful to message
-    // write success true message to DB if success
   }
 });
+
 
 // Start of Mpesa functions
 
@@ -182,9 +180,9 @@ router.post("/lipanampesa/success", (req, res) => {
       lipaNaMpesaTitle: "Money recived!; we done did it!; whose the goat fam?",
       lipaNaMpesaCSS: "message is-success"
     });
-    // Send the email with Quotes
+    // Send the Email with The Quotes Here
     let sendTheEmail = require('./sendemail.js');
-    sendTheEmail.sendEmail("machariamuguku@gmail.com", "this is yet another test mate!");
+    sendTheEmail.sendEmail("machariamuguku@gmail.com", "<p>this is yet another test mate!</p>");
     // log the success results in MOngoDB?
     console.log(prettyjson.render('you actually paid! respect!'));
   } else if (lipaNaMpesaResultCode === 1032) {

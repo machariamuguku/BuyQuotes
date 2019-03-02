@@ -1,8 +1,7 @@
 var nodemailer = require("nodemailer");
-
 // nodemailer method
-
 let sendTheEmail = {
+    // parse email address to send to and the actual message to send
     sendEmail: function (towho, themessage) {
         // set nodemailer transport
         var transporter = nodemailer.createTransport({
@@ -12,26 +11,22 @@ let sendTheEmail = {
                 pass: "@chiever#1"
             }
         });
-
         //  configure email preferences
         const mailOptions = {
-            // sender address
+            // sender's email address (same as transporter user)
             from: "mugukuwrites@gmail.com",
             // list of receivers
             to: towho,
-            // to: "machariamuguku@gmail.com",
-            // Subject line
+            // The Email Subject
             subject: "testing nodemailer",
-            // plain text body
+            //The Email message (Email body)
             html: themessage
-            // html: "<p>am just testing nodemailer!</p>"
         };
 
-        // send email
+        // send the email
         transporter.sendMail(mailOptions, function (err, info) {
             if (err) console.log(err);
-            else console.log("Email sent: " + info);
-            // console.log('Email sent: ' + info.response);
+            else console.log("Email successfully sent: " + info);
         });
     }
 }
