@@ -17,20 +17,14 @@ router.get('/youpaid', (req, res) => {
 });
 // Payment processing code here ...
 router.post("/pay", (req, res) => {
-  req
-    .checkBody(
-      "phonenumber",
-      "Use an M-PESA registered, Kenyan phone number (in this format --> 254712345678)"
-    )
-    .isMobilePhone("en-KE")
-  req
-    .checkBody("email", "Enter an Email Address to receive the quotes in")
-    .notEmpty();
   req.checkBody("quotecategory", "Select a Quote category").notEmpty();
+  req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
+  req.checkBody("phonenumber", "Use an M-PESA registered, Kenyan phone number (in this format --> 254712345678)").isMobilePhone("en-KE");
 
   let errors = req.validationErrors();
   let newuserdata = "";
   lipanampesaAllResponse = false;
+  req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
 
   if (errors) {
     res.render("cart", {
