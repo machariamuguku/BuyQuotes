@@ -78,5 +78,5 @@ app.use((err, req, res) => {
 const server = http.createServer(app);
 server.listen(port);
 server.on('listening', () => {
-    console.log('Application Ready!');
+    console.log('The Node-Express app started successfuly');
 });
