@@ -4,6 +4,29 @@ const request = require("request");
 const moment = require("moment");
 const base64 = require("base-64");
 const log4jslogger = require('./log4js');
+const mongoose = require('mongoose');
+
+
+// add moongose and connect to db
+//Try local connection first before connecting to the online DB
+let mongoport = 27017;
+
+/* N/B change characters reserved for uri in conection string 
+with their respective encoding 
+eg # with %23 and @ with %40 */
+let mongourl = "mongodb://localhost:" + mongoport + "/buyquotes" || 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/test?retryWrites=true';
+mongoose.connect(mongourl, {
+  useNewUrlParser: true
+}).then(
+  () => {
+    log4jslogger.info('The Database connection is successful');
+  },
+  err => {
+    log4jslogger.info('Error when connecting to the database' + err);
+  }
+);
+//set moongoose connection
+var moongoseconn = mongoose.connection;
 
 const router = express.Router();
 
@@ -129,6 +152,9 @@ router.post("/pay", (req, res) => {
               cssalertforloading: "message is-success"
             });
             // insert transaction history to DB here?
+
+            //try moongose
+            moongoseconn.collection('collectionName').insertOne(newuserdata);
           }
           // If Submission to M-Pesa fails 
           else {
@@ -192,7 +218,8 @@ router.post("/lipanampesa/success", (req, res) => {
     });
     // log the success results in MOngoDB?
     log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
-    log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
+    //insert to db
+    moongoseconn.collection('collectionName').insertOne(req.body);
   } else {
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,

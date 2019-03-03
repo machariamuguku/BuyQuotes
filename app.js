@@ -3,29 +3,9 @@ const express = require('express');
 const path = require('path');
 const morganlogger = require('morgan');
 const cors = require('cors')
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expressValidator = require("express-validator");
 const log4jslogger = require('./log4js');
-
-// add moongose and connect to db
-//Try local connection first before connecting to the online DB
-let mongoport = 27017;
-
-/* N/B change characters reserved for uri in conection string 
-with their respective encoding 
-eg # with %23 and @ with %40 */
-let mongourl = "mongodb://localhost:" + mongoport + "/buyquotes" || 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/test?retryWrites=true';
-mongoose.connect(mongourl, {
-    useNewUrlParser: true
-}).then(
-    () => {
-        log4jslogger.info('The Database connection is successful');
-    },
-    err => {
-        log4jslogger.info('Error when connecting to the database' + err);
-    }
-);
 
 // Require router module here ...
 const router = require('./router');
