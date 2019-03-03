@@ -3,7 +3,7 @@ const prettyjson = require("prettyjson");
 const request = require("request");
 const moment = require("moment");
 const base64 = require("base-64");
-var nodemailer = require('nodemailer');
+const log4jslogger = require('./log4js');
 
 const router = express.Router();
 
@@ -12,9 +12,6 @@ router.get("/", (req, res) => {
   res.render("cart");
 });
 
-router.get('/youpaid', (req, res) => {
-  res.render('youpaid')
-});
 // Payment processing code here ...
 router.post("/pay", (req, res) => {
   req.checkBody("quotecategory", "Select a Quote category").notEmpty();
@@ -32,12 +29,27 @@ router.post("/pay", (req, res) => {
       errors: errors,
       csserroralertclass: "message is-danger"
     });
+    /*
+    Am logging all attempted requests with log4js to log4js.log
+    It's not really useful, you can collect this data on a DB
+    am just being paranoid
+    */
+    let incompleteUserData = {
+      phonenumber: req.body.phonenumber,
+      email: req.body.email,
+      quotecategory: req.body.quotecategory,
+    };
+
+    log4jslogger.info("#400 .... Incomplete User Data. Request Not Submitted To M-PESA " + JSON.stringify(incompleteUserData));
   } else {
     newuserdata = {
       phonenumber: req.body.phonenumber,
       email: req.body.email,
       quotecategory: req.body.quotecategory
     };
+
+    // Put this data in a db to reference during payment processing and quote sending
+
     // Process Payment here
     const consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N";
     const consumer_secret = "TEYbiahbnSmUErPV";
@@ -104,9 +116,13 @@ router.post("/pay", (req, res) => {
         function (error, response, body) {
           // If Submission to M-Pesa succeeds log and render success message
           if (body.CustomerMessage) {
-            console.log(".............Response Parameters..................");
-            console.log(body);
-            console.log("............./Response Parameters.................");
+            // Am logging all successfull requests with log4js to log4js.log
+            let completeUserData = JSON.stringify(newuserdata);
+            log4jslogger.info("#200 .... Request successfully Submited to M-PESA " + completeUserData);
+            // Also logging the response back from mpesa
+            log4jslogger.info(".............Response Parameters..................");
+            log4jslogger.info(JSON.stringify(body));
+            log4jslogger.info("............./Response Parameters.................");
             res.render("cart", {
               processingtitle: "Order complete; Submission Successful; Processing Payment",
               sendingToMpesaSucceeds: body.CustomerMessage,
@@ -116,7 +132,14 @@ router.post("/pay", (req, res) => {
           }
           // If Submission to M-Pesa fails 
           else {
-            console.log(error);
+            // Am logging all failed requests with log4js to log4js.log
+            let incompleteUserData = {
+              phonenumber: req.body.phonenumber,
+              email: req.body.email,
+              quotecategory: req.body.quotecategory,
+            };
+            log4jslogger.info("#500 .... Bad Request. Request Submitted To M-PESA but rejected " + JSON.stringify(incompleteUserData));
+            log4jslogger.info(body);
             res.render("cart", {
               errortitle: "My request just failed, and everything is worse now",
               sendingToMpesaFails: body.errorMessage,
@@ -159,7 +182,7 @@ router.post("/lipanampesa/success", (req, res) => {
     let sendTheEmail = require('./sendemail.js');
     sendTheEmail.sendEmail("machariamuguku@gmail.com", "<p>this is yet another test mate!</p>");
     // log the success results in MOngoDB?
-    console.log(prettyjson.render('you actually paid! respect!'));
+    log4jslogger.info(prettyjson.render('you actually paid! respect!'));
   } else if (lipaNaMpesaResultCode === 1032) {
     // Render the failure message to the front end
     res.render("cart", {
@@ -168,7 +191,8 @@ router.post("/lipanampesa/success", (req, res) => {
       lipaNaMpesaCSS: "message is-danger"
     });
     // log the success results in MOngoDB?
-    console.log(prettyjson.render('i F knewed you aint gonna pay!'))
+    log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
+    log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
   } else {
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
@@ -177,7 +201,7 @@ router.post("/lipanampesa/success", (req, res) => {
     });
 
     // log the success results in MOngoDB?
-    console.log('What happened?' + req.body);
+    log4jslogger.info('What happened?' + req.body);
   }
 
   // Format and send success message to safaricom servers

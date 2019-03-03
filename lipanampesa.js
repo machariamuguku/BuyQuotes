@@ -1,1 +1,1 @@
-// Export your lipa na mpesa method here
+// To do: migrate the lipa na mpesa methods here

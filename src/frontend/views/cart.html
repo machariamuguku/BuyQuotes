@@ -66,8 +66,14 @@
                 <div class="message-body">
                     <!-- show loading thingy here -->
                     <div class="has-text-centered">
-                        <a class="button is-success is-loading">Processing</a>
-                        M-pesa response: {{sendingToMpesaFails}}
+                        <a class="button is-danger is-outlined">
+                            <span>Failed</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </a>
+                        M-pesa response: {{sendingToMpesaFails}}. Kindly use this format ---> 254712345678 (without a
+                        zero or a + sign)
                     </div>
                 </div>
             </article>
@@ -192,7 +198,7 @@
 
                                     <div class="field">
                                         <p class="help is-danger">N/b: Include the
-                                            country code but without the plus e.g:
+                                            country code but without the plus or the zero i.e :
                                             254712345678</p>
                                         <p class="control has-icons-left">
                                             <input name="phonenumber" class="input" type="tel" placeholder="Mpesa Phone Number">

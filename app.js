@@ -1,27 +1,29 @@
 const http = require('http');
 const express = require('express');
 const path = require('path');
-const logger = require('morgan');
+const morganlogger = require('morgan');
 const cors = require('cors')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expressValidator = require("express-validator");
+const log4jslogger = require('./log4js');
 
 // add moongose and connect to db
-let mongoport = 27017; //local only
+//Try local connection first before connecting to the online DB
+let mongoport = 27017;
 
 /* N/B change characters reserved for uri in conection string 
 with their respective encoding 
 eg # with %23 and @ with %40 */
-let mongourl = 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/test?retryWrites=true' || "mongodb://localhost:" + mongoport + "/buyquotes";
+let mongourl = "mongodb://localhost:" + mongoport + "/buyquotes" || 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/test?retryWrites=true';
 mongoose.connect(mongourl, {
     useNewUrlParser: true
 }).then(
     () => {
-        console.log('The Database connection is successful')
+        log4jslogger.info('The Database connection is successful');
     },
     err => {
-        console.log('Error when connecting to the database' + err)
+        log4jslogger.info('Error when connecting to the database' + err);
     }
 );
 
@@ -54,13 +56,13 @@ app.use(express.static(path.join(__dirname, "./src/frontend/resources")));
 // initialize morgan to log output to a file
 var fs = require('fs');
 
-app.use(logger('common', {
-    stream: fs.createWriteStream('./mpesarequestlogs.log', {
+app.use(morganlogger('common', {
+    stream: fs.createWriteStream('./morganlogs.log', {
         flags: 'a'
     })
 }));
 
-app.use(logger('dev'));
+app.use(morganlogger('dev'));
 // other middleware
 app.use(express.urlencoded({
     extended: false
@@ -89,5 +91,5 @@ app.use((err, req, res) => {
 const server = http.createServer(app);
 server.listen(port);
 server.on('listening', () => {
-    console.log('The Node-Express app started successfuly');
+    log4jslogger.info('The Node-Express app started successfuly');
 });
