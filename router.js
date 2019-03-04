@@ -229,6 +229,8 @@ router.post("/lipanampesa/success", (req, res) => {
       cssmessageclass: "message is-success"
     });
 
+    // log output
+    console.log("this is what you inserting?: "+req.body.Body);
     //insert to mongoDB
     moongoseconn.collection("collectionName2").update({
       CheckoutRequestIDRef: req.body.Body.stkCallback.CheckoutRequestID
