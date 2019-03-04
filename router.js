@@ -234,11 +234,30 @@ router.post("/lipanampesa/success", (req, res) => {
     // log the success results in MOngoDB?
     log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
     //insert to db
+
+    //   db.collection.updateOne(
+    //     <filter>,
+    //     <update>,
+    //     {
+    //       upsert: <boolean>,
+    //       writeConcern: <document>,
+    //       collation: <document>,
+    //       arrayFilters: [ <filterdocument1>, ... ]
+    //     }
+    //  )
+
     moongoseconn.collection('collectionName').updateOne({
-      "Body.stkCallback.CheckoutRequestID": "ws_CO_DMZ_258353958_04032019180532453"
+      Body: {
+        stkCallback: {
+          CheckoutRequestID: "ws_CO_DMZ_258353958_04032019180532453"
+        }
+      }
     }, {
       $set: {
-        tempnewbody
+        tempnewbody = {
+          "mwangi": "baba",
+          "njau": "mama?"
+        }
       }
     });
   } else {
