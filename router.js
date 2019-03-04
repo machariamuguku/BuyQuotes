@@ -237,7 +237,7 @@ router.post("/lipanampesa/success", (req, res) => {
     }, {
       $push: {
         mpesamethods: {
-          stkCallback: req.body.Body
+          stkCallback: req.body.Body.stkCallback
         }
       }
     });
