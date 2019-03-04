@@ -6,7 +6,6 @@ const base64 = require("base-64");
 const log4jslogger = require('./log4js');
 const mongoose = require('mongoose');
 
-
 // add moongose and connect to db
 //Try local connection first before connecting to the online DB
 let mongoport = 27017;
@@ -14,16 +13,16 @@ let mongoport = 27017;
 /* N/B change characters reserved for uri in conection string 
 with their respective encoding 
 eg # with %23 and @ with %40 */
-// let mongourl = "mongodb://localhost:" + mongoport + "/buyquotes" || 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/test?retryWrites=true';
-let mongourl = 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/buyquotes?retryWrites=true';
+let mongourl = "mongodb://localhost:" + mongoport + "/buyquotes" || 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/test?retryWrites=true';
+// let mongourl = 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/buyquotes?retryWrites=true';
 mongoose.connect(mongourl, {
   useNewUrlParser: true
 }).then(
   () => {
-    log4jslogger.info('The Database connection is successful');
+    console.log('The Database connection is successful');
   },
   err => {
-    log4jslogger.info('Error when connecting to the database' + err);
+    console.log('Error when connecting to the database' + err);
   }
 );
 //set moongoose connection
@@ -43,7 +42,6 @@ router.post("/pay", (req, res) => {
   req.checkBody("phonenumber", "Use an M-PESA registered, Kenyan phone number (in this format --> 254712345678)").isMobilePhone("en-KE");
 
   let errors = req.validationErrors();
-  let newuserdata = "";
   lipanampesaAllResponse = false;
   req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
 
@@ -66,14 +64,6 @@ router.post("/pay", (req, res) => {
 
     log4jslogger.info("#400 .... Incomplete User Data. Request Not Submitted To M-PESA " + JSON.stringify(incompleteUserData));
   } else {
-    newuserdata = {
-      phonenumber: req.body.phonenumber,
-      email: req.body.email,
-      quotecategory: req.body.quotecategory
-    };
-
-    // Put this data in a db to reference during payment processing and quote sending
-
     // Process Payment here
     const consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N";
     const consumer_secret = "TEYbiahbnSmUErPV";
@@ -84,7 +74,7 @@ router.post("/pay", (req, res) => {
       new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
     const url_for_api =
       "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
-    let phoneNumber = newuserdata.phonenumber; //the phone number in which to send the stk push
+    let phoneNumber = req.body.phonenumber; //the phone number in which to send the stk push
     const shortCode = "174379"; //this is the testing shortcode change it to your own after going live
     const passkey =
       "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"; //change this after going live
@@ -136,13 +126,9 @@ router.post("/pay", (req, res) => {
             TransactionDesc: transactionDesc
           }
         },
-
         function (error, response, body) {
           // If Submission to M-Pesa succeeds log and render success message
           if (body.CustomerMessage) {
-            // Am logging all successfull requests with log4js to log4js.log
-            let completeUserData = JSON.stringify(newuserdata);
-            log4jslogger.info("#200 .... Request successfully Submited to M-PESA " + completeUserData);
             // Also logging the response back from mpesa
             log4jslogger.info(".............Response Parameters..................");
             log4jslogger.info(JSON.stringify(body));
@@ -155,15 +141,29 @@ router.post("/pay", (req, res) => {
             // insert transaction history to DB here?
 
             /*
-              Merge the two objects (newuserdata and req.body)
+              Merge the two objects 
+              (user data from req.body and body from mpesa response)
               so they can be inserted into mongodb as a single collection
             */
-            let newjsononject = {
-              newuserdata,
-              body
+            let allUserData = {
+              phonenumber: req.body.phonenumber,
+              email: req.body.email,
+              quotecategory: req.body.quotecategory,
+              CheckoutRequestIDRef: body.CheckoutRequestID,
+              mpesamethods: [{
+                MerchantRequestID: body.MerchantRequestID,
+                CheckoutRequestID: body.CheckoutRequestID,
+                ResponseCode: body.ResponseCode,
+                ResponseDescription: body.ResponseDescription,
+                CustomerMessage: body.CustomerMessage,
+              }]
             };
+
+            // Am logging all successfull requests with log4js to log4js.log
+            log4jslogger.info("#200 .... Request successfully Submited to M-PESA " + JSON.stringify(allUserData));
+
             //use moongose to insert the two objects in a mongoDB as a single object
-            moongoseconn.collection('collectionName').insertOne(newjsononject);
+            // moongoseconn.collection('collectionName6').insertOne(allUserData);
           }
           // If Submission to M-Pesa fails 
           else {
@@ -235,29 +235,19 @@ router.post("/lipanampesa/success", (req, res) => {
     log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
     //insert to db
 
-    //   db.collection.updateOne(
-    //     <filter>,
-    //     <update>,
-    //     {
-    //       upsert: <boolean>,
-    //       writeConcern: <document>,
-    //       collation: <document>,
-    //       arrayFilters: [ <filterdocument1>, ... ]
-    //     }
-    //  )
-
-    moongoseconn.collection('collectionName').updateOne({
-      body: {
-        CheckoutRequestID: "ws_CO_DMZ_258353958_04032019180532453"
-      }
+    moongoseconn.collection('collectionName6').update({
+      CheckoutRequestIDRef: "ws_CO_DMZ_392813921_04032019230443236"
     }, {
-      $set: {
-        "tempnewbody": {
-          "mwangi": "baba",
-          "njau": "mama?"
+      $push: {
+        mpesamethods: {
+          MerchantRequestID: req.body.Body.MerchantRequestID,
+          CheckoutRequestID: req.body.Body.CheckoutRequestID,
+          ResultCode: req.body.Body.ResultCode,
+          ResultDesc: req.body.Body.ResultDesc,
         }
       }
     });
+
   } else {
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
