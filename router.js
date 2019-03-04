@@ -162,7 +162,7 @@ router.post("/pay", (req, res) => {
               newuserdata,
               body
             };
-            //try moongose
+            //use moongose to insert the two objects in a mongoDB as a single object
             moongoseconn.collection('collectionName').insertOne(newjsononject);
           }
           // If Submission to M-Pesa fails 
@@ -206,6 +206,8 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode; //The ResultCode
   let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
   let lipaNaMpesaResult = req.body; //The whole result body.. for mongo
+  let CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
+
   if (lipaNaMpesaResultCode === 0) {
     // Render the success message to the front end
     res.render("cart", {
@@ -228,7 +230,13 @@ router.post("/lipanampesa/success", (req, res) => {
     // log the success results in MOngoDB?
     log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
     //insert to db
-    moongoseconn.collection('collectionName').insertOne(lipaNaMpesaResult);
+    moongoseconn.collection('collectionName').update({
+      "CheckoutRequestID": CheckoutRequestID
+    }, {
+      $set: {
+        lipaNaMpesaResult
+      }
+    });
   } else {
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
