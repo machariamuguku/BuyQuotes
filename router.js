@@ -247,7 +247,7 @@ router.post("/lipanampesa/success", (req, res) => {
         }
       }
     });
-
+//for changes sake
   } else {
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
