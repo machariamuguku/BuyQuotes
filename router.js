@@ -218,7 +218,7 @@ router.post("/pay", (req, res) => {
   }
 });
 
-// Start of Mpesa functions
+// Mpesa callbacks
 
 /*
 	LipaNaMPesa SuccessURL
@@ -272,7 +272,7 @@ router.post("/lipanampesa/success", (req, res) => {
 
     moongoseconn.collection("collectionName2").update(
       {
-        CheckoutRequestIDRef: "ws_CO_DMZ_258723381_04032019234151277"
+        CheckoutRequestIDRef: req.body.Body.stkCallback.CheckoutRequestID
       },
       {
         $push: {
