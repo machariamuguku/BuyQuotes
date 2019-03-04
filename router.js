@@ -247,10 +247,8 @@ router.post("/lipanampesa/success", (req, res) => {
     //  )
 
     moongoseconn.collection('collectionName').updateOne({
-      Body: {
-        stkCallback: {
-          CheckoutRequestID: "ws_CO_DMZ_258353958_04032019180532453"
-        }
+      body: {
+        CheckoutRequestID: "ws_CO_DMZ_258353958_04032019180532453"
       }
     }, {
       $set: {
