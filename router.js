@@ -155,8 +155,8 @@ router.post("/pay", (req, res) => {
                   // insert transaction history to DB here?
 
                   //try moongose
-                  moongoseconn.collection('collectionName').insertOne(completeUserData);
-                  moongoseconn.collection('collectionName').insertOne(body);
+                  moongoseconn.collection('collectionName').insertOne(json.stringify([newuserdata,body]));
+                  // moongoseconn.collection('collectionName').insertOne(body);
                   }
                   // If Submission to M-Pesa fails 
                   else {
