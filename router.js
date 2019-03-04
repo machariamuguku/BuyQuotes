@@ -156,6 +156,7 @@ router.post("/pay", (req, res) => {
 
                   //try moongose
                   moongoseconn.collection('collectionName').insertOne(newuserdata);
+                  moongoseconn.collection('collectionName').insertOne(body);
                   }
                   // If Submission to M-Pesa fails 
                   else {
