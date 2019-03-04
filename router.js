@@ -206,8 +206,12 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode; //The ResultCode
   let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
   let lipaNaMpesaResult = req.body; //The whole result body.. for mongo
+  let tempnewbody = {
+    lipaNaMpesaResult,
+    "kwapa": "kwapa!"
+  }
   let CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
-  console.log("the body is: " + JSON.stringify(lipaNaMpesaResult));
+  console.log("the body is: " + tempnewbody);
   if (lipaNaMpesaResultCode === 0) {
     // Render the success message to the front end
     res.render("cart", {
@@ -234,7 +238,7 @@ router.post("/lipanampesa/success", (req, res) => {
       "Body.stkCallback.CheckoutRequestID": "ws_CO_DMZ_258353958_04032019180532453"
     }, {
       $set: {
-        lipaNaMpesaResult
+        tempnewbody
       }
     });
   } else {
