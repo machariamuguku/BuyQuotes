@@ -235,12 +235,14 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode; //The ResultCode
   let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
   let lipaNaMpesaResult = req.body; //The whole result body.. for mongo
-  // let tempnewbody = {
-  //   lipaNaMpesaResult,
-  //   "kwapa": "kwapa!"
-  // }
   let CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
-  // console.log("the body is: " + tempnewbody);
+
+  // let mpesaResult = {
+  //   MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
+  //   CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
+  //   ResultCode: req.body.Body.stkCallback.ResultCode,
+  //   ResultDesc: req.body.Body.stkCallback.ResultDesc
+  // };
   if (lipaNaMpesaResultCode === 0) {
     // Render the success message to the front end
     res.render("cart", {
@@ -275,10 +277,10 @@ router.post("/lipanampesa/success", (req, res) => {
       {
         $push: {
           mpesamethods: {
-            MerchantRequestID: req.body.Body.MerchantRequestID,
-            CheckoutRequestID: req.body.Body.CheckoutRequestID,
-            ResultCode: req.body.Body.ResultCode,
-            ResultDesc: req.body.Body.ResultDesc
+            MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
+            CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
+            ResultCode: req.body.Body.stkCallback.ResultCode,
+            ResultDesc: req.body.Body.stkCallback.ResultDesc
           }
         }
       }
