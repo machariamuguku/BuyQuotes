@@ -152,3 +152,255 @@
 [2019-03-04T09:22:19.346] [INFO] default - The Node-Express app started successfuly
 [2019-03-04T09:22:20.364] [INFO] default - The Node-Express app started successfuly
 [2019-03-04T09:22:24.869] [INFO] default - The Database connection is successful
+[2019-03-04T11:00:14.198] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:00:36.915] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:00:50.720] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:01:00.238] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:01:09.079] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:01:09.079] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:01:09.079] [INFO] default - {"MerchantRequestID":"22524-8175784-1","CheckoutRequestID":"ws_CO_DMZ_392050834_04032019110058560","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:01:09.079] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:01:49.450] [INFO] default - The Database connection is successful
+[2019-03-04T11:06:16.808] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:06:21.873] [INFO] default - The Database connection is successful
+[2019-03-04T11:06:28.295] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:06:28.295] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:06:28.296] [INFO] default - {"MerchantRequestID":"9234-3196125-1","CheckoutRequestID":"ws_CO_DMZ_257966691_04032019110622518","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:06:28.299] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:06:51.503] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:06:54.850] [INFO] default - The Database connection is successful
+[2019-03-04T11:06:56.896] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:06:56.897] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:06:56.897] [INFO] default - {"MerchantRequestID":"9230-3196369-1","CheckoutRequestID":"ws_CO_DMZ_392056637_04032019110646256","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:06:56.897] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:08:26.306] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:08:35.680] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:08:39.696] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:08:42.253] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:08:43.767] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:08:46.911] [INFO] default - The Database connection is successful
+[2019-03-04T11:08:49.413] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:08:52.430] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:08:54.570] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:08:58.152] [INFO] default - The Database connection is successful
+[2019-03-04T11:09:00.642] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:09:04.092] [INFO] default - The Database connection is successful
+[2019-03-04T11:09:12.880] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:09:12.880] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:09:12.881] [INFO] default - {"MerchantRequestID":"19398-3188762-1","CheckoutRequestID":"ws_CO_DMZ_257968552_04032019110906842","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:09:12.881] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:09:50.084] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:09:54.679] [INFO] default - The Database connection is successful
+[2019-03-04T11:10:04.617] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:10:07.586] [INFO] default - The Database connection is successful
+[2019-03-04T11:10:19.871] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:10:19.871] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:10:19.872] [INFO] default - {"MerchantRequestID":"22511-8180516-1","CheckoutRequestID":"ws_CO_DMZ_392059910_04032019111009024","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:10:19.872] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:11:58.289] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:12:02.608] [INFO] default - The Database connection is successful
+[2019-03-04T11:12:07.597] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:12:11.177] [INFO] default - The Database connection is successful
+[2019-03-04T11:12:17.933] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:12:21.121] [INFO] default - The Database connection is successful
+[2019-03-04T11:12:23.628] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:12:26.857] [INFO] default - The Database connection is successful
+[2019-03-04T11:13:50.278] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:13:55.285] [INFO] default - The Database connection is successful
+[2019-03-04T11:13:56.095] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:13:59.435] [INFO] default - The Database connection is successful
+[2019-03-04T11:18:10.198] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:18:11.510] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:18:19.107] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:18:20.604] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:18:22.587] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:18:27.555] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:18:41.215] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:18:43.362] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:18:51.067] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:19:36.488] [INFO] default - Error when connecting to the databaseError: querySrv ESERVFAIL _mongodb._tcp.buyquotes-ddg7d.mongodb.net
+[2019-03-04T11:20:23.128] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:20:23.128] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:20:23.128] [INFO] default - {"MerchantRequestID":"25695-8964674-1","CheckoutRequestID":"ws_CO_DMZ_392067876_04032019112012637","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:20:23.128] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:21:19.061] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:21:20.307] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:21:23.988] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:21:26.144] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:21:27.388] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:21:30.477] [INFO] default - The Database connection is successful
+[2019-03-04T11:21:37.131] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:21:40.086] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:21:43.372] [INFO] default - The Database connection is successful
+[2019-03-04T11:22:34.975] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:22:34.976] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:22:34.976] [INFO] default - {"MerchantRequestID":"9224-3204179-1","CheckoutRequestID":"ws_CO_DMZ_392069594_04032019112224307","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:22:34.976] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:27:07.577] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:27:09.927] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:27:12.406] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:27:15.531] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:27:17.795] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:27:18.873] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:27:22.083] [INFO] default - The Database connection is successful
+[2019-03-04T11:27:28.794] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:27:31.996] [INFO] default - The Database connection is successful
+[2019-03-04T11:28:33.261] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:28:39.771] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:28:49.762] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:28:53.034] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:28:55.295] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:28:57.106] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:29:02.706] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:29:04.219] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:29:07.474] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:29:09.087] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:30:01.776] [INFO] default - Error when connecting to the databaseError: querySrv ETIMEOUT _mongodb._tcp.buyquotes-ddg7d.mongodb.net
+[2019-03-04T11:31:29.185] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:31:30.920] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:31:32.037] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:31:37.443] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:31:42.271] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:31:46.825] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:31:51.630] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:31:53.681] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:31:54.901] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:31:56.125] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:32:01.997] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:32:06.654] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:32:07.928] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:32:09.320] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:32:11.603] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:32:46.066] [INFO] default - Error when connecting to the databaseError: querySrv ESERVFAIL _mongodb._tcp.buyquotes-ddg7d.mongodb.net
+[2019-03-04T11:33:11.654] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:33:11.654] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:33:11.654] [INFO] default - {"MerchantRequestID":"25692-8971927-1","CheckoutRequestID":"ws_CO_DMZ_257986444_04032019113305990","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:33:11.654] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:34:26.522] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:34:30.906] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:34:35.773] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:34:39.002] [INFO] default - The Database connection is successful
+[2019-03-04T11:34:44.310] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:34:47.716] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:34:49.707] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:34:50.894] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:34:52.231] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:34:54.642] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:34:57.741] [INFO] default - The Database connection is successful
+[2019-03-04T11:35:11.381] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:35:13.807] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:35:17.023] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:35:21.928] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:35:21.928] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:35:21.928] [INFO] default - {"MerchantRequestID":"19395-3201995-1","CheckoutRequestID":"ws_CO_DMZ_392082009_04032019113511393","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:35:21.928] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:35:23.450] [INFO] default - The Database connection is successful
+[2019-03-04T11:37:36.536] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:37:42.177] [INFO] default - The Database connection is successful
+[2019-03-04T11:37:47.933] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:37:47.933] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:37:47.933] [INFO] default - {"MerchantRequestID":"19398-3203250-1","CheckoutRequestID":"ws_CO_DMZ_257990153_04032019113741995","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:37:47.936] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:38:46.145] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:38:48.322] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:38:49.268] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:38:53.177] [INFO] default - The Database connection is successful
+[2019-03-04T11:39:06.982] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:39:09.332] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:39:17.320] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:39:20.133] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:39:23.165] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:39:26.444] [INFO] default - The Database connection is successful
+[2019-03-04T11:39:34.602] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:39:45.483] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:39:46.745] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:39:51.633] [INFO] default - The Database connection is successful
+[2019-03-04T11:39:52.646] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:39:57.152] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:40:02.695] [INFO] default - The Database connection is successful
+[2019-03-04T11:40:13.016] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:40:14.734] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:40:18.194] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:40:20.288] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:40:23.791] [INFO] default - The Database connection is successful
+[2019-03-04T11:40:29.353] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:40:32.799] [INFO] default - The Database connection is successful
+[2019-03-04T11:42:01.397] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:42:01.397] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:42:01.398] [INFO] default - {"MerchantRequestID":"22512-8196556-1","CheckoutRequestID":"ws_CO_DMZ_257993434_04032019114155736","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:42:01.398] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:43:09.008] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:43:13.620] [INFO] default - The Database connection is successful
+[2019-03-04T11:43:24.475] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:43:24.476] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:43:24.476] [INFO] default - {"MerchantRequestID":"22529-8197322-1","CheckoutRequestID":"ws_CO_DMZ_257994753_04032019114318616","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:43:24.476] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:43:58.265] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:44:01.956] [INFO] default - The Database connection is successful
+[2019-03-04T11:44:05.123] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:44:08.849] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:44:11.761] [INFO] default - The Database connection is successful
+[2019-03-04T11:44:16.261] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:44:18.603] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:44:22.005] [INFO] default - The Database connection is successful
+[2019-03-04T11:44:40.337] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:44:41.682] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:44:45.782] [INFO] default - The Database connection is successful
+[2019-03-04T11:44:56.690] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:44:59.705] [INFO] default - The Database connection is successful
+[2019-03-04T11:45:04.619] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:45:04.619] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:45:04.619] [INFO] default - {"MerchantRequestID":"19389-3207047-1","CheckoutRequestID":"ws_CO_DMZ_392090024_04032019114453943","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:45:04.619] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:45:20.739] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:45:27.157] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:45:27.158] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:45:27.159] [INFO] default - {"MerchantRequestID":"9223-3216016-1","CheckoutRequestID":"ws_CO_DMZ_257996444_04032019114521489","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:45:27.159] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:46:13.436] [INFO] default - Error when connecting to the databaseError: querySrv ETIMEOUT _mongodb._tcp.buyquotes-ddg7d.mongodb.net
+[2019-03-04T11:53:46.040] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:53:46.040] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:53:46.040] [INFO] default - {"MerchantRequestID":"25692-8983804-1","CheckoutRequestID":"ws_CO_DMZ_392099985_04032019115335461","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:53:46.040] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:55:34.992] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T11:55:34.992] [INFO] default - .............Response Parameters..................
+[2019-03-04T11:55:34.992] [INFO] default - {"MerchantRequestID":"22517-8203826-1","CheckoutRequestID":"ws_CO_DMZ_392102420_04032019115524297","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T11:55:34.992] [INFO] default - ............./Response Parameters.................
+[2019-03-04T11:56:34.523] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T11:56:38.686] [INFO] default - The Database connection is successful
+[2019-03-04T12:06:08.103] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:06:12.525] [INFO] default - The Database connection is successful
+[2019-03-04T12:06:14.980] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T12:06:14.980] [INFO] default - .............Response Parameters..................
+[2019-03-04T12:06:14.980] [INFO] default - {"MerchantRequestID":"19397-3218746-1","CheckoutRequestID":"ws_CO_DMZ_392112490_04032019120604279","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T12:06:14.980] [INFO] default - ............./Response Parameters.................
+[2019-03-04T12:06:48.974] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T12:06:48.975] [INFO] default - .............Response Parameters..................
+[2019-03-04T12:06:48.978] [INFO] default - {"MerchantRequestID":"19395-3219035-1","CheckoutRequestID":"ws_CO_DMZ_258015517_04032019120642963","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T12:06:48.978] [INFO] default - ............./Response Parameters.................
+[2019-03-04T12:39:46.601] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T12:39:46.601] [INFO] default - .............Response Parameters..................
+[2019-03-04T12:39:46.601] [INFO] default - {"MerchantRequestID":"22527-8227646-1","CheckoutRequestID":"ws_CO_DMZ_392144916_04032019123935900","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T12:39:46.602] [INFO] default - ............./Response Parameters.................
+[2019-03-04T12:42:48.673] [INFO] default - #200 .... Request successfully Submited to M-PESA {"phonenumber":"254728655403","email":"mugukuwrites@gmail.com","quotecategory":"Programming"}
+[2019-03-04T12:42:48.673] [INFO] default - .............Response Parameters..................
+[2019-03-04T12:42:48.674] [INFO] default - {"MerchantRequestID":"9233-3247162-1","CheckoutRequestID":"ws_CO_DMZ_392147063_04032019124238042","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
+[2019-03-04T12:42:48.674] [INFO] default - ............./Response Parameters.................
+[2019-03-04T12:45:31.539] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:45:33.085] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:45:37.216] [INFO] default - The Database connection is successful
+[2019-03-04T12:45:38.481] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:45:41.057] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:45:42.559] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:45:45.816] [INFO] default - The Database connection is successful
+[2019-03-04T12:46:31.199] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:46:32.295] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:46:34.502] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:46:36.512] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:46:40.524] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:46:46.826] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:47:21.513] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:47:31.775] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:47:32.656] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:47:40.518] [INFO] default - The Node-Express app started successfuly
+[2019-03-04T12:47:42.547] [INFO] default - The Node-Express app started successfuly
