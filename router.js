@@ -207,7 +207,7 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
   let lipaNaMpesaResult = req.body; //The whole result body.. for mongo
   let CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
-  console.log("the body is: " + lipaNaMpesaResult);
+  console.log("the body is: " + JSON.stringify(lipaNaMpesaResult));
   if (lipaNaMpesaResultCode === 0) {
     // Render the success message to the front end
     res.render("cart", {
