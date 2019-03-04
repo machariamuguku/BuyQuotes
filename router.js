@@ -211,7 +211,7 @@ router.post("/lipanampesa/success", (req, res) => {
   //   "kwapa": "kwapa!"
   // }
   let CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
-  console.log("the body is: " + tempnewbody);
+  // console.log("the body is: " + tempnewbody);
   if (lipaNaMpesaResultCode === 0) {
     // Render the success message to the front end
     res.render("cart", {
