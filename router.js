@@ -207,7 +207,7 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
   let lipaNaMpesaResult = req.body; //The whole result body.. for mongo
   let CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
-  console.log("the CheckoutRequestID is: " + CheckoutRequestID);
+  console.log("the body is: " + lipaNaMpesaResult);
   if (lipaNaMpesaResultCode === 0) {
     // Render the success message to the front end
     res.render("cart", {
@@ -230,7 +230,7 @@ router.post("/lipanampesa/success", (req, res) => {
     // log the success results in MOngoDB?
     log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
     //insert to db
-    moongoseconn.collection('collectionName').update({
+    moongoseconn.collection('collectionName').updateOne({
       "Body.stkCallback.CheckoutRequestID": "ws_CO_DMZ_258353958_04032019180532453"
     }, {
       $set: {
