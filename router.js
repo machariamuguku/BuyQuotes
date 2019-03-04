@@ -270,7 +270,7 @@ router.post("/lipanampesa/success", (req, res) => {
 
     moongoseconn.collection("collectionName2").update(
       {
-        CheckoutRequestIDRef: req.body.Body.CheckoutRequestID
+        CheckoutRequestIDRef: "ws_CO_DMZ_258723381_04032019234151277"
       },
       {
         $push: {
