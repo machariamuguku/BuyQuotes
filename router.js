@@ -231,7 +231,7 @@ router.post("/lipanampesa/success", (req, res) => {
     log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
     //insert to db
     moongoseconn.collection('collectionName').update({
-      "Body.stkCallback.CheckoutRequestID": CheckoutRequestID
+      "Body.stkCallback.CheckoutRequestID": "ws_CO_DMZ_258353958_04032019180532453"
     }, {
       $set: {
         lipaNaMpesaResult
