@@ -3,7 +3,7 @@
     {{#if errors}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
-            <article class="{{csserroralertclass}}">
+            <article class="{{cssmessageclass}}">
                 <div class="message-header">
                     <h1 class="title">{{title}}</h1>
                     <form method="GET" action="/">
@@ -29,9 +29,9 @@
     {{#if sendingToMpesaSucceeds}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
-            <article class="{{cssalertforloading}}">
+            <article class="{{cssmessageclass}}">
                 <div class="message-header">
-                    <p class="title">{{processingtitle}}</p>
+                    <p class="title">{{title}}</p>
                     <form method="GET" action="/">
                         <button class="delete" aria-label="delete" type="submit"></button>
                     </form>
@@ -56,9 +56,9 @@
     {{#if sendingToMpesaFails}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
-            <article class="{{csserroralertclass}}">
+            <article class="{{cssmessageclass}}">
                 <div class="message-header">
-                    <p class="title">{{errortitle}}</p>
+                    <p class="title">{{title}}</p>
                     <form method="GET" action="/">
                         <button class="delete" aria-label="delete" type="submit"></button>
                     </form>
@@ -88,9 +88,9 @@
     {{#if lipanaMpesaResponse}}
     <div class="column has-text-centered">
         <div class="bd-snippet-preview ">
-            <article class="{{cssalertforloading}}">
+            <article class="{{cssmessageclass}}">
                 <div class="message-header">
-                    <p class="title">{{lipaNaMpesaTitle}}</p>
+                    <p class="title">{{title}}</p>
                     <form method="GET" action="/">
                         <button class="delete" aria-label="delete" type="submit"></button>
                     </form>

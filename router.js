@@ -1,19 +1,23 @@
 const express = require("express");
-const prettyjson = require("prettyjson");
 const request = require("request");
 const moment = require("moment");
 const base64 = require("base-64");
 const log4jslogger = require("./log4js");
 const mongoose = require("mongoose");
 
-// add moongose and connect to db
-//Try local connection first before connecting to the online DB
-// let mongoport = 27017;
+/*
+  add moongose and connect to db
+  Try local connection first before connecting to the online DB
+*/
 
-/* N/B change characters reserved for uri in conection string 
-with their respective encoding 
-eg # with %23 and @ with %40 */
+// let mongoport = 27017; //mongo port for local connection
 // let mongourl = "mongodb://localhost:" + mongoport + "/buyquotes" || 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/test?retryWrites=true';
+
+/*
+  N/B change characters reserved for URL's in conection string password
+  with their respective encoding 
+  eg # with %23 and @ with %40 
+*/
 let mongourl =
   "mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/buyquotes?retryWrites=true";
 mongoose
@@ -31,6 +35,7 @@ mongoose
 //set moongoose connection
 var moongoseconn = mongoose.connection;
 
+//set up express router
 const router = express.Router();
 
 // home router
@@ -38,8 +43,10 @@ router.get("/", (req, res) => {
   res.render("cart");
 });
 
-// Payment processing code here ...
+// Payment processing router
 router.post("/pay", (req, res) => {
+
+  // express validator modules
   req.checkBody("quotecategory", "Select a Quote category").notEmpty();
   req
     .checkBody("email", "Enter an Email Address to receive the quotes in")
@@ -52,31 +59,27 @@ router.post("/pay", (req, res) => {
     .isMobilePhone("en-KE");
 
   let errors = req.validationErrors();
-  lipanampesaAllResponse = false;
-  req
-    .checkBody("email", "Enter an Email Address to receive the quotes in")
-    .notEmpty();
 
   if (errors) {
     res.render("cart", {
-      title: "Please Correct the following errors",
       errors: errors,
-      csserroralertclass: "message is-danger"
+      title: "Please Correct the following errors",
+      cssmessageclass: "message is-danger"
     });
+    //Convert the incomplete request data into a javascript object
+    let incompleteUserData1 = {
+      phonenumber: req.body.phonenumber,
+      email: req.body.email,
+      quotecategory: req.body.quotecategory,
+    };
     /*
     Am logging all attempted requests with log4js to log4js.log
     It's not really useful, you can collect this data on a DB
     am just being paranoid
     */
-    let incompleteUserData = {
-      phonenumber: req.body.phonenumber,
-      email: req.body.email,
-      quotecategory: req.body.quotecategory
-    };
-
     log4jslogger.info(
       "#400 .... Incomplete User Data. Request Not Submitted To M-PESA " +
-        JSON.stringify(incompleteUserData)
+      JSON.stringify(incompleteUserData1)
     );
   } else {
     // Process Payment here
@@ -94,22 +97,21 @@ router.post("/pay", (req, res) => {
     const passkey =
       "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"; //change this after going live
     const amount = "1";
-    const callBackURL = "https://buyquotes.herokuapp.com/lipanampesa/success"; //your callback url for which to pick thwe json data returned
+    const callBackURL = "https://buyquotes.herokuapp.com/lipanampesa/success"; //your callback url for which to pick the json data returned
     const accountReference = "muguku.co.ke"; //any specific reference
     const transactionDesc = "Buy quotes from muguku.co.ke";
     let timestamp = moment().format("YYYYMMDDHHmmss");
-    let password;
+    let password = base64.encode(shortCode + passkey + timestamp);
 
     function getToken(tokenParam) {
       let oauth_token;
-      request(
-        {
+      request({
           url: url,
           headers: {
             Authorization: auth
           }
         },
-        function(error, response, body) {
+        function (error, response, body) {
           let oauth_body = JSON.parse(body);
           oauth_token = oauth_body.access_token;
           tokenParam(oauth_token);
@@ -117,13 +119,11 @@ router.post("/pay", (req, res) => {
       );
     }
 
-    getToken(function(token) {
+    getToken(function (token) {
       let oauth_token = token;
       let auth_for_api = "Bearer " + oauth_token;
-      password = base64.encode(shortCode + passkey + timestamp);
 
-      request(
-        {
+      request({
           method: "POST",
           url: url_for_api,
           headers: {
@@ -143,25 +143,19 @@ router.post("/pay", (req, res) => {
             TransactionDesc: transactionDesc
           }
         },
-        function(error, response, body) {
-          // If Submission to M-Pesa succeeds log and render success message
-          if (body.CustomerMessage) {
-            // Also logging the response back from mpesa
-            log4jslogger.info(
-              ".............Response Parameters.................."
-            );
-            log4jslogger.info(JSON.stringify(body));
-            log4jslogger.info(
-              "............./Response Parameters................."
-            );
+        function (error, response, body) {
+          /*
+            If Submission to M-Pesa succeeds 
+            render success message to the front end 
+            and push the data to mongoDB
+          */
+          let CheckoutRequestID = body.CheckoutRequestID;
+          if (CheckoutRequestID) {
             res.render("cart", {
-              processingtitle:
-                "Order complete; Submission Successful; Processing Payment",
               sendingToMpesaSucceeds: body.CustomerMessage,
-              cssalertforloading: "message is-success"
+              title: "Order complete; Submission Successful; Processing Payment",
+              cssmessageclass: "message is-success"
             });
-            // insert transaction history to DB here?
-
             /*
               Merge the two objects 
               (user data from req.body and body from mpesa response)
@@ -172,45 +166,39 @@ router.post("/pay", (req, res) => {
               email: req.body.email,
               quotecategory: req.body.quotecategory,
               CheckoutRequestIDRef: body.CheckoutRequestID,
-              mpesamethods: [
-                {
-                  MerchantRequestID: body.MerchantRequestID,
-                  CheckoutRequestID: body.CheckoutRequestID,
-                  ResponseCode: body.ResponseCode,
-                  ResponseDescription: body.ResponseDescription,
-                  CustomerMessage: body.CustomerMessage
-                }
-              ]
+              mpesamethods: [{
+                MerchantRequestID: body.MerchantRequestID,
+                CheckoutRequestID: body.CheckoutRequestID,
+                ResponseCode: body.ResponseCode,
+                ResponseDescription: body.ResponseDescription,
+                CustomerMessage: body.CustomerMessage
+              }]
             };
-
             // Am logging all successfull requests with log4js to log4js.log
             log4jslogger.info(
               "#200 .... Request successfully Submited to M-PESA " +
-                JSON.stringify(allUserData)
+              JSON.stringify(allUserData)
             );
-
             //use moongose to insert the two objects in a mongoDB as a single object
             moongoseconn.collection("collectionName2").insertOne(allUserData);
           }
           // If Submission to M-Pesa fails
           else {
-            // Am logging all failed requests with log4js to log4js.log
-            let incompleteUserData = {
+            let incompleteUserData2 = {
               phonenumber: req.body.phonenumber,
               email: req.body.email,
               quotecategory: req.body.quotecategory
             };
+            // Am logging all failed requests with log4js to log4js.log
             log4jslogger.info(
               "#500 .... Bad Request. Request Submitted To M-PESA but rejected " +
-                JSON.stringify(incompleteUserData)
+              JSON.stringify(incompleteUserData2)
             );
-            log4jslogger.info(body);
             res.render("cart", {
-              errortitle: "My request just failed, and everything is worse now",
               sendingToMpesaFails: body.errorMessage,
-              csserroralertclass: "message is-danger"
+              title: "My request just failed, and everything is worse now",
+              cssmessageclass: "message is-danger"
             });
-            // insert transaction history to DB here?
           }
         }
       );
@@ -219,7 +207,6 @@ router.post("/pay", (req, res) => {
 });
 
 // Mpesa callbacks
-
 /*
 	LipaNaMPesa SuccessURL
 	URL: /lipanampesa/success
@@ -231,25 +218,28 @@ router.post("/lipanampesa/success", (req, res) => {
     if ResultCode is 1032 the transaction was either canceled by the user,
     failed due to lack of enough funds or due to server overload
   */
-
   let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode; //The ResultCode
   let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
-  let lipaNaMpesaResult = req.body; //The whole result body.. for mongo
-  let CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
 
-  // let mpesaResult = {
-  //   MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
-  //   CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
-  //   ResultCode: req.body.Body.stkCallback.ResultCode,
-  //   ResultDesc: req.body.Body.stkCallback.ResultDesc
-  // };
   if (lipaNaMpesaResultCode === 0) {
     // Render the success message to the front end
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
-      lipaNaMpesaTitle: "Money recived!; we done did it!; whose the goat fam?",
-      lipaNaMpesaCSS: "message is-success"
+      title: "Money recived!; we done did it!; whose the goat fam?",
+      cssmessageclass: "message is-success"
     });
+
+    //insert to mongoDB
+    moongoseconn.collection("collectionName2").update({
+      CheckoutRequestIDRef: req.body.Body.stkCallback.CheckoutRequestID
+    }, {
+      $push: {
+        mpesamethods: {
+          stkCallback: req.body.Body
+        }
+      }
+    });
+
     // Send the Email with The Quotes Here
     let sendTheEmail = require("./sendemail.js");
     sendTheEmail.sendEmail(
@@ -257,39 +247,33 @@ router.post("/lipanampesa/success", (req, res) => {
       "<p>this is yet another test mate!</p>"
     );
     // log the success results in MOngoDB?
-    log4jslogger.info(prettyjson.render("you actually paid! respect!"));
+    log4jslogger.info("you actually paid! respect!");
   } else if (lipaNaMpesaResultCode === 1032) {
     // Render the failure message to the front end
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
-      lipaNaMpesaTitle:
-        "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
-      lipaNaMpesaCSS: "message is-danger"
+      title: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+      cssmessageclass: "message is-danger"
     });
-    // log the success results in MOngoDB?
-    log4jslogger.info(prettyjson.render("i F knewed you aint gonna pay!"));
-    //insert to db
 
-    moongoseconn.collection("collectionName2").update(
-      {
-        CheckoutRequestIDRef: req.body.Body.stkCallback.CheckoutRequestID
-      },
-      {
-        $push: {
-          mpesamethods: {
-            MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
-            CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
-            ResultCode: req.body.Body.stkCallback.ResultCode,
-            ResultDesc: req.body.Body.stkCallback.ResultDesc
-          }
+    //insert to mongoDB
+    moongoseconn.collection("collectionName2").update({
+      CheckoutRequestIDRef: req.body.Body.stkCallback.CheckoutRequestID
+    }, {
+      $push: {
+        mpesamethods: {
+          MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
+          CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
+          ResultCode: req.body.Body.stkCallback.ResultCode,
+          ResultDesc: req.body.Body.stkCallback.ResultDesc
         }
       }
-    );
+    });
   } else {
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
-      lipaNaMpesaTitle: "I don't even know what happened!",
-      lipaNaMpesaCSS: "message is-danger"
+      title: "I don't even know what happened!",
+      cssmessageclass: "message is-danger"
     });
 
     // log the success results in MOngoDB?
