@@ -3,8 +3,8 @@ const prettyjson = require("prettyjson");
 const request = require("request");
 const moment = require("moment");
 const base64 = require("base-64");
-const log4jslogger = require('./log4js');
-const mongoose = require('mongoose');
+const log4jslogger = require("./log4js");
+const mongoose = require("mongoose");
 
 // add moongose and connect to db
 //Try local connection first before connecting to the online DB
@@ -14,17 +14,20 @@ const mongoose = require('mongoose');
 with their respective encoding 
 eg # with %23 and @ with %40 */
 // let mongourl = "mongodb://localhost:" + mongoport + "/buyquotes" || 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/test?retryWrites=true';
-let mongourl = 'mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/buyquotes?retryWrites=true';
-mongoose.connect(mongourl, {
-  useNewUrlParser: true
-}).then(
-  () => {
-    console.log('The Database connection is successful');
-  },
-  err => {
-    console.log('Error when connecting to the database ' + err);
-  }
-);
+let mongourl =
+  "mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/buyquotes?retryWrites=true";
+mongoose
+  .connect(mongourl, {
+    useNewUrlParser: true
+  })
+  .then(
+    () => {
+      console.log("The Database connection is successful");
+    },
+    err => {
+      console.log("Error when connecting to the database " + err);
+    }
+  );
 //set moongoose connection
 var moongoseconn = mongoose.connection;
 
@@ -38,12 +41,21 @@ router.get("/", (req, res) => {
 // Payment processing code here ...
 router.post("/pay", (req, res) => {
   req.checkBody("quotecategory", "Select a Quote category").notEmpty();
-  req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
-  req.checkBody("phonenumber", "Use an M-PESA registered, Kenyan phone number (in this format --> 254712345678)").isMobilePhone("en-KE");
+  req
+    .checkBody("email", "Enter an Email Address to receive the quotes in")
+    .notEmpty();
+  req
+    .checkBody(
+      "phonenumber",
+      "Use an M-PESA registered, Kenyan phone number (in this format --> 254712345678)"
+    )
+    .isMobilePhone("en-KE");
 
   let errors = req.validationErrors();
   lipanampesaAllResponse = false;
-  req.checkBody("email", "Enter an Email Address to receive the quotes in").notEmpty();
+  req
+    .checkBody("email", "Enter an Email Address to receive the quotes in")
+    .notEmpty();
 
   if (errors) {
     res.render("cart", {
@@ -59,10 +71,13 @@ router.post("/pay", (req, res) => {
     let incompleteUserData = {
       phonenumber: req.body.phonenumber,
       email: req.body.email,
-      quotecategory: req.body.quotecategory,
+      quotecategory: req.body.quotecategory
     };
 
-    log4jslogger.info("#400 .... Incomplete User Data. Request Not Submitted To M-PESA " + JSON.stringify(incompleteUserData));
+    log4jslogger.info(
+      "#400 .... Incomplete User Data. Request Not Submitted To M-PESA " +
+        JSON.stringify(incompleteUserData)
+    );
   } else {
     // Process Payment here
     const consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N";
@@ -87,13 +102,14 @@ router.post("/pay", (req, res) => {
 
     function getToken(tokenParam) {
       let oauth_token;
-      request({
+      request(
+        {
           url: url,
           headers: {
             Authorization: auth
           }
         },
-        function (error, response, body) {
+        function(error, response, body) {
           let oauth_body = JSON.parse(body);
           oauth_token = oauth_body.access_token;
           tokenParam(oauth_token);
@@ -101,12 +117,13 @@ router.post("/pay", (req, res) => {
       );
     }
 
-    getToken(function (token) {
+    getToken(function(token) {
       let oauth_token = token;
       let auth_for_api = "Bearer " + oauth_token;
       password = base64.encode(shortCode + passkey + timestamp);
 
-      request({
+      request(
+        {
           method: "POST",
           url: url_for_api,
           headers: {
@@ -126,15 +143,20 @@ router.post("/pay", (req, res) => {
             TransactionDesc: transactionDesc
           }
         },
-        function (error, response, body) {
+        function(error, response, body) {
           // If Submission to M-Pesa succeeds log and render success message
           if (body.CustomerMessage) {
             // Also logging the response back from mpesa
-            log4jslogger.info(".............Response Parameters..................");
+            log4jslogger.info(
+              ".............Response Parameters.................."
+            );
             log4jslogger.info(JSON.stringify(body));
-            log4jslogger.info("............./Response Parameters.................");
+            log4jslogger.info(
+              "............./Response Parameters................."
+            );
             res.render("cart", {
-              processingtitle: "Order complete; Submission Successful; Processing Payment",
+              processingtitle:
+                "Order complete; Submission Successful; Processing Payment",
               sendingToMpesaSucceeds: body.CustomerMessage,
               cssalertforloading: "message is-success"
             });
@@ -150,30 +172,38 @@ router.post("/pay", (req, res) => {
               email: req.body.email,
               quotecategory: req.body.quotecategory,
               CheckoutRequestIDRef: body.CheckoutRequestID,
-              mpesamethods: [{
-                MerchantRequestID: body.MerchantRequestID,
-                CheckoutRequestID: body.CheckoutRequestID,
-                ResponseCode: body.ResponseCode,
-                ResponseDescription: body.ResponseDescription,
-                CustomerMessage: body.CustomerMessage,
-              }]
+              mpesamethods: [
+                {
+                  MerchantRequestID: body.MerchantRequestID,
+                  CheckoutRequestID: body.CheckoutRequestID,
+                  ResponseCode: body.ResponseCode,
+                  ResponseDescription: body.ResponseDescription,
+                  CustomerMessage: body.CustomerMessage
+                }
+              ]
             };
 
             // Am logging all successfull requests with log4js to log4js.log
-            log4jslogger.info("#200 .... Request successfully Submited to M-PESA " + JSON.stringify(allUserData));
+            log4jslogger.info(
+              "#200 .... Request successfully Submited to M-PESA " +
+                JSON.stringify(allUserData)
+            );
 
             //use moongose to insert the two objects in a mongoDB as a single object
-            // moongoseconn.collection('collectionName6').insertOne(allUserData);
+            moongoseconn.collection("collectionName2").insertOne(allUserData);
           }
-          // If Submission to M-Pesa fails 
+          // If Submission to M-Pesa fails
           else {
             // Am logging all failed requests with log4js to log4js.log
             let incompleteUserData = {
               phonenumber: req.body.phonenumber,
               email: req.body.email,
-              quotecategory: req.body.quotecategory,
+              quotecategory: req.body.quotecategory
             };
-            log4jslogger.info("#500 .... Bad Request. Request Submitted To M-PESA but rejected " + JSON.stringify(incompleteUserData));
+            log4jslogger.info(
+              "#500 .... Bad Request. Request Submitted To M-PESA but rejected " +
+                JSON.stringify(incompleteUserData)
+            );
             log4jslogger.info(body);
             res.render("cart", {
               errortitle: "My request just failed, and everything is worse now",
@@ -187,7 +217,6 @@ router.post("/pay", (req, res) => {
     });
   }
 });
-
 
 // Start of Mpesa functions
 
@@ -220,33 +249,40 @@ router.post("/lipanampesa/success", (req, res) => {
       lipaNaMpesaCSS: "message is-success"
     });
     // Send the Email with The Quotes Here
-    let sendTheEmail = require('./sendemail.js');
-    sendTheEmail.sendEmail("machariamuguku@gmail.com", "<p>this is yet another test mate!</p>");
+    let sendTheEmail = require("./sendemail.js");
+    sendTheEmail.sendEmail(
+      "machariamuguku@gmail.com",
+      "<p>this is yet another test mate!</p>"
+    );
     // log the success results in MOngoDB?
-    log4jslogger.info(prettyjson.render('you actually paid! respect!'));
+    log4jslogger.info(prettyjson.render("you actually paid! respect!"));
   } else if (lipaNaMpesaResultCode === 1032) {
     // Render the failure message to the front end
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
-      lipaNaMpesaTitle: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+      lipaNaMpesaTitle:
+        "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
       lipaNaMpesaCSS: "message is-danger"
     });
     // log the success results in MOngoDB?
-    log4jslogger.info(prettyjson.render('i F knewed you aint gonna pay!'));
+    log4jslogger.info(prettyjson.render("i F knewed you aint gonna pay!"));
     //insert to db
 
-    moongoseconn.collection('collectionName6').update({
-      CheckoutRequestIDRef: "ws_CO_DMZ_392813921_04032019230443236"
-    }, {
-      $push: {
-        mpesamethods: {
-          MerchantRequestID: req.body.Body.MerchantRequestID,
-          CheckoutRequestID: req.body.Body.CheckoutRequestID,
-          ResultCode: req.body.Body.ResultCode,
-          ResultDesc: req.body.Body.ResultDesc,
+    moongoseconn.collection("collectionName2").update(
+      {
+        CheckoutRequestIDRef: req.body.Body.CheckoutRequestID
+      },
+      {
+        $push: {
+          mpesamethods: {
+            MerchantRequestID: req.body.Body.MerchantRequestID,
+            CheckoutRequestID: req.body.Body.CheckoutRequestID,
+            ResultCode: req.body.Body.ResultCode,
+            ResultDesc: req.body.Body.ResultDesc
+          }
         }
       }
-    });
+    );
   } else {
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
@@ -255,7 +291,7 @@ router.post("/lipanampesa/success", (req, res) => {
     });
 
     // log the success results in MOngoDB?
-    log4jslogger.info('What happened?' + req.body);
+    log4jslogger.info("What happened?" + req.body);
   }
 
   // Format and send success message to safaricom servers
