@@ -5,10 +5,10 @@ let sendTheEmail = {
     sendEmail: function (towho, themessage) {
         // set nodemailer transport
         var transporter = nodemailer.createTransport({
-            service: "gmail",
+            service: "SendinBlue",
             auth: {
                 user: "mugukuwrites@gmail.com",
-                pass: "@chiever#1"
+                pass: "xjAyPEK9t32hL5vM"
             }
         });
         //  configure email preferences
