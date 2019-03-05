@@ -189,7 +189,6 @@ router.post("/lipanampesa/success", (req, res) => {
   };
   //send the success message to safaricom servers
   res.json(message);
-
   /*
     Check the ResultCode from the response object,
     if ResultCode is 0 the transaction was successfull,
@@ -200,68 +199,42 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
 
   if (lipaNaMpesaResultCode === 0) {
-
-    /*
-    // Render the success message to the front end
-    res.render("cart", {
-      lipanampesaResponse: lipanaMpesaResponse,
-      title: "Money recived!; we done did it!; whose the goat fam?",
-      cssmessageclass: "message is-success"
-    });
-    */
-
-    // It occassionally fails to update so i want to catch the error
-    try {
-      //insert to mongoDB
-      moongoseconn.collection("collectionName2").updateOne({
-        "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
-      }, {
-        $push: {
-          mpesamethods: {
-            MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
-            CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
-            ResultCode: req.body.Body.stkCallback.ResultCode,
-            ResultDesc: req.body.Body.stkCallback.ResultDesc,
-            CallbackMetadata: req.body.Body.stkCallback.CallbackMetadata
-          }
+    //insert to mongoDB
+    moongoseconn.collection("collectionName2").update({
+      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+    }, {
+      $push: {
+        mpesamethods: {
+          MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
+          CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
+          ResultCode: req.body.Body.stkCallback.ResultCode,
+          ResultDesc: req.body.Body.stkCallback.ResultDesc,
+          CallbackMetadata: req.body.Body.stkCallback.CallbackMetadata,
         }
-      });
-    } catch (e) {
-      console.log(e);
-      log4jslogger.info("#Insertion-success to DB failed .... I wonder why?: " + e);
-    }
-
+      }
+    });
     /*
       Get email address and quote category from the MongoDB object 
       and parse this to the send email method
     */
-
-    let sendtodata = moongoseconn.collection("collectionName2").findOne({
+    let emailobjects;
+    moongoseconn.collection("collectionName2").findOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+    }, (err, res) => {
+      if (err) throw new Error(err.message, null);
+      emailobjects = res;
+      //set the email objects with response
+      const sendTheEmail = require("./sendemail.js"); //call sendemail.js
+      let sendto = emailobjects.email; //define send to variable
+      let quotecategory = emailobjects.quotecategory;
+      let emailsubject = (quotecategory + " " + "Quotes Delivered by https://buyquotes.herokuapp.com") //set email subject
+      let emailbody = "<p>this is a test mail mate!</p><p>powered by: http://www.muguku.co.ke/</p>" //set the email body
+      // Send the Email with The Quotes Here
+      sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
     });
-
-    // Send the Email with The Quotes Here
-    const sendTheEmail = require("./sendemail.js"); //call sendemail.js
-    let sendto = sendtodata.email; //define send to variable
-    let quotecategory = sendtodata.quotecategory;
-    let emailsubject = (quotecategory + "" + "Quotes Delivered from muguku.co.ke") //set email subject
-    let emailbody = "<p>this is a test mail mate!</p>" //set the email body
-
-    sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
     // log the success in log4js file
     log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
-
   } else if (lipaNaMpesaResultCode === 1032) {
-
-    /*
-    // Render the failure message to the front end
-    res.render("cart", {
-      lipanampesaResponse: lipanaMpesaResponse,
-      title: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
-      cssmessageclass: "message is-danger"
-    });
-    */
-
     //insert to mongoDB
     moongoseconn.collection("collectionName2").update({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
@@ -276,25 +249,6 @@ router.post("/lipanampesa/success", (req, res) => {
       }
     });
 
-    // lets try something here
-    let sendtodata;
-    moongoseconn.collection("collectionName2").findOne({
-      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
-    }, (err, res) => {
-      if (err) throw new Error(err.message, null);
-      sendtodata = res;
-      console.log("this theee" + sendtodata);
-      // Send the Email with The Quotes Here
-      const sendTheEmail = require("./sendemail.js"); //call sendemail.js
-      let sendto = sendtodata.email; //define send to variable
-      let quotecategory = sendtodata.quotecategory;
-      let emailsubject = (quotecategory + " " + "Quotes Delivered from muguku.co.ke") //set email subject
-      let emailbody = "<p>this is a test mail mate!</p>" //set the email body
-
-      sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
-      // /lets try something here
-    });
-
     log4jslogger.info("#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
   } else {
     res.render("cart", {
@@ -305,6 +259,24 @@ router.post("/lipanampesa/success", (req, res) => {
     // log the success results in MOngoDB?
     log4jslogger.info("#Unprecedented error .... occured" + req.body);
   }
+
+  /*
+    // Render the success message to the front end
+    res.render("cart", {
+      lipanampesaResponse: lipanaMpesaResponse,
+      title: "Money recived!; we done did it!; whose the goat fam?",
+      cssmessageclass: "message is-success"
+    });
+    */
+
+  /*
+    // Render the failure message to the front end
+    res.render("cart", {
+      lipanampesaResponse: lipanaMpesaResponse,
+      title: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
+      cssmessageclass: "message is-danger"
+    });
+    */
 
 });
 
