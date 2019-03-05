@@ -88,7 +88,7 @@ router.post("/pay", (req, res) => {
       "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"; //change this after going live
     let auth =
       "Basic " +
-      new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
+      new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
     const url_for_api =
       "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
     let phoneNumber = req.body.phonenumber; //the phone number in which to send the stk push
@@ -271,7 +271,7 @@ router.post("/lipanampesa/success", (req, res) => {
       cssmessageclass: "message is-danger"
     });
     //insert to mongoDB
-    moongoseconn.collection("collectionName2").update({
+    moongoseconn.collection("collectionName2").updateOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
