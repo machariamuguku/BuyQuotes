@@ -10,7 +10,7 @@ ctrl+click to follow link
 // nodemailer method
 let sendTheEmail = {
     // parse email address to send to and the actual message to send
-    sendEmail: function (towho, themessage) {
+    sendEmail: function (sendto, emailsubject, emailbody) {
         // set nodemailer transport
         let transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -23,31 +23,26 @@ let sendTheEmail = {
             }
         });
 
-        //  configure email preferences
-        const mailOptions = {
-            // sender's email address (same as transporter's user)
-            from: '"Macharia Muguku" <machariamuguku@gmail.com>',
-            // list of receivers
-            to: towho,
-            // The Email Subject
-            subject: "Quotes Delivered from muguku.co.ke",
-            //The Email message (Email body)
-            html: themessage,
-        };
-
         // send the email
         transporter.sendMail({
-                mailOptions,
+                // sender's email address (same as transporter's user)
+                from: '"Macharia Muguku" <machariamuguku@gmail.com>',
+                // list of receivers
+                to: sendto,
+                // The Email Subject
+                subject: emailsubject,
+                //The Email message (Email body)
+                html: emailbody,
                 auth: {
                     user: "machariamuguku@gmail.com",
                     refreshToken: "1/gk2_eNGDxf71iFzLIHSd0kfZ6fmUOUfwRRlAYpLIlx8-tiG4kkxX3tWb1JSu0dgb",
                     accessToken: "ya29.GlvDBotl6_i5Uaw1Q-U9sIecjeewkly6eVKQjbvTrKPxKYjaWAm6yhYdhiZ-ifli7YZtoLVJMsu2N1ZYR0mLqhrDzXJuUCddd-a8RBKPqJVjWGfi-oTP97Ko8RHr",
-                    expires: 1484314697598
+                    expires: 3600
                 }
             },
             (err, info) => {
                 if (err) log4jslogger.info("#400 .... There were errors sending email: " + err),
-                    console.log("#400 .... There were errors sending email: " + JSON.stringify(err));
+                    console.log(err);
                 else console.log("Email successfully sent");
             });
     }

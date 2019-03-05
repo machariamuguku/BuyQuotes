@@ -210,32 +210,46 @@ router.post("/lipanampesa/success", (req, res) => {
     });
     */
 
-    //insert to mongoDB
-    moongoseconn.collection("collectionName2").updateOne({
-      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
-    }, {
-      $push: {
-        mpesamethods: {
-          MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
-          CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
-          ResultCode: req.body.Body.stkCallback.ResultCode,
-          ResultDesc: req.body.Body.stkCallback.ResultDesc,
-          CallbackMetadata: req.body.Body.stkCallback.CallbackMetadata
+    // It occassionally fails to update so i want to catch the error
+    try {
+      //insert to mongoDB
+      moongoseconn.collection("collectionName2").updateOne({
+        "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+      }, {
+        $push: {
+          mpesamethods: {
+            MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
+            CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
+            ResultCode: req.body.Body.stkCallback.ResultCode,
+            ResultDesc: req.body.Body.stkCallback.ResultDesc,
+            CallbackMetadata: req.body.Body.stkCallback.CallbackMetadata
+          }
         }
-      }
-    });
+      });
+    } catch (e) {
+      console.log(e);
+      log4jslogger.info("#Insertion-success to DB failed .... I wonder why?: " + e);
+    }
 
     /*
       Get email address and quote category from the MongoDB object 
       and parse this to the send email method
     */
 
+    let sendtodata = moongoseconn.collection("collectionName2").findOne({
+      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+    });
+
+    console.log(sendtodata);
+
     // Send the Email with The Quotes Here
-    const sendTheEmail = require("./sendemail.js");
-    sendTheEmail.sendEmail(
-      "mugukuwrites@gmail.com",
-      "<p>this is a test mail mate!</p>"
-    );
+    const sendTheEmail = require("./sendemail.js"); //call sendemail.js
+    let sendto = "mugukuwrites@gmail.com"; //define send to variable
+    let quotecategory = "Programming";
+    let emailsubject = (quotecategory + "Quotes Delivered from muguku.co.ke") //set email subject
+    let emailbody = "<p>this is a test mail mate!</p>" //set the email body
+
+    sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
     // log the success in log4js file
     log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
 
@@ -250,19 +264,25 @@ router.post("/lipanampesa/success", (req, res) => {
     });
     */
 
-    //insert to mongoDB
-    moongoseconn.collection("collectionName2").updateOne({
-      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
-    }, {
-      $push: {
-        mpesamethods: {
-          MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
-          CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
-          ResultCode: req.body.Body.stkCallback.ResultCode,
-          ResultDesc: req.body.Body.stkCallback.ResultDesc
+    // It occassionally fails to update so i want to catch the error
+    try {
+      //insert to mongoDB
+      moongoseconn.collection("collectionName2").updateOne({
+        "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+      }, {
+        $push: {
+          mpesamethods: {
+            MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
+            CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
+            ResultCode: req.body.Body.stkCallback.ResultCode,
+            ResultDesc: req.body.Body.stkCallback.ResultDesc
+          }
         }
-      }
-    });
+      });
+    } catch (e) {
+      console.log(e);
+      log4jslogger.info("#Insertion-canceled to DB failed .... I wonder why?: " + e);
+    }
     log4jslogger.info("#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
   } else {
     res.render("cart", {
@@ -270,7 +290,6 @@ router.post("/lipanampesa/success", (req, res) => {
       title: "I don't even know what happened!",
       cssmessageclass: "message is-danger"
     });
-
     // log the success results in MOngoDB?
     log4jslogger.info("#Unprecedented error .... occured" + req.body);
   }

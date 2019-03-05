@@ -626,3 +626,11 @@
 [2019-03-04T23:06:46.912] [INFO] default - .............Response Parameters..................
 [2019-03-04T23:06:46.912] [INFO] default - {"MerchantRequestID":"19388-3623506-1","CheckoutRequestID":"ws_CO_DMZ_392814918_04032019230635502","ResponseCode":"0","ResponseDescription":"Success. Request accepted for processing","CustomerMessage":"Success. Request accepted for processing"}
 [2019-03-04T23:06:46.913] [INFO] default - ............./Response Parameters.................
+[2019-03-05T21:52:08.017] [INFO] default - #400 .... There were errors sending email: Error: No recipients defined
+[2019-03-05T22:16:27.307] [INFO] default - #400 .... There were errors sending email: Error: No recipients defined
+[2019-03-05T22:18:25.696] [INFO] default - #400 .... There were errors sending email: Error: No recipients defined
+[2019-03-05T22:20:13.595] [INFO] default - #400 .... There were errors sending email: Error: No recipients defined
+[2019-03-05T22:21:11.349] [INFO] default - #400 .... There were errors sending email: Error: No recipients defined
+[2019-03-05T22:21:52.720] [INFO] default - #400 .... There were errors sending email: Error: No recipients defined
+[2019-03-05T22:23:11.232] [INFO] default - #400 .... There were errors sending email: Error: No recipients defined
+[2019-03-05T22:23:44.132] [INFO] default - #400 .... There were errors sending email: Error: No recipients defined
