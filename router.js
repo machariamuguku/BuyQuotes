@@ -263,7 +263,7 @@ router.post("/lipanampesa/success", (req, res) => {
     */
 
     //insert to mongoDB
-    moongoseconn.collection("collectionName2").update({
+    moongoseconn.collection("collectionName2").updateOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
@@ -288,7 +288,7 @@ router.post("/lipanampesa/success", (req, res) => {
       const sendTheEmail = require("./sendemail.js"); //call sendemail.js
       let sendto = sendtodata.email; //define send to variable
       let quotecategory = sendtodata.quotecategory;
-      let emailsubject = (quotecategory + "" + "Quotes Delivered from muguku.co.ke") //set email subject
+      let emailsubject = (quotecategory + " " + "Quotes Delivered from muguku.co.ke") //set email subject
       let emailbody = "<p>this is a test mail mate!</p>" //set the email body
 
       sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
