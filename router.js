@@ -262,44 +262,39 @@ router.post("/lipanampesa/success", (req, res) => {
     });
     */
 
-    // It occassionally fails to update so i want to catch the error
-    try {
-      //insert to mongoDB
-      moongoseconn.collection("collectionName2").update({
-        "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
-      }, {
-        $push: {
-          mpesamethods: {
-            MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
-            CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
-            ResultCode: req.body.Body.stkCallback.ResultCode,
-            ResultDesc: req.body.Body.stkCallback.ResultDesc
-          }
+    //insert to mongoDB
+    moongoseconn.collection("collectionName2").update({
+      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+    }, {
+      $push: {
+        mpesamethods: {
+          MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
+          CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
+          ResultCode: req.body.Body.stkCallback.ResultCode,
+          ResultDesc: req.body.Body.stkCallback.ResultDesc
         }
-      }), () => {
-        // lets try something here
-        let sendtodata;
-        moongoseconn.collection("collectionName2").findOne({
-          "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
-        }, (err, res) => {
-          if (err) throw new Error(err.message, null);
-          sendtodata = res;
-          console.log("this theee" + sendtodata);
-          // Send the Email with The Quotes Here
-          const sendTheEmail = require("./sendemail.js"); //call sendemail.js
-          let sendto = sendtodata.email; //define send to variable
-          let quotecategory = sendtodata.quotecategory;
-          let emailsubject = (quotecategory + "" + "Quotes Delivered from muguku.co.ke") //set email subject
-          let emailbody = "<p>this is a test mail mate!</p>" //set the email body
+      }
+    });
 
-          sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
-          // /lets try something here
-        });
-      };
-    } catch (e) {
-      console.log(e);
-      log4jslogger.info("#Insertion-canceled to DB failed .... I wonder why?: " + e);
-    }
+    // lets try something here
+    let sendtodata;
+    moongoseconn.collection("collectionName2").findOne({
+      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+    }, (err, res) => {
+      if (err) throw new Error(err.message, null);
+      sendtodata = res;
+      console.log("this theee" + sendtodata);
+      // Send the Email with The Quotes Here
+      const sendTheEmail = require("./sendemail.js"); //call sendemail.js
+      let sendto = sendtodata.email; //define send to variable
+      let quotecategory = sendtodata.quotecategory;
+      let emailsubject = (quotecategory + "" + "Quotes Delivered from muguku.co.ke") //set email subject
+      let emailbody = "<p>this is a test mail mate!</p>" //set the email body
+
+      sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
+      // /lets try something here
+    });
+
 
     log4jslogger.info("#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
   } else {
