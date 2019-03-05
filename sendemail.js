@@ -18,15 +18,15 @@ let sendTheEmail = {
             // list of receivers
             to: towho,
             // The Email Subject
-            subject: "testing nodemailer",
+            subject: "Quotes Delivered from muguku.co.ke",
             //The Email message (Email body)
             html: themessage
         };
 
         // send the email
         transporter.sendMail(mailOptions, function (err, info) {
-            if (err) console.log(err);
-            else console.log("Email successfully sent: " + info);
+            if (err) console.log(JSON.stringify(err));
+            else console.log("Email successfully sent");
         });
     }
 }
