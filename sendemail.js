@@ -42,7 +42,7 @@ let sendTheEmail = {
                     user: "machariamuguku@gmail.com",
                     refreshToken: "1/gk2_eNGDxf71iFzLIHSd0kfZ6fmUOUfwRRlAYpLIlx8-tiG4kkxX3tWb1JSu0dgb",
                     accessToken: "ya29.GlvDBotl6_i5Uaw1Q-U9sIecjeewkly6eVKQjbvTrKPxKYjaWAm6yhYdhiZ-ifli7YZtoLVJMsu2N1ZYR0mLqhrDzXJuUCddd-a8RBKPqJVjWGfi-oTP97Ko8RHr",
-                    expires: 3600
+                    expires: 1484314697598
                 }
             },
             (err, info) => {

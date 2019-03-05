@@ -231,7 +231,7 @@ router.post("/lipanampesa/success", (req, res) => {
     */
 
     // Send the Email with The Quotes Here
-    sendTheEmail = require("./sendemail.js");
+    const sendTheEmail = require("./sendemail.js");
     sendTheEmail.sendEmail(
       "mugukuwrites@gmail.com",
       "<p>this is a test mail mate!</p>"
