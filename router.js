@@ -242,27 +242,21 @@ router.post("/lipanampesa/success", (req, res) => {
           CallbackMetadata: req.body.Body.stkCallback.CallbackMetadata
         }
       }
-    }).then((value) => {
-      /*
-        Get email address and quote category from the MongoDB object 
-        and parse this to the send email method
-      */
-
-      console.log("the insertion succeeded and returned: ");
-      console.log(value);
-      /*
-            // Send the Email with The Quotes Here
-            sendTheEmail = require("./sendemail.js"),
-
-              sendTheEmail.sendEmail(
-                "machariamuguku@gmail.com",
-                "<p>this is yet another test mate!</p>"
-              )
-            // log the success in log4js file
-            log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
-            */
     });
 
+    /*
+      Get email address and quote category from the MongoDB object 
+      and parse this to the send email method
+    */
+
+    // Send the Email with The Quotes Here
+    sendTheEmail = require("./sendemail.js");
+    sendTheEmail.sendEmail(
+      "machariamuguku@gmail.com",
+      "<p>this is yet another test mate!</p>"
+    );
+    // log the success in log4js file
+    log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
   } else if (lipaNaMpesaResultCode === 1032) {
     // Render the failure message to the front end
     res.render("cart", {
@@ -282,9 +276,8 @@ router.post("/lipanampesa/success", (req, res) => {
           ResultDesc: req.body.Body.stkCallback.ResultDesc
         }
       }
-    }).then(() => {
-      log4jslogger.info("#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
     });
+    log4jslogger.info("#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
   } else {
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
