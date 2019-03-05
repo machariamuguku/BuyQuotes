@@ -265,7 +265,7 @@ router.post("/lipanampesa/success", (req, res) => {
     // It occassionally fails to update so i want to catch the error
     try {
       //insert to mongoDB
-      moongoseconn.collection("collectionName2").updateOne({
+      moongoseconn.collection("collectionName2").update({
         "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
       }, {
         $push: {
