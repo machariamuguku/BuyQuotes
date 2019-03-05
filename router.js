@@ -240,7 +240,7 @@ router.post("/lipanampesa/success", (req, res) => {
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     });
     
-    setTimeout(console.log(sendtodata, 3000));
+    setTimeout(console.log(sendtodata),3000);
 
     // Send the Email with The Quotes Here
     const sendTheEmail = require("./sendemail.js"); //call sendemail.js
