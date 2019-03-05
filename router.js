@@ -283,11 +283,15 @@ router.post("/lipanampesa/success", (req, res) => {
     }
 
 
-
-
     // lets try something here
-    let sendtodata = moongoseconn.collection("collectionName2").findOne({
+    let sendtodata;
+
+    moongoseconn.collection("collectionName2").findOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+    }, (err, res) => {
+      if (err) throw new Error(err.message, null);
+      sendtodata = res;
+      console.log("this theee" + sendtodata);
     });
 
     // Send the Email with The Quotes Here
