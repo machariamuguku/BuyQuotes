@@ -1,10 +1,11 @@
-var nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
+const log4jslogger = require("./log4js");
 // nodemailer method
 let sendTheEmail = {
     // parse email address to send to and the actual message to send
     sendEmail: function (towho, themessage) {
         // set nodemailer transport
-        var transporter = nodemailer.createTransport({
+        let transporter = nodemailer.createTransport({
             service: "Gmail",
             auth: {
                 user: "mugukuwrites@gmail.com",
@@ -25,7 +26,8 @@ let sendTheEmail = {
 
         // send the email
         transporter.sendMail(mailOptions, function (err, info) {
-            if (err) console.log(JSON.stringify(err));
+            if (err) log4jslogger.info("#400 .... There were errors sending email: " + JSON.stringify(err)),
+                console.log("#400 .... There were errors sending email: " + JSON.stringify(err));
             else console.log("Email successfully sent");
         });
     }
