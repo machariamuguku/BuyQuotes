@@ -240,13 +240,11 @@ router.post("/lipanampesa/success", (req, res) => {
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     });
     
-    setTimeout(console.log(sendtodata),3000);
-
     // Send the Email with The Quotes Here
     const sendTheEmail = require("./sendemail.js"); //call sendemail.js
-    let sendto = "mugukuwrites@gmail.com"; //define send to variable
-    let quotecategory = "Programming";
-    let emailsubject = (quotecategory + "Quotes Delivered from muguku.co.ke") //set email subject
+    let sendto = sendtodata.email; //define send to variable
+    let quotecategory = sendtodata.quotecategory;
+    let emailsubject = (quotecategory+""+"Quotes Delivered from muguku.co.ke") //set email subject
     let emailbody = "<p>this is a test mail mate!</p>" //set the email body
 
     sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
