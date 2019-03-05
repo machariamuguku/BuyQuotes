@@ -1,6 +1,12 @@
 const nodemailer = require("nodemailer");
 const log4jslogger = require("./log4js");
 
+/*
+N/B: Get instructions to generate access tokens here 
+--> https://medium.com/@nickroach_50526/sending-emails-with-node-js-using-smtp-gmail-and-oauth2-316fe9c790a1
+ctrl+click to follow link
+*/
+
 // nodemailer method
 let sendTheEmail = {
     // parse email address to send to and the actual message to send
@@ -26,14 +32,14 @@ let sendTheEmail = {
             // The Email Subject
             subject: "Quotes Delivered from muguku.co.ke",
             //The Email message (Email body)
-            text: themessage,
+            html: themessage,
         };
 
         // send the email
         transporter.sendMail({
                 mailOptions,
                 auth: {
-                    user: 'machariamuguku@gmail.com',
+                    user: "machariamuguku@gmail.com",
                     refreshToken: "1/gk2_eNGDxf71iFzLIHSd0kfZ6fmUOUfwRRlAYpLIlx8-tiG4kkxX3tWb1JSu0dgb",
                     accessToken: "ya29.GlvDBotl6_i5Uaw1Q-U9sIecjeewkly6eVKQjbvTrKPxKYjaWAm6yhYdhiZ-ifli7YZtoLVJMsu2N1ZYR0mLqhrDzXJuUCddd-a8RBKPqJVjWGfi-oTP97Ko8RHr",
                     expires: 3600
@@ -45,7 +51,7 @@ let sendTheEmail = {
                 else console.log("Email successfully sent");
             });
     }
-}
+};
 module.exports = sendTheEmail;
 
 // // nodemailer method
