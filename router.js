@@ -238,7 +238,7 @@ router.post("/lipanampesa/success", (req, res) => {
 
     let sendtodata = moongoseconn.collection("collectionName2").findOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
-    }).toArray();
+    });
 
     console.log(sendtodata);
 
