@@ -228,7 +228,7 @@ router.post("/lipanampesa/success", (req, res) => {
       let sendto = emailobjects.email; //define send to variable
       let quotecategory = emailobjects.quotecategory;
       let emailsubject = (quotecategory + " " + "Quotes Delivered by https://buyquotes.herokuapp.com") //set email subject
-      let emailbody = "<p>this is a test mail mate!</p><p>powered by: http://www.muguku.co.ke/</p>" //set the email body
+      let emailbody = "<p>'Talk is cheap. Show me the code.' ― Linus Torvalds</p> <p>powered by: http://www.muguku.co.ke/</p>" //set the email body
       // Send the Email with The Quotes Here
       sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
     });
