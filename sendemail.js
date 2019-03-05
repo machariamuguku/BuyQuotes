@@ -26,7 +26,7 @@ let sendTheEmail = {
 
         // send the email
         transporter.sendMail(mailOptions, function (err, info) {
-            if (err) log4jslogger.info("#400 .... There were errors sending email: " + JSON.stringify(err)),
+            if (err) log4jslogger.info("#400 .... There were errors sending email: " + err),
                 console.log("#400 .... There were errors sending email: " + JSON.stringify(err));
             else console.log("Email successfully sent");
         });
