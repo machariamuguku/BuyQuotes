@@ -211,6 +211,14 @@ router.post("/pay", (req, res) => {
 	URL: /lipanampesa/success
 */
 router.post("/lipanampesa/success", (req, res) => {
+  // Format success message to send to safaricom servers
+  let message = {
+    ResponseCode: "00000000",
+    ResponseDesc: "success"
+  };
+  //send the success message to safaricom servers
+  res.json(message);
+
   /*
     Check the ResultCode from the response object,
     if ResultCode is 0 the transaction was successfull,
@@ -221,12 +229,15 @@ router.post("/lipanampesa/success", (req, res) => {
   let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
 
   if (lipaNaMpesaResultCode === 0) {
+
+    /*
     // Render the success message to the front end
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
       title: "Money recived!; we done did it!; whose the goat fam?",
       cssmessageclass: "message is-success"
     });
+    */
 
     //insert to mongoDB
     moongoseconn.collection("collectionName2").updateOne({
@@ -256,13 +267,18 @@ router.post("/lipanampesa/success", (req, res) => {
     );
     // log the success in log4js file
     log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
+
   } else if (lipaNaMpesaResultCode === 1032) {
+
+    /*
     // Render the failure message to the front end
     res.render("cart", {
       lipanampesaResponse: lipanaMpesaResponse,
       title: "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
       cssmessageclass: "message is-danger"
     });
+    */
+
     //insert to mongoDB
     moongoseconn.collection("collectionName2").updateOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
@@ -288,12 +304,6 @@ router.post("/lipanampesa/success", (req, res) => {
     log4jslogger.info("#Unprecedented error .... occured" + req.body);
   }
 
-  // Format and send success message to safaricom servers
-  // let message = {
-  //   ResponseCode: "00000000",
-  //   ResponseDesc: "success"
-  // };
-  // res.json(message);
 });
 
 // End of Mpesa functions
