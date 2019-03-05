@@ -230,7 +230,7 @@ router.post("/lipanampesa/success", (req, res) => {
     });
 
     //insert to mongoDB
-    moongoseconn.collection("collectionName2").updateOne({
+    moongoseconn.collection("collectionName2").update({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
@@ -271,7 +271,7 @@ router.post("/lipanampesa/success", (req, res) => {
       cssmessageclass: "message is-danger"
     });
     //insert to mongoDB
-    moongoseconn.collection("collectionName2").updateOne({
+    moongoseconn.collection("collectionName2").update({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
