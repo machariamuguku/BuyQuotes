@@ -233,8 +233,8 @@ router.post("/lipanampesa/success", (req, res) => {
     // Send the Email with The Quotes Here
     sendTheEmail = require("./sendemail.js");
     sendTheEmail.sendEmail(
-      "machariamuguku@gmail.com",
-      "<p>this is yet another test mate!</p>"
+      "mugukuwrites@gmail.com",
+      "<p>this is a test mail mate!</p>"
     );
     // log the success in log4js file
     log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
