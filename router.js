@@ -263,7 +263,7 @@ router.post("/lipanampesa/success", (req, res) => {
     */
 
     //insert to mongoDB
-    moongoseconn.collection("collectionName2").updateOne({
+    moongoseconn.collection("collectionName2").update({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
@@ -294,7 +294,6 @@ router.post("/lipanampesa/success", (req, res) => {
       sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
       // /lets try something here
     });
-
 
     log4jslogger.info("#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
   } else {
