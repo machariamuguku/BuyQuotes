@@ -271,7 +271,7 @@ router.post("/lipanampesa/success", (req, res) => {
       cssmessageclass: "message is-danger"
     });
     //insert to mongoDB
-    moongoseconn.collection("collectionName2").update({
+    moongoseconn.collection("collectionName2").updateOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
