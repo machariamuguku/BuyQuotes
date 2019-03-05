@@ -26,7 +26,7 @@ let sendTheEmail = {
         //  configure email preferences
         const mailOptions = {
             // sender's email address (same as transporter's user)
-            from: "machariamuguku@gmail.com",
+            from: '"Macharia Muguku" <machariamuguku@gmail.com>',
             // list of receivers
             to: towho,
             // The Email Subject
