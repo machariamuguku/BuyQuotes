@@ -236,20 +236,25 @@ router.post("/lipanampesa/success", (req, res) => {
 
     // log output
     console.log("this is what you inserting?: " + req.body.Body);
+
     //insert to mongoDB
     moongoseconn.collection("collectionName2").update(
       {
-        CheckoutRequestIDRef: req.body.Body.stkCallback.CheckoutRequestID
+        "mpesamethods.CheckoutRequestID":
+          req.body.Body.stkCallback.CheckoutRequestID
       },
       {
         $push: {
           mpesamethods: {
-            stkCallback: req.body.Body.stkCallback
+            MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
+            CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
+            ResultCode: req.body.Body.stkCallback.ResultCode,
+            ResultDesc: req.body.Body.stkCallback.ResultDesc,
+            CallbackMetadata: req.body.Body.stkCallback.CallbackMetadata
           }
         }
       }
     );
-
     // Send the Email with The Quotes Here
     let sendTheEmail = require("./sendemail.js");
     sendTheEmail.sendEmail(
@@ -266,7 +271,6 @@ router.post("/lipanampesa/success", (req, res) => {
         "You got the lipa na mpesa prompt but you pressed decline, didn't you?",
       cssmessageclass: "message is-danger"
     });
-    // { CheckoutRequestIDRef: req.body.Body.stkCallback.CheckoutRequestID }
     //insert to mongoDB
     moongoseconn.collection("collectionName2").update(
       {
@@ -276,7 +280,6 @@ router.post("/lipanampesa/success", (req, res) => {
       {
         $push: {
           mpesamethods: {
-            "this-is-it": "what is?",
             MerchantRequestID: req.body.Body.stkCallback.MerchantRequestID,
             CheckoutRequestID: req.body.Body.stkCallback.CheckoutRequestID,
             ResultCode: req.body.Body.stkCallback.ResultCode,
