@@ -238,7 +238,9 @@ router.post("/lipanampesa/success", (req, res) => {
 
     let sendtodata = moongoseconn.collection("collectionName2").findOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
-    }).then(console.log(sendtodata));
+    }).toArray();
+
+    console.log(sendtodata);
 
     // Send the Email with The Quotes Here
     const sendTheEmail = require("./sendemail.js"); //call sendemail.js
