@@ -249,7 +249,7 @@ router.post("/lipanampesa/success", (req, res) => {
       */
 
       console.log("the insertion succeeded and returned: ");
-      console.log(value);
+      console.log(JSON.stringify(value));
       /*
             // Send the Email with The Quotes Here
             sendTheEmail = require("./sendemail.js"),
