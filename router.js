@@ -267,7 +267,7 @@ router.post("/lipanampesa/success", (req, res) => {
         "quotecategory": emailobjects.quotecategory
       }, (err, res) => {
         if (err) throw new Error(err.message, null);
-        quotesobjects = res;
+        quotesobjects = res.quotes;
         console.log(quotesobjects);
         //set the email objects with response
         const sendTheEmail = require("./sendemail.js"); //call sendemail.js
