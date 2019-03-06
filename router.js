@@ -223,15 +223,17 @@ router.post("/lipanampesa/success", (req, res) => {
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
       emailobjects = res;
-      //set the email objects with response
-      const sendTheEmail = require("./sendemail.js"); //call sendemail.js
-      let sendto = emailobjects.email; //define send to variable
-      let quotecategory = emailobjects.quotecategory;
-      let emailsubject = (quotecategory + " " + "Quotes Delivered by https://buyquotes.herokuapp.com") //set email subject
-      let emailbody = "<p>'Talk is cheap. Show me the code.' ― Linus Torvalds</p> <p>powered by: http://www.muguku.co.ke/</p>" //set the email body
-      // Send the Email with The Quotes Here
-      sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
     });
+
+    //set the email objects with response
+    const sendTheEmail = require("./sendemail.js"); //call sendemail.js
+    let sendto = emailobjects.email; //define send to variable
+    let quotecategory = emailobjects.quotecategory;
+    let emailsubject = (quotecategory + " " + "Quotes Delivered by buyquotes.herokuapp.com") //set email subject
+    let emailbody = "<p>'Talk is cheap. Show me the code.' ― Linus Torvalds</p> <p>powered by: http://www.muguku.co.ke/</p>" //set the email body
+    // Send the Email with The Quotes Here
+    sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
+
     // log the success in log4js file
     log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
   } else if (lipaNaMpesaResultCode === 1032) {
