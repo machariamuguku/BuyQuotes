@@ -256,12 +256,12 @@ router.post("/lipanampesa/success", (req, res) => {
           Get email address and quote category from the MongoDB object 
           and parse this to the send email method
         */
-    // let emailobjects;
+    let emailobjects;
     moongoseconn.collection("collectionName2").findOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
-      let emailobjects = res;
+      emailobjects = res;
       let quotesobjects;
       moongoseconn.collection("Quotes").findOne({
         "quotecategory": emailobjects.quotecategory
@@ -273,7 +273,7 @@ router.post("/lipanampesa/success", (req, res) => {
         let sendto = emailobjects.email; //define send to variable
         let quotecategory = emailobjects.quotecategory;
         let emailsubject = (quotecategory + " " + "Quotes Delivered by buyquotes.herokuapp.com") //set email subject
-        let emailbody = "<p>" + quotesobjects + "</p> <p>powered by: http://www.muguku.co.ke/</p>" //set the email body
+        let emailbody = "<p>"+quotesobjects+"</p> <p>powered by: http://www.muguku.co.ke/</p>" //set the email body
         // Send the Email with The Quotes Here
         sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
       });
