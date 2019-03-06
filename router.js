@@ -262,12 +262,11 @@ router.post("/lipanampesa/success", (req, res) => {
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
       emailobjects = res;
-      let quotesobjects;
       moongoseconn.collection("Quotes").findOne({
         "quotecategory": emailobjects.quotecategory
       }, (error, response) => {
         if (error) throw new Error(error.message, null);
-        quotesobjects = response.quotes;
+        let quotesobjects = response.quotes;
         console.log(quotesobjects);
         //set the email objects with response
         const sendTheEmail = require("./sendemail.js"); //call sendemail.js
