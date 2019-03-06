@@ -263,7 +263,8 @@ router.post("/lipanampesa/success", (req, res) => {
       if (err) throw new Error(err.message, null);
       emailobjects = res;
       moongoseconn.collection("Quotes").findOne({
-        "quotecategory": emailobjects.quotecategory
+        // "quotecategory": emailobjects.quotecategory
+        "quotecategory": "programming"
       }, (error, response) => {
         if (error) throw new Error(error.message, null);
         let quotesobjects = response.quotes;
