@@ -21,4 +21,4 @@
         }]
     }
 
-    module.exports = ProgrammingObject.quotes;
+    module.exports = (ProgrammingObject.quote.quote+"--"+ProgrammingObject.quote.author);
