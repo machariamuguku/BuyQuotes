@@ -264,7 +264,7 @@ router.post("/lipanampesa/success", (req, res) => {
       emailobjects = res;
       let getQuotes = require('./thequotes');
       let quotecategory1 = emailobjects.quotecategory;
-      let getQuotesArguments = quotecategory1.quotes;
+      let getQuotesArguments = (quotecategory1+".quotes");
       console.log(getQuotesArguments);
       quotesobjects = getQuotes(getQuotesArguments); //look at thequotes.js to understand the arguments 
       //array containing quote objects
