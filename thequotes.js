@@ -19,6 +19,14 @@
             "quote": "Programming today is a race between software engineers striving to build bigger and better idiot-proof programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning.",
             "author": "Rick Cook"
         }]
+    };
+
+    repeatLog = (n, arrayobj) => {
+        for (let i = 0; i < n; i++) {
+            // console.log((i + 1) + '.' + '"' + arrayobj[i].quote + '"' + ' ' + '-' + ' ' + arrayobj[i].author);
+            return ((i + 1) + '.' + '"' + arrayobj[i].quote + '"' + ' ' + '-' + ' ' + arrayobj[i].author);
+        }
     }
 
-    module.exports = (ProgrammingObject.quote.quote+"--"+ProgrammingObject.quote.author);
+    let programquot = repeatLog(ProgrammingObject.quotes.length, ProgrammingObject.quotes)
+    module.exports = repeatLog;
