@@ -34,17 +34,17 @@
     // // getQuotes(ProgrammingObject.quotes)
     // getQuotes([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
-   // truth
+    // truth
     getQuotes = (quoteObj) => {
         let n = quoteObj.length;
         var output = '';
         for (let i = 0; i < n; i++) {
-           // console.log((i + 1) + '.' + '"' + quoteObj[i].quote + '"' + ' ' + '-' + ' ' + quoteObj[i].author);
-            output += ((i + 1) + '.' + '"' + quoteObj[i].quote + '"' + ' ' + '-' + ' ' + quoteObj[i].author+"\n");
+            // console.log((i + 1) + '.' + '"' + quoteObj[i].quote + '"' + ' ' + '-' + ' ' + quoteObj[i].author);
+            output += ('<p style="color:red;font-size:22;">' + (i + 1) + '.' + '"' + quoteObj[i].quote + '"' + ' ' + '-' + ' ' + quoteObj[i].author + '</p' + "\n");
         }
         return output
     }
-//    console.log(getQuotes(ProgrammingObject.quotes))
+    console.log(getQuotes(ProgrammingObject.quotes))
     /*
     format the querry as 2.1.1 bellow.
     N/B: replace getQuotes with the name you'll call it with
