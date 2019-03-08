@@ -262,6 +262,7 @@ router.post("/lipanampesa/success", (req, res) => {
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
       emailobjects = res;
+      let quotecategory = emailobjects.quotecategory;
       let getQuotes = require('./thequotes');
       let getQuotesArguments = quotecategory.quotes
       quotesobjects = getQuotes(getQuotesArguments); //look at thequotes.js to understand the arguments 
@@ -269,7 +270,6 @@ router.post("/lipanampesa/success", (req, res) => {
       //set the email objects with response
       const sendTheEmail = require("./sendemail.js"); //call sendemail.js
       let sendto = emailobjects.email; //define send to variable
-      let quotecategory = emailobjects.quotecategory;
       let emailsubject = (quotecategory + " " + "Quotes Delivered by buyquotes.herokuapp.com") //set email subject
       let emailbody = "<p>" + quotesobjects + "</p> <p>powered by: http://www.muguku.co.ke/</p>" //set the email body
       // Send the Email with The Quotes Here
