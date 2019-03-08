@@ -1,6 +1,6 @@
 //1.
-programming = {
-    "quotecategory": "programming",
+Programming = {
+    "quotecategory": "Programming",
     "quotes": [{
         "quote": "Talk is cheap. Show me the code.",
         "author": "Linus Torvalds"
@@ -20,8 +20,50 @@ programming = {
 };
 
 //2.
-workout = {
-    "quotecategory": "workout",
+Workout = {
+    "quotecategory": "Workout",
+    "quotes": [{
+        "quote": "Training gives us an outlet for suppressed energies created by stress and thus tones the spirit just as exercise conditions the body.",
+        "author": "Arnold Schwarzenegger"
+    }, {
+        "quote": "Strength does not come from the physical capacity. It comes from an indomitable will.",
+        "author": "Ghandi"
+    }, {
+        "quote": "Your body can stand almost anything. It’s your mind that you have to convince.",
+        "author": "Anonymous"
+    }, {
+        "quote": "Fitness is like a relationship. You can’t cheat and expect it to work.",
+        "author": "Anonymous"
+    }, {
+        "quote": "Dead last finish is greater than did not finish, which trumps did not start.",
+        "author": "Anonymous"
+    }]
+};
+
+//3.
+Motivation = {
+    "quotecategory": "Motivation",
+    "quotes": [{
+        "quote": "Training gives us an outlet for suppressed energies created by stress and thus tones the spirit just as exercise conditions the body.",
+        "author": "Arnold Schwarzenegger"
+    }, {
+        "quote": "Strength does not come from the physical capacity. It comes from an indomitable will.",
+        "author": "Ghandi"
+    }, {
+        "quote": "Your body can stand almost anything. It’s your mind that you have to convince.",
+        "author": "Anonymous"
+    }, {
+        "quote": "Fitness is like a relationship. You can’t cheat and expect it to work.",
+        "author": "Anonymous"
+    }, {
+        "quote": "Dead last finish is greater than did not finish, which trumps did not start.",
+        "author": "Anonymous"
+    }]
+};
+
+//4.
+Love = {
+    "quotecategory": "Love",
     "quotes": [{
         "quote": "Training gives us an outlet for suppressed energies created by stress and thus tones the spirit just as exercise conditions the body.",
         "author": "Arnold Schwarzenegger"
