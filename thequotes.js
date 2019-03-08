@@ -1,6 +1,6 @@
 //1.
-Programming = {
-    "quotecategory": "Programming",
+programming = {
+    "quotecategory": "programming",
     "quotes": [{
         "quote": "Talk is cheap. Show me the code.",
         "author": "Linus Torvalds"
@@ -20,8 +20,8 @@ Programming = {
 };
 
 //2.
-Workout = {
-    "quotecategory": "Workout",
+workout = {
+    "quotecategory": "workout",
     "quotes": [{
         "quote": "Training gives us an outlet for suppressed energies created by stress and thus tones the spirit just as exercise conditions the body.",
         "author": "Arnold Schwarzenegger"
@@ -41,8 +41,8 @@ Workout = {
 };
 
 //3.
-Motivation = {
-    "quotecategory": "Motivation",
+motivation = {
+    "quotecategory": "motivation",
     "quotes": [{
         "quote": "Training gives us an outlet for suppressed energies created by stress and thus tones the spirit just as exercise conditions the body.",
         "author": "Arnold Schwarzenegger"
@@ -62,8 +62,8 @@ Motivation = {
 };
 
 //4.
-Love = {
-    "quotecategory": "Love",
+love = {
+    "quotecategory": "love",
     "quotes": [{
         "quote": "Training gives us an outlet for suppressed energies created by stress and thus tones the spirit just as exercise conditions the body.",
         "author": "Arnold Schwarzenegger"
