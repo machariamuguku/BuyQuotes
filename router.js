@@ -262,8 +262,8 @@ router.post("/lipanampesa/success", (req, res) => {
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
       emailobjects = res;
-      let getquotes = require('./thequotes');
-      quotesobjects = getquotes(ProgrammingObject.quotes.length, ProgrammingObject.quotes);
+      let getQuotes = require('./thequotes');
+      quotesobjects = getQuotes(ProgrammingObject.quotes); //look at thequotes.js to understand the arguments 
       //array containing quote objects
       //set the email objects with response
       const sendTheEmail = require("./sendemail.js"); //call sendemail.js

@@ -21,12 +21,35 @@
         }]
     };
 
-    repeatLog = (n, arrayobj) => {
-        for (let i = 0; i < n; i++) {
-            // console.log((i + 1) + '.' + '"' + arrayobj[i].quote + '"' + ' ' + '-' + ' ' + arrayobj[i].author);
-            return ((i + 1) + '.' + '"' + arrayobj[i].quote + '"' + ' ' + '-' + ' ' + arrayobj[i].author);
-        }
-    }
 
-    let programquot = repeatLog(ProgrammingObject.quotes.length, ProgrammingObject.quotes)
-    module.exports = repeatLog;
+    // function getQuotes(getQuotes) {
+    //     var n = getQuotes.length;
+    //     var output = '';
+    //     for (var i = 0; i < n; i++) {
+    //         console.log(getQuotes[i][2])
+    //         // output += getQuotes[i][2].split(":", 1)[0];
+    //     }
+    //     return output;
+    // }
+    // // getQuotes(ProgrammingObject.quotes)
+    // getQuotes([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+   // truth
+    getQuotes = (quoteObj) => {
+        let n = quoteObj.length;
+        var output = '';
+        for (let i = 0; i < n; i++) {
+           // console.log((i + 1) + '.' + '"' + quoteObj[i].quote + '"' + ' ' + '-' + ' ' + quoteObj[i].author);
+            output += ((i + 1) + '.' + '"' + quoteObj[i].quote + '"' + ' ' + '-' + ' ' + quoteObj[i].author+"\n");
+        }
+        return output
+    }
+//    console.log(getQuotes(ProgrammingObject.quotes))
+    /*
+    format the querry as 2.1.1 bellow.
+    N/B: replace getQuotes with the name you'll call it with
+    i.e nameToCallWith = require(./thequotes.js)
+    2.1.1 ...................................................................
+    getQuotes(ProgrammingObject.quotes)
+    */
+    module.exports = getQuotes;
