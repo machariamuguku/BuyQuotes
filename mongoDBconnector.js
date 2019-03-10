@@ -40,9 +40,6 @@ const MongoClient = require('mongodb').MongoClient;
 
 // module.exports = moongoseconn;
 
-
-
-const MongoClient = require('mongodb').MongoClient;
 const uri = process.env.MongoDBCleverCloudConnectionURL;
 const client = new MongoClient(uri, {
   useNewUrlParser: true
