@@ -56,7 +56,7 @@ router.post("/pay", (req, res) => {
     const consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N";
     const consumer_secret = "TEYbiahbnSmUErPV";
     const url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"; //change this after going live
-    let auth = "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
+    let auth = "Basic " + new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
     const url_for_api = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
     let phoneNumber = req.body.phonenumber; //the phone number in which to send the stk push
     const shortCode = "174379"; //this is the testing shortcode change it to your own after going live
@@ -146,7 +146,7 @@ router.post("/pay", (req, res) => {
               JSON.stringify(allUserData)
             );
             //use moongose to insert the two objects in a mongoDB as a single object
-            moongoseconn.collection("QuotesCollection").insertOne(allUserData);
+            moongoseconn.collection.insertOne(allUserData);
           }
           // If Submission to M-Pesa fails
           else {
@@ -196,7 +196,7 @@ router.post("/lipanampesa/success", (req, res) => {
 
   if (lipaNaMpesaResultCode === 0) {
     //insert to mongoDB
-    moongoseconn.collection("QuotesCollection").update({
+    moongoseconn.collection.update({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
@@ -216,7 +216,7 @@ router.post("/lipanampesa/success", (req, res) => {
       and parse this to the send email method
     */
     let emailobjects;
-    moongoseconn.collection("QuotesCollection").findOne({
+    moongoseconn.collection.findOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
@@ -253,7 +253,7 @@ router.post("/lipanampesa/success", (req, res) => {
     log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
   } else if (lipaNaMpesaResultCode === 1032) {
     //insert to mongoDB
-    moongoseconn.collection("QuotesCollection").update({
+    moongoseconn.collection.update({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
