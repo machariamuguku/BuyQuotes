@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 require('dotenv').config();
+const MongoClient = require('mongodb').MongoClient;
 
 /*
   add moongose and connect to db
@@ -18,20 +19,36 @@ require('dotenv').config();
 // let mongourl = process.env.MongoDBAtlasConnectionURL;
 
 //Mongo Clever Cloud
-let mongourl = process.env.MongoDBCleverCloudConnectionURL;
-mongoose
-  .connect(mongourl, {
-    useNewUrlParser: true
-  })
-  .then(
-    () => {
-      console.log("The Database connection is successful");
-    },
-    err => {
-      console.log("Error when connecting to the database " + err);
-    }
-  );
-//set moongoose connection
-let moongoseconn = mongoose.connection;
+
+//old
+
+// let mongourl = process.env.MongoDBCleverCloudConnectionURL;
+// mongoose
+//   .connect(mongourl, {
+//     useNewUrlParser: true
+//   })
+//   .then(
+//     () => {
+//       console.log("The Database connection is successful");
+//     },
+//     err => {
+//       console.log("Error when connecting to the database " + err);
+//     }
+//   );
+// //set moongoose connection
+// let moongoseconn = mongoose.connection;
+
+// module.exports = moongoseconn;
+
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://muguku:<password>@muguku-ddg7d.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+let moongoseconn = client.connect(err => {
+  const collection = client.db("buyQuotes").collection("QuotesCollection");
+  // perform actions on the collection object
+  client.close();
+});
 
 module.exports = moongoseconn;
