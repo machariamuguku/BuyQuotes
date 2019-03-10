@@ -66,7 +66,7 @@ router.post("/pay", (req, res) => {
     const accountReference = "muguku.co.ke"; //any specific reference
     const transactionDesc = "Buy quotes from muguku.co.ke";
     let timestamp = moment().format("YYYYMMDDHHmmss");
-    let password;
+    let password = base64.encode(shortCode+passkey+timestamp);
 
     function getToken(tokenParam) {
       let oauth_token;
