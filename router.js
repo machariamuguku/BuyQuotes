@@ -263,16 +263,23 @@ router.post("/lipanampesa/success", (req, res) => {
       if (err) throw new Error(err.message, null);
       emailobjects = res;
       let getQuotes = require('./thequotes');
+      /*
+      Sting concatenation failed.. condition was the only way
+      */
       let quotecategory1;
       if (emailobjects.quotecategory === "Programming") {
         quotecategory1 = Programming.quotes;
-      } else {
+      } else if (emailobjects.quotecategory === "Workout") {
+        quotecategory1 = Workout.quotes;
+      } else if (emailobjects.quotecategory === "Motivation") {
+        quotecategory1 = Motivation.quotes;
+      } else if (emailobjects.quotecategory === "Love") {
         quotecategory1 = Love.quotes;
+      } else {
+        quotecategory1 = Programming.quotes;
       }
       quotesobjects = getQuotes(quotecategory1); //look at thequotes.js to understand the arguments
-      //let quotesobjects = getQuotes(Programming.quotes); 
-      //array containing quote objects
-      //set the email objects with response
+      //call and set the email objects with response
       const sendTheEmail = require("./sendemail.js"); //call sendemail.js
       let sendto = emailobjects.email; //define send to variable
       let quotecategory = emailobjects.quotecategory;
