@@ -1,6 +1,7 @@
 // const mongoose = require("mongoose");
 require('dotenv').config();
-const MongoClient = require('mongodb').MongoClient;
+let MongoClient = require('mongodb').MongoClient,
+  assert = require('assert');
 
 /*
   add moongose and connect to db
@@ -40,14 +41,14 @@ const MongoClient = require('mongodb').MongoClient;
 
 // module.exports = moongoseconn;
 
-const uri = process.env.MongoDBCleverCloudConnectionURL;
-const client = new MongoClient(uri, {
-  useNewUrlParser: true
-});
-let moongoseconn = client.connect(err => {
-  const collection = client.db("buyQuotes").collection("QuotesCollection");
-  // perform actions on the collection object
-  client.close();
-});
 
-module.exports = moongoseconn;
+// Connection URL
+let url = process.env.MongoDBCleverCloudConnectionURL;
+
+// Use connect method to connect to the server
+module.exports.moongoseconn = MongoClient.connect(url, function (err, db) {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
+
+  db.close();
+});
