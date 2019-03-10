@@ -56,7 +56,7 @@ router.post("/pay", (req, res) => {
     const consumer_key = process.env.consumer_key;
     const consumer_secret = process.env.consumer_secret;
     const url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"; //change this after going live
-    let auth = process.env.auth;
+    let auth = "Basic " + new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64")
     const url_for_api = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
     let phoneNumber = req.body.phonenumber; //the phone number in which to send the stk push
     const shortCode = process.env.shortCode; //this is the testing shortcode change it to your own after going live
@@ -66,7 +66,7 @@ router.post("/pay", (req, res) => {
     const accountReference = "muguku.co.ke"; //any specific reference
     const transactionDesc = "Buy quotes from muguku.co.ke";
     let timestamp = moment().format("YYYYMMDDHHmmss");
-    let password = process.env.password;
+    let password = "base64.encode(shortCode+passkey+timestamp)"
 
     function getToken(tokenParam) {
       let oauth_token;
