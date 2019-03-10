@@ -26,5 +26,6 @@ let objectToInsert = {
     ]
 }
 
+
 //use moongose to insert the two objects in a mongoDB as a single object
 moongoseconn.collection("Quotes").insertOne(objectToInsert);

@@ -4,6 +4,7 @@ const moment = require("moment");
 const base64 = require("base-64");
 const log4jslogger = require("./log4js");
 const moongoseconn = require("./mongoDBconnector");
+require('dotenv').config();
 
 //set up express router
 const router = express.Router();
@@ -52,25 +53,20 @@ router.post("/pay", (req, res) => {
     );
   } else {
     // Process Payment here
-    const consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N";
-    const consumer_secret = "TEYbiahbnSmUErPV";
-    const url =
-      "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"; //change this after going live
-    let auth =
-      "Basic " +
-      new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
-    const url_for_api =
-      "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
+    const consumer_key = process.env.consumer_key;
+    const consumer_secret = process.env.consumer_secret;
+    const url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"; //change this after going live
+    let auth = process.env.auth;
+    const url_for_api = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
     let phoneNumber = req.body.phonenumber; //the phone number in which to send the stk push
-    const shortCode = "174379"; //this is the testing shortcode change it to your own after going live
-    const passkey =
-      "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"; //change this after going live
+    const shortCode = process.env.shortCode; //this is the testing shortcode change it to your own after going live
+    const passkey = process.env.passkey; //change this after going live
     const amount = "1";
     const callBackURL = "https://buyquotes.herokuapp.com/lipanampesa/success"; //your callback url for which to pick the json data returned
     const accountReference = "muguku.co.ke"; //any specific reference
     const transactionDesc = "Buy quotes from muguku.co.ke";
     let timestamp = moment().format("YYYYMMDDHHmmss");
-    let password = base64.encode(shortCode + passkey + timestamp);
+    let password = process.env.password;
 
     function getToken(tokenParam) {
       let oauth_token;
