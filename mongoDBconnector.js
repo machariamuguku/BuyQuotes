@@ -13,7 +13,11 @@ const mongoose = require("mongoose");
   with their respective encoding 
   eg # with %23 and @ with %40 
 */
-let mongourl = "mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/buyquotes?retryWrites=true";
+//initial
+// let mongourl = "mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/buyquotes?retryWrites=true";
+
+//new
+let mongourl = "mongodb://unke9v0ynx9bcwapmnq2:GtL7tuikACPwV7SO1a2K@bs8dxeex7ags0j3-mongodb.services.clever-cloud.com:27017/bs8dxeex7ags0j3";
 mongoose
   .connect(mongourl, {
     useNewUrlParser: true
