@@ -43,8 +43,10 @@ const MongoClient = require('mongodb').MongoClient;
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://muguku:<password>@muguku-ddg7d.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
+const uri = process.env.MongoDBCleverCloudConnectionURL;
+const client = new MongoClient(uri, {
+  useNewUrlParser: true
+});
 let moongoseconn = client.connect(err => {
   const collection = client.db("buyQuotes").collection("QuotesCollection");
   // perform actions on the collection object
