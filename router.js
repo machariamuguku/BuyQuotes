@@ -150,7 +150,7 @@ router.post("/pay", (req, res) => {
               JSON.stringify(allUserData)
             );
             //use moongose to insert the two objects in a mongoDB as a single object
-            moongoseconn.collection("collectionName2").insertOne(allUserData);
+            moongoseconn.collection("QuotesCollection").insertOne(allUserData);
           }
           // If Submission to M-Pesa fails
           else {
@@ -200,7 +200,7 @@ router.post("/lipanampesa/success", (req, res) => {
 
   if (lipaNaMpesaResultCode === 0) {
     //insert to mongoDB
-    moongoseconn.collection("collectionName2").update({
+    moongoseconn.collection("QuotesCollection").update({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
@@ -220,7 +220,7 @@ router.post("/lipanampesa/success", (req, res) => {
       and parse this to the send email method
     */
     let emailobjects;
-    moongoseconn.collection("collectionName2").findOne({
+    moongoseconn.collection("QuotesCollection").findOne({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
@@ -257,7 +257,7 @@ router.post("/lipanampesa/success", (req, res) => {
     log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
   } else if (lipaNaMpesaResultCode === 1032) {
     //insert to mongoDB
-    moongoseconn.collection("collectionName2").update({
+    moongoseconn.collection("QuotesCollection").update({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
     }, {
       $push: {
