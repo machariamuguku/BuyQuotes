@@ -29,7 +29,7 @@ mongoose
   .then(
     () => {
       console.log("The Database connection is successful");
-      db.close();
+      mongoose.close();
     },
     err => {
       console.log("Error when connecting to the database " + err);
