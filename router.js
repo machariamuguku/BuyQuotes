@@ -184,16 +184,18 @@ router.post("/lipanampesa/success", (req, res) => {
     ResponseDesc: "success"
   };
 
-  moongoseconn.collection("QuotesCollection").update({
-    "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
-  }, {
-    $push: {
-      mpesamethods: {
-        ResultBody: req.body.Body
+  if (req.body) {
+    //insert to mongoDB
+    moongoseconn.collection("QuotesCollection").update({
+      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+    }, {
+      $push: {
+        mpesamethods: {
+          ResultBody: req.body.Body
+        }
       }
-    }
-  });
-
+    });
+  }
   //send the success message to safaricom servers
   res.json(message);
 });
