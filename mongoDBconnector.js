@@ -22,14 +22,14 @@ require('dotenv').config();
 //old
 
 let mongourl = "mongodb+srv://muguku:%40chiever%231@muguku-ddg7d.mongodb.net/buyquotes?retryWrites=true";
-mongoose
+let db = mongoose
   .connect(mongourl, {
     useNewUrlParser: true
   })
   .then(
     () => {
       console.log("The Database connection is successful");
-      mongoose.close();
+      db.close();
     },
     err => {
       console.log("Error when connecting to the database " + err);
