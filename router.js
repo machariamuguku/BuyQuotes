@@ -246,8 +246,6 @@ router.post("/lipanampesa/success", (req, res) => {
       let emailbody = "<p>" + quotesobjects + "</p> <p>powered by: http://www.muguku.co.ke/</p>" //set the email body
       // Send the Email with The Quotes Here
       sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
-
-      moongoseconn.close();
     });
     // end
 
@@ -267,7 +265,6 @@ router.post("/lipanampesa/success", (req, res) => {
         }
       }
     });
-    moongoseconn.close();
 
     log4jslogger.info("#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
   } else {
