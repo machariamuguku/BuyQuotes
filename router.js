@@ -195,11 +195,11 @@ router.post("/lipanampesa/success", (req, res) => {
         }
       }
     });
-  }
-  //send the success message to safaricom servers
-  res.json(message);
-});
 
+    //send the success message to safaricom servers
+    res.json(message);
+  }
+});
 
 //Process the payments here
 router.post("/lipanampesa/process", (req, res) => {
