@@ -191,10 +191,8 @@ router.post("/lipanampesa/success", (req, res) => {
     if ResultCode is 1032 the transaction was either canceled by the user,
     failed due to lack of enough funds or due to server overload
   */
-  let lipaNaMpesaResultCode = req.body.Body.stkCallback.ResultCode; //The ResultCode
-  let lipanaMpesaResponse = req.body.Body.stkCallback.ResultDesc; //The ResultDescription
-
-  if (lipaNaMpesaResultCode === 0) {
+ 
+  if (req.body.Body.stkCallback.ResultCode == 0) {
     //insert to mongoDB
     moongoseconn.collection("QuotesCollection").update({
       "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
@@ -226,13 +224,13 @@ router.post("/lipanampesa/success", (req, res) => {
       Sting concatenation failed.. condition was the only way
       */
       let quotecategory1;
-      if (emailobjects.quotecategory === "Programming") {
+      if (emailobjects.quotecategory == "Programming") {
         quotecategory1 = Programming.quotes;
-      } else if (emailobjects.quotecategory === "Workout") {
+      } else if (emailobjects.quotecategory == "Workout") {
         quotecategory1 = Workout.quotes;
-      } else if (emailobjects.quotecategory === "Motivation") {
+      } else if (emailobjects.quotecategory == "Motivation") {
         quotecategory1 = Motivation.quotes;
-      } else if (emailobjects.quotecategory === "Love") {
+      } else if (emailobjects.quotecategory == "Love") {
         quotecategory1 = Love.quotes;
       } else {
         quotecategory1 = Programming.quotes;
@@ -251,7 +249,7 @@ router.post("/lipanampesa/success", (req, res) => {
 
     // log the success in log4js file
     log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
-  } else if (lipaNaMpesaResultCode === 1032) {
+  } else if (req.body.Body.stkCallback.ResultCode == 1032) {
     //insert to mongoDB
     moongoseconn.collection("QuotesCollection").update({
       "mpesamethods.MerchantRequestID": req.body.Body.stkCallback.MerchantRequestID
@@ -268,11 +266,6 @@ router.post("/lipanampesa/success", (req, res) => {
 
     log4jslogger.info("#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
   } else {
-    res.render("cart", {
-      lipanampesaResponse: lipanaMpesaResponse,
-      title: "I don't even know what happened!",
-      cssmessageclass: "message is-danger"
-    });
     // log the success results in MOngoDB?
     log4jslogger.info("#Unprecedented error .... occured" + req.body);
   }
@@ -294,6 +287,15 @@ router.post("/lipanampesa/success", (req, res) => {
       cssmessageclass: "message is-danger"
     });
     */
+
+  /*
+    // Render unprecedented error message to the front end
+   res.render("cart", {
+    lipanampesaResponse: lipanaMpesaResponse,
+    title: "I don't even know what happened!",
+    cssmessageclass: "message is-danger"
+  });
+      */
 
 });
 
