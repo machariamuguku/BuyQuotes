@@ -191,7 +191,7 @@ router.post("/lipanampesa/success", (req, res) => {
     if ResultCode is 1032 the transaction was either canceled by the user,
     failed due to lack of enough funds or due to server overload
   */
- 
+
   if (req.body.Body.stkCallback.ResultCode == 0) {
     //insert to mongoDB
     moongoseconn.collection("QuotesCollection").update({
@@ -208,13 +208,16 @@ router.post("/lipanampesa/success", (req, res) => {
       }
     });
 
+    // log the success in log4js file
+    log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
+
     // start
     /*
       Get email address and quote category from the MongoDB object 
       and parse this to the send email method
     */
     let emailobjects;
-    moongoseconn.collection("QuotesCollection").findOne({
+    moongoseconn.collection("==QuotesCollection").findOne({
       "mpesamethods.MerchantRequestID": req.body.Body.stkCallback.MerchantRequestID
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
@@ -246,9 +249,6 @@ router.post("/lipanampesa/success", (req, res) => {
       sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
     });
     // end
-
-    // log the success in log4js file
-    log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
   } else if (req.body.Body.stkCallback.ResultCode == 1032) {
     //insert to mongoDB
     moongoseconn.collection("QuotesCollection").update({
