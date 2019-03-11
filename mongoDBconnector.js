@@ -1,7 +1,5 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 require('dotenv').config();
-let MongoClient = require('mongodb').MongoClient,
-  assert = require('assert');
 
 /*
   add moongose and connect to db
@@ -23,32 +21,21 @@ let MongoClient = require('mongodb').MongoClient,
 
 //old
 
-// let mongourl = process.env.MongoDBCleverCloudConnectionURL;
-// mongoose
-//   .connect(mongourl, {
-//     useNewUrlParser: true
-//   })
-//   .then(
-//     () => {
-//       console.log("The Database connection is successful");
-//     },
-//     err => {
-//       console.log("Error when connecting to the database " + err);
-//     }
-//   );
-// //set moongoose connection
-// let moongoseconn = mongoose.connection;
+let mongourl = process.env.MongoDBCleverCloudConnectionURL;
+mongoose
+  .connect(mongourl, {
+    useNewUrlParser: true
+  })
+  .then(
+    () => {
+      console.log("The Database connection is successful");
+      db.close();
+    },
+    err => {
+      console.log("Error when connecting to the database " + err);
+    }
+  );
+//set moongoose connection
+let moongoseconn = mongoose.connection;
 
-// module.exports = moongoseconn;
-
-
-// Connection URL
-let url = process.env.MongoDBCleverCloudConnectionURL;
-
-// Use connect method to connect to the server
-module.exports.moongoseconn = MongoClient.connect(url, function (err, db) {
-  assert.equal(null, err);
-  console.log("Connected successfully to server");
-
-  db.close();
-});
+module.exports = moongoseconn;
