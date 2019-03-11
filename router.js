@@ -217,7 +217,7 @@ router.post("/lipanampesa/success", (req, res) => {
       and parse this to the send email method
     */
     let emailobjects;
-    moongoseconn.collection("==QuotesCollection").findOne({
+    moongoseconn.collection("QuotesCollection").findOne({
       "mpesamethods.MerchantRequestID": req.body.Body.stkCallback.MerchantRequestID
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
