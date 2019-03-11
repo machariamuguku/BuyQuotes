@@ -183,6 +183,30 @@ router.post("/lipanampesa/success", (req, res) => {
     ResponseCode: "00000000",
     ResponseDesc: "success"
   };
+
+  moongoseconn.collection("QuotesCollection").update({
+    "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+  }, {
+    $push: {
+      mpesamethods: {
+        ResultBody: req.body.Body
+      }
+    }
+  });
+
+  //send the success message to safaricom servers
+  res.json(message);
+});
+
+
+//Process the payments here
+router.post("/lipanampesa/success", (req, res) => {
+  // Format success message to send to safaricom servers
+  let message = {
+    ResponseCode: "00000000",
+    ResponseDesc: "success"
+  };
+
   //send the success message to safaricom servers
   res.json(message);
   /*
