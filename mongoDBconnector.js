@@ -21,7 +21,7 @@ require('dotenv').config();
 
 //old
 
-let mongourl = process.env.MongoDBAtlasConnectionURL;
+let mongourl = "mongodb+srv://muguku:%40chiever%231@buyquotes-ddg7d.mongodb.net/buyquotes?retryWrites=true";
 mongoose
   .connect(mongourl, {
     useNewUrlParser: true

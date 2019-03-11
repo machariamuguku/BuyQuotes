@@ -19,15 +19,15 @@ let sendTheEmail = {
             secure: true,
             auth: {
                 type: 'OAuth2',
-                clientId: process.env.clientId,
-                clientSecret: process.env.clientSecret
+                clientId: '833392259723-ij0tsn3m6vi3kbtspq0nhtvcbcbgmmfq.apps.googleusercontent.com',
+                clientSecret: '0il4HxucpWXGRJxVUzJdR-16'
             }
         });
 
         // send the email
         transporter.sendMail({
                 // sender's email address (same as transporter's user)
-                from: process.env.from,
+                from: '"Macharia Muguku" <machariamuguku@gmail.com>',
                 // list of receivers
                 to: sendto,
                 // The Email Subject
@@ -35,9 +35,9 @@ let sendTheEmail = {
                 //The Email message (Email body)
                 html: emailbody,
                 auth: {
-                    user: process.env.user,
-                    refreshToken: process.env.refreshToken,
-                    accessToken: process.env.accessToken,
+                    user: "machariamuguku@gmail.com",
+                    refreshToken: "1/gk2_eNGDxf71iFzLIHSd0kfZ6fmUOUfwRRlAYpLIlx8-tiG4kkxX3tWb1JSu0dgb",
+                    accessToken: "ya29.GlvDBotl6_i5Uaw1Q-U9sIecjeewkly6eVKQjbvTrKPxKYjaWAm6yhYdhiZ-ifli7YZtoLVJMsu2N1ZYR0mLqhrDzXJuUCddd-a8RBKPqJVjWGfi-oTP97Ko8RHr",
                     expires: 3600
                 }
             },
