@@ -200,7 +200,7 @@ router.post("/lipanampesa/success", (req, res) => {
 
 
 //Process the payments here
-router.post("/lipanampesa/success", (req, res) => {
+router.post("/lipanampesa/process", (req, res) => {
   // Format success message to send to safaricom servers
   let message = {
     ResponseCode: "00000000",
