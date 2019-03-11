@@ -217,7 +217,7 @@ router.post("/lipanampesa/success", (req, res) => {
     */
     let emailobjects;
     moongoseconn.collection("QuotesCollection").findOne({
-      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+      "mpesamethods.MerchantRequestID": req.body.Body.stkCallback.MerchantRequestID
     }, (err, res) => {
       if (err) throw new Error(err.message, null);
       emailobjects = res;
@@ -254,7 +254,7 @@ router.post("/lipanampesa/success", (req, res) => {
   } else if (lipaNaMpesaResultCode === 1032) {
     //insert to mongoDB
     moongoseconn.collection("QuotesCollection").update({
-      "mpesamethods.CheckoutRequestID": req.body.Body.stkCallback.CheckoutRequestID
+      "mpesamethods.MerchantRequestID": req.body.Body.stkCallback.MerchantRequestID
     }, {
       $push: {
         mpesamethods: {
