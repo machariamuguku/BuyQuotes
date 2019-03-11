@@ -21,7 +21,7 @@ require('dotenv').config();
 
 //old
 
-let mongourl = process.env.MongoDBCleverCloudConnectionURL;
+let mongourl = process.env.MongoDBAtlasConnectionURL;
 mongoose
   .connect(mongourl, {
     useNewUrlParser: true
