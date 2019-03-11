@@ -146,7 +146,7 @@ router.post("/pay", (req, res) => {
               JSON.stringify(allUserData)
             );
             //use moongose to insert the two objects in a mongoDB as a single object
-            moongoseconn.collection("QuotesCollection").insertOne(allUserData).then(mongoose.connection.close());
+            moongoseconn.collection("QuotesCollection").insertOne(allUserData).then(moongoseconn.close());
           }
           // If Submission to M-Pesa fails
           else {
@@ -247,7 +247,7 @@ router.post("/lipanampesa/success", (req, res) => {
       // Send the Email with The Quotes Here
       sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
 
-      mongoose.connection.close();
+      moongoseconn.close();
     });
     // end
 
@@ -266,7 +266,7 @@ router.post("/lipanampesa/success", (req, res) => {
           ResultDesc: req.body.Body.stkCallback.ResultDesc
         }
       }
-    });
+    }).then(moongoseconn.close());
 
     log4jslogger.info("#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
   } else {
