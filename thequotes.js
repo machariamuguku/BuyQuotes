@@ -88,7 +88,7 @@ getQuotes = (quoteObj) => {
     var output = '';
     for (let i = 0; i < n; i++) {
         // console.log((i + 1) + '.' + '"' + quoteObj[i].quote + '"' + ' ' + '-' + ' ' + quoteObj[i].author);
-        output += ('<p style="color:#00d2b4;font-size:22;">' + (i + 1) + '.' + '"' + quoteObj[i].quote + '"' + ' ' + '-' + ' ' + quoteObj[i].author + '</p' + "\n");
+        output += ('<p style="color:#3273dc;font-size:22; font-weight: bold;">' + (i + 1) + '.' + '"' + quoteObj[i].quote + '"' + ' ' + '-' + ' ' + quoteObj[i].author + '</p' + "\n");
     }
     return output
 }
