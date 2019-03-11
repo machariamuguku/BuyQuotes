@@ -66,7 +66,7 @@ router.post("/pay", (req, res) => {
     const accountReference = "muguku.co.ke"; //any specific reference
     const transactionDesc = "Buy quotes from muguku.co.ke";
     let timestamp = moment().format("YYYYMMDDHHmmss");
-    let password = base64.encode(shortCode+passkey+timestamp);
+    let password = base64.encode(shortCode + passkey + timestamp);
 
     function getToken(tokenParam) {
       let oauth_token;
@@ -146,7 +146,7 @@ router.post("/pay", (req, res) => {
               JSON.stringify(allUserData)
             );
             //use moongose to insert the two objects in a mongoDB as a single object
-            moongoseconn.collection("QuotesCollection").insertOne(allUserData);
+            moongoseconn.collection("QuotesCollection").insertOne(allUserData).then(mongoose.connection.close());
           }
           // If Submission to M-Pesa fails
           else {
@@ -246,6 +246,8 @@ router.post("/lipanampesa/success", (req, res) => {
       let emailbody = "<p>" + quotesobjects + "</p> <p>powered by: http://www.muguku.co.ke/</p>" //set the email body
       // Send the Email with The Quotes Here
       sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
+
+      mongoose.connection.close();
     });
     // end
 
