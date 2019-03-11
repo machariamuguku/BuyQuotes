@@ -147,7 +147,6 @@ router.post("/pay", (req, res) => {
             );
             //use moongose to insert the two objects in a mongoDB as a single object
             moongoseconn.collection("QuotesCollection").insertOne(allUserData);
-            moongoseconn.close();
           }
           // If Submission to M-Pesa fails
           else {
