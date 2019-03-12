@@ -189,7 +189,7 @@ router.post("/pay", (req, res) => {
                 function(error, response, body) {
                   // TODO: Use the body object to extract the response
                   console.log("This is what you've been waiting for: ")
-                  console.log(allUserData.mpesamethods.CheckoutRequestID);
+                  console.log(JSON.stringify(allUserData.mpesamethods.CheckoutRequestID));
                   console.log("and.....")
                   console.log(body);
                 }
