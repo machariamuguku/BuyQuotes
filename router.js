@@ -206,19 +206,19 @@ router.post("/pay", (req, res) => {
             );
           }
 
-            // set a timer interval to check status every 10 secconds
-            recheckStatus = setInterval(getwatchu, 10000);
+            // // set a timer interval to check status every 10 secconds
+            // recheckStatus = setInterval(getwatchu, 10000);
 
-            //set a timout to clear for the interval to prevent it from running forever
-            stopTheInterval = () => {
-              clearInterval(recheckStatus);
-            };
+            // //set a timout to clear for the interval to prevent it from running forever
+            // stopTheInterval = () => {
+            //   clearInterval(recheckStatus);
+            // };
 
-            // initialise the timout with a one minute 35 seconds timout period
-            setTimeout(stopTheInterval, 35000);
+            // // initialise the timout with a one minute 35 seconds timout period
+            // setTimeout(stopTheInterval, 35000);
 
             // //set timout for mother function to 1.6 20secs minutes
-            setTimeout(getwatchu, 20000);
+            setTimeout(getwatchu, 15000);
           }
           // If Submission to M-Pesa fails
           else {
