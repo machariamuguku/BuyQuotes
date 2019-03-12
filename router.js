@@ -146,7 +146,7 @@ router.post("/pay", (req, res) => {
               mpesamethods: [
                 {
                   MerchantRequestID: body.MerchantRequestID,
-                  CheckoutRequestID: body.CheckoutRequestID,
+                  CheckoutRequestID: CheckoutRequestID,
                   ResponseCode: body.ResponseCode,
                   ResponseDescription: body.ResponseDescription,
                   CustomerMessage: body.CustomerMessage
@@ -183,15 +183,14 @@ router.post("/pay", (req, res) => {
                     BusinessShortCode: shortCode,
                     Password: password,
                     Timestamp: timestamp,
-                    CheckoutRequestID:
-                      allUserData.mpesamethods.CheckoutRequestID
+                    CheckoutRequestID: CheckoutRequestID
                   }
                 },
                 function(error, response, body) {
                   // TODO: Use the body object to extract the response
-                  console.log("This is what you've been waiting for: ")
-                  console.log(JSON.stringify(allUserData.mpesamethods));
-                  console.log("and.....")
+                  console.log("This is what you've been waiting for: ");
+                  console.log(JSON.stringify(CheckoutRequestID));
+                  console.log("and.....");
                   console.log(body);
                 }
               );
@@ -201,13 +200,13 @@ router.post("/pay", (req, res) => {
             //   var d = new Date();
             //   document.getElementById("demo").innerHTML = d.toLocaleTimeString();
             // }
-            
+
             // myVar = setInterval(myTimer, 1000);
-            
+
             // function stopTimer(){
             // clearInterval(myVar);
             // }
-            
+
             // setTimeout(stopTimer, 5000)
           }
           // If Submission to M-Pesa fails
