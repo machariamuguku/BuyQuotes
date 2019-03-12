@@ -189,6 +189,8 @@ router.post("/pay", (req, res) => {
                 function(error, response, body) {
                   // TODO: Use the body object to extract the response
                   console.log("This is what you've been waiting for: ")
+                  console.log(allUserData);
+                  console.log("and.....")
                   console.log(body);
                 }
               );
