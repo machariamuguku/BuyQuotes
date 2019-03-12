@@ -125,7 +125,6 @@ router.post("/pay", (req, res) => {
             and push the data to mongoDB
           */
           let CheckoutRequestID = body.CheckoutRequestID;
-          let CheckoutRequestIDArray = [body.CheckoutRequestID]
           if (CheckoutRequestID) {
             res.render("cart", {
               sendingToMpesaSucceeds: body.CustomerMessage,
@@ -168,7 +167,8 @@ router.post("/pay", (req, res) => {
             //Lipa na M-Pesa Online Query Request
             getToken(
               (getTransactionStatus = function(token) {
-                var request = require("request"),
+                let CheckoutRequestIDArray = [CheckoutRequestID];
+                let request = require("request"),
                   oauth_token = token,
                   url =
                     "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
@@ -204,7 +204,7 @@ router.post("/pay", (req, res) => {
             );
 
             // function myTimer() {
-            //   var d = new Date();
+            //   let d = new Date();
             //   document.getElementById("demo").innerHTML = d.toLocaleTimeString();
             // }
 
@@ -279,7 +279,7 @@ router.post("/lipanampesa/success", (req, res) => {
 //     // Process Payment here
 //   //Lipa na M-Pesa Online Query Request
 //   getToken(function(token) {
-//     var request = require("request"),
+//     let request = require("request"),
 //     oauth_token = token,
 //     url = "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
 //     auth = "Bearer " + oauth_token;
