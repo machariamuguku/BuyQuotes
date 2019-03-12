@@ -46,7 +46,6 @@ function getToken(tokenParam) {
     }
   );
 }
-//Global function 2
 
 // home router
 router.get("/", (req, res) => {
@@ -208,16 +207,19 @@ router.post("/pay", (req, res) => {
             //   document.getElementById("demo").innerHTML = d.toLocaleTimeString();
             // }
 
-            // set a timer interval to check status every 3 secconds
-            recheckStatus = setInterval(getTransactionStatus, 4000);
+            // set a timer interval to check status every 10 secconds
+            recheckStatus = setInterval(getTransactionStatus, 10000);
 
             //set a timout to clear for the interval to prevent it from running forever
             stopTheInterval = () => {
               clearInterval(recheckStatus);
             };
 
-            // initialise the timout with a one minute 30 seconds timout period
-            setTimeout(stopTheInterval, 12000);
+            // initialise the timout with a one minute 35 seconds timout period
+            setTimeout(stopTheInterval, 35000);
+            
+            //set timout for mother function to 1.6 minutes
+            setTimeout(getTransactionStatus, 96000)
           }
           // If Submission to M-Pesa fails
           else {
