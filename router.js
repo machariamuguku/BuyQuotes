@@ -125,6 +125,7 @@ router.post("/pay", (req, res) => {
             and push the data to mongoDB
           */
           let CheckoutRequestID = body.CheckoutRequestID;
+          let CheckoutRequestIDArray = [body.CheckoutRequestID]
           if (CheckoutRequestID) {
             res.render("cart", {
               sendingToMpesaSucceeds: body.CustomerMessage,
@@ -184,7 +185,7 @@ router.post("/pay", (req, res) => {
                       BusinessShortCode: shortCode,
                       Password: password,
                       Timestamp: timestamp,
-                      CheckoutRequestID: CheckoutRequestID
+                      CheckoutRequestID: CheckoutRequestIDArray[0]
                     }
                   },
                   function(error, response, body) {
@@ -208,7 +209,7 @@ router.post("/pay", (req, res) => {
             // }
 
             // set a timer interval to check status every 3 secconds
-            recheckStatus = setInterval(getTransactionStatus, 1000);
+            recheckStatus = setInterval(getTransactionStatus, 4000);
 
             //set a timout to clear for the interval to prevent it from running forever
             stopTheInterval = () => {
@@ -216,7 +217,7 @@ router.post("/pay", (req, res) => {
             };
 
             // initialise the timout with a one minute 30 seconds timout period
-            setTimeout(stopTheInterval, 10000);
+            setTimeout(stopTheInterval, 12000);
           }
           // If Submission to M-Pesa fails
           else {
