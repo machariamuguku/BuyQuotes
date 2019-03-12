@@ -162,6 +162,7 @@ router.post("/pay", (req, res) => {
             moongoseconn.collection("QuotesCollection").insertOne(allUserData);
 
             // Go to async that waits for response from M-PESA and does things with it
+
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
             getToken(function(token) {
@@ -189,12 +190,25 @@ router.post("/pay", (req, res) => {
                 function(error, response, body) {
                   // TODO: Use the body object to extract the response
                   console.log("This is what you've been waiting for: ")
-                  console.log(JSON.stringify(allUserData.mpesamethods.CheckoutRequestID));
+                  console.log(JSON.stringify(allUserData.mpesamethods));
                   console.log("and.....")
                   console.log(body);
                 }
               );
             });
+
+            // function myTimer() {
+            //   var d = new Date();
+            //   document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+            // }
+            
+            // myVar = setInterval(myTimer, 1000);
+            
+            // function stopTimer(){
+            // clearInterval(myVar);
+            // }
+            
+            // setTimeout(stopTimer, 5000)
           }
           // If Submission to M-Pesa fails
           else {
