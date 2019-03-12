@@ -9,44 +9,6 @@ require("dotenv").config();
 //set up express router
 const router = express.Router();
 
-// Global variables
-const consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N";
-const consumer_secret = "TEYbiahbnSmUErPV";
-const url =
-  "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"; //change this after going live
-let auth =
-  "Basic " +
-  new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
-const url_for_api =
-  "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
-const shortCode = "174379"; //this is the testing shortcode change it to your own after going live
-const passkey =
-  "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"; //change this after going live
-const amount = "1";
-const callBackURL = "https://buyquotes.herokuapp.com/lipanampesa/success"; //your callback url for which to pick the json data returned
-const accountReference = "muguku.co.ke"; //any specific reference
-const transactionDesc = "Buy quotes from muguku.co.ke";
-let timestamp = moment().format("YYYYMMDDHHmmss");
-let password = base64.encode(shortCode + passkey + timestamp);
-
-// Global functions
-function getToken(tokenParam) {
-  let oauth_token;
-  request(
-    {
-      url: url,
-      headers: {
-        Authorization: auth
-      }
-    },
-    function(error, response, body) {
-      let oauth_body = JSON.parse(body);
-      oauth_token = oauth_body.access_token;
-      tokenParam(oauth_token);
-    }
-  );
-}
-
 // home router
 router.get("/", (req, res) => {
   res.render("cart");
@@ -91,6 +53,45 @@ router.post("/pay", (req, res) => {
     );
   } else {
     // Process Payment here
+
+    // Global variables
+    const consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N";
+    const consumer_secret = "TEYbiahbnSmUErPV";
+    const url =
+      "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"; //change this after going live
+    let auth =
+      "Basic " +
+      new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
+    const url_for_api =
+      "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
+    const shortCode = "174379"; //this is the testing shortcode change it to your own after going live
+    const passkey =
+      "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"; //change this after going live
+    const amount = "1";
+    const callBackURL = "https://buyquotes.herokuapp.com/lipanampesa/success"; //your callback url for which to pick the json data returned
+    const accountReference = "muguku.co.ke"; //any specific reference
+    const transactionDesc = "Buy quotes from muguku.co.ke";
+    let timestamp = moment().format("YYYYMMDDHHmmss");
+    let password = base64.encode(shortCode + passkey + timestamp);
+
+    // Global functions
+    function getToken(tokenParam) {
+      let oauth_token;
+      request(
+        {
+          url: url,
+          headers: {
+            Authorization: auth
+          }
+        },
+        function(error, response, body) {
+          let oauth_body = JSON.parse(body);
+          oauth_token = oauth_body.access_token;
+          tokenParam(oauth_token);
+        }
+      );
+    }
+
     let phoneNumber = req.body.phonenumber; //the phone number in which to send the stk push
     getToken(function(token) {
       let oauth_token = token;
@@ -217,9 +218,9 @@ router.post("/pay", (req, res) => {
 
             // initialise the timout with a one minute 35 seconds timout period
             setTimeout(stopTheInterval, 35000);
-            
+
             //set timout for mother function to 1.6 minutes
-            setTimeout(getTransactionStatus, 96000)
+            setTimeout(getTransactionStatus, 96000);
           }
           // If Submission to M-Pesa fails
           else {
