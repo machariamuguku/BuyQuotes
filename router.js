@@ -19,7 +19,6 @@ let auth =
   new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
 const url_for_api =
   "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
-let phoneNumber = req.body.phonenumber; //the phone number in which to send the stk push
 const shortCode = "174379"; //this is the testing shortcode change it to your own after going live
 const passkey =
   "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"; //change this after going live
@@ -93,6 +92,7 @@ router.post("/pay", (req, res) => {
     );
   } else {
     // Process Payment here
+    let phoneNumber = req.body.phonenumber; //the phone number in which to send the stk push
     getToken(function(token) {
       let oauth_token = token;
       let auth_for_api = "Bearer " + oauth_token;
@@ -188,6 +188,7 @@ router.post("/pay", (req, res) => {
                 },
                 function(error, response, body) {
                   // TODO: Use the body object to extract the response
+                  console.log("This is what you've been waiting for: ")
                   console.log(body);
                 }
               );
