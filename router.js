@@ -165,8 +165,8 @@ router.post("/pay", (req, res) => {
 
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
-            recheckStatus = setInterval(
-              getToken(function(token) {
+            getToken(
+              (getTransactionStatus = function(token) {
                 var request = require("request"),
                   oauth_token = token,
                   url =
@@ -199,8 +199,7 @@ router.post("/pay", (req, res) => {
                     // console.log("and.....");
                   }
                 );
-              }),
-              1000
+              })
             );
 
             // function myTimer() {
@@ -209,7 +208,7 @@ router.post("/pay", (req, res) => {
             // }
 
             // set a timer interval to check status every 3 secconds
-            //recheckStatus = setInterval(getTransactionStatus, 1000);
+            recheckStatus = setInterval(getTransactionStatus, 1000);
 
             //set a timout to clear for the interval to prevent it from running forever
             stopTheInterval = () => {
