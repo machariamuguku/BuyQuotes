@@ -165,9 +165,6 @@ router.post("/pay", (req, res) => {
 
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
-            let CheckoutRequestIDArray = [CheckoutRequestID];
-            console.log("this the arr" + CheckoutRequestIDArray);
-
             getwatchu = () => {
               getToken(function(token) {
                 let request = require("request"),
@@ -187,7 +184,7 @@ router.post("/pay", (req, res) => {
                       BusinessShortCode: shortCode,
                       Password: password,
                       Timestamp: timestamp,
-                      CheckoutRequestID: CheckoutRequestIDArray
+                      CheckoutRequestID: CheckoutRequestID
                     }
                   },
                   function(error, response, body) {
