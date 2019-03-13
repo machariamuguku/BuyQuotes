@@ -166,7 +166,7 @@ router.post("/pay", (req, res) => {
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
 
-            getwatchu = TheCheckoutRequestID => {
+            getwatchu = (TheCheckoutRequestID) => {
               getToken(function(token) {
                 let request = require("request"),
                   oauth_token = token,
