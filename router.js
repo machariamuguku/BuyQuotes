@@ -187,11 +187,11 @@ router.post("/pay", (req, res) => {
                     CheckoutRequestID: CheckoutRequestID
                   }
                 },
-                function(error, response, body) {
+                async function(error, response, body) {
                   // TODO: Use the body object to extract the response
-                 
-                 let whativebeenwaitingfor = body.ResponseCode
-                  if (whativebeenwaitingfor) {
+                  let promise = Promise.resolve(body.ResponseCode);
+                
+                  if (promise) {
                     console.log(body);
                   } else {
                     console.log("idk!!");
