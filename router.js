@@ -194,7 +194,7 @@ router.post("/pay", (req, res) => {
                   if (whativebeenwaitingfor) {
                     console.log(body);
                   } else {
-                    console.log(error);
+                    console.log("idk!!");
                   }
                   // console.log("This is what you've been waiting for: ");
                   // console.log(JSON.stringify(CheckoutRequestID));
