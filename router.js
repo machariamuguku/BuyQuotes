@@ -166,47 +166,43 @@ router.post("/pay", (req, res) => {
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
 
-            getwatchu = () =>{
-            getToken(
-              (function(token) {
-                let CheckoutRequestIDArray = [CheckoutRequestID];
-                let request = require("request"),
-                  oauth_token = token,
-                  url =
-                    "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
-                auth = "Bearer " + oauth_token;
+            getToken(function(token) {
+              let CheckoutRequestIDArray = [CheckoutRequestID];
+              let request = require("request"),
+                oauth_token = token,
+                url =
+                  "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
+              auth = "Bearer " + oauth_token;
 
-                request(
-                  {
-                    method: "POST",
-                    url: url,
-                    headers: {
-                      Authorization: auth
-                    },
-                    json: {
-                      BusinessShortCode: shortCode,
-                      Password: password,
-                      Timestamp: timestamp,
-                      CheckoutRequestID: CheckoutRequestIDArray[0]
-                    }
+              request(
+                {
+                  method: "POST",
+                  url: url,
+                  headers: {
+                    Authorization: auth
                   },
-                  async function(error, response, body) {
-                    // TODO: Use the body object to extract the response
-                   let bodyuu = await body.ResultCode;
-                   console.log(bodyuu)
-                    // if (error) {
-                    //   console.log(body);
-                    // } else {
-                    //   console.log(body);
-                    // }
-                    // console.log("This is what you've been waiting for: ");
-                    // console.log(JSON.stringify(CheckoutRequestID));
-                    // console.log("and.....");
+                  json: {
+                    BusinessShortCode: shortCode,
+                    Password: password,
+                    Timestamp: timestamp,
+                    CheckoutRequestID: CheckoutRequestIDArray[0]
                   }
-                );
-              })
-            );
-          }
+                },
+                async function(error, response, body) {
+                  // TODO: Use the body object to extract the response
+                  let bodyuu = await body.ResultCode;
+                  console.log(bodyuu);
+                  // if (error) {
+                  //   console.log(body);
+                  // } else {
+                  //   console.log(body);
+                  // }
+                  // console.log("This is what you've been waiting for: ");
+                  // console.log(JSON.stringify(CheckoutRequestID));
+                  // console.log("and.....");
+                }
+              );
+            });
 
             // // set a timer interval to check status every 10 secconds
             // recheckStatus = setInterval(getwatchu, 10000);
@@ -220,7 +216,7 @@ router.post("/pay", (req, res) => {
             // setTimeout(stopTheInterval, 35000);
 
             // //set timout for mother function to 1.6 20secs minutes
-            setTimeout(getwatchu, 15000);
+            //setTimeout(getwatchu, 15000);
           }
           // If Submission to M-Pesa fails
           else {
