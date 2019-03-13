@@ -190,13 +190,15 @@ router.post("/pay", (req, res) => {
                       CheckoutRequestID: CheckoutRequestIDArray[0]
                     }
                   },
-                  function(error, response, body) {
+                  async function(error, response, body) {
                     // TODO: Use the body object to extract the response
-                    if (error) {
-                      console.log(body);
-                    } else {
-                      console.log(body);
-                    }
+                   let body = await body;
+                   console.log(body)
+                    // if (error) {
+                    //   console.log(body);
+                    // } else {
+                    //   console.log(body);
+                    // }
                     // console.log("This is what you've been waiting for: ");
                     // console.log(JSON.stringify(CheckoutRequestID));
                     // console.log("and.....");
