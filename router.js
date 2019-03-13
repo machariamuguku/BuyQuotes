@@ -165,7 +165,7 @@ router.post("/pay", (req, res) => {
 
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
-            getwatchu = () => {
+            getTheTransactionStatus = () => {
               getToken(function(token) {
                 let request = require("request"),
                   oauth_token = token,
@@ -189,14 +189,17 @@ router.post("/pay", (req, res) => {
                   },
                   function(error, response, body) {
                     // TODO: Use the body object to extract the response
-                    if (error) {
-                      console.log("the error " + JSON.stringify(error));
-                      console.log("the success " +JSON.stringify(body));
-                      console.log("the response " + JSON.stringify(response));
+                    if (body.ResponseCode) {
+                      console.log("the success " + JSON.stringify(body));
+                      // Render the success message to the front end
+                      res.render("cart", {
+                        lipanampesaResponse: lipanaMpesaResponse,
+                        title:
+                          "Money recived!; we done did it!; whose the goat fam?",
+                        cssmessageclass: "message is-success"
+                      });
                     } else {
-                      console.log("the success " +JSON.stringify(body));
                       console.log("the error " + JSON.stringify(error));
-                      console.log("the response " + JSON.stringify(response));
                     }
                     // console.log("This is what you've been waiting for: ");
                     // console.log(JSON.stringify(CheckoutRequestID));
@@ -218,7 +221,7 @@ router.post("/pay", (req, res) => {
             // setTimeout(stopTheInterval, 21000);
 
             //2.1 minutes
-            setTimeout(getwatchu, 60000);
+            setTimeout(getTheTransactionStatus, 60000);
           }
           // If Submission to M-Pesa fails
           else {
