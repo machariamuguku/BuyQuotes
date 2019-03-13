@@ -187,7 +187,7 @@ router.post("/pay", (req, res) => {
                       BusinessShortCode: shortCode,
                       Password: password,
                       Timestamp: timestamp,
-                      CheckoutRequestID: CheckoutRequestIDArray[0]
+                      CheckoutRequestID: CheckoutRequestIDArray
                     }
                   },
                   function(error, response, body) {
