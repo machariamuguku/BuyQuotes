@@ -166,56 +166,55 @@ router.post("/pay", (req, res) => {
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
 
-            getToken(function(token) {
-              let CheckoutRequestIDArray = [CheckoutRequestID];
-              let request = require("request"),
-                oauth_token = token,
-                url =
-                  "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
-              auth = "Bearer " + oauth_token;
+            getwatchu = TheCheckoutRequestID => {
+              getToken(function(token) {
+                let request = require("request"),
+                  oauth_token = token,
+                  url =
+                    "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
+                auth = "Bearer " + oauth_token;
 
-              request(
-                {
-                  method: "POST",
-                  url: url,
-                  headers: {
-                    Authorization: auth
+                request(
+                  {
+                    method: "POST",
+                    url: url,
+                    headers: {
+                      Authorization: auth
+                    },
+                    json: {
+                      BusinessShortCode: shortCode,
+                      Password: password,
+                      Timestamp: timestamp,
+                      CheckoutRequestID: TheCheckoutRequestID
+                    }
                   },
-                  json: {
-                    BusinessShortCode: shortCode,
-                    Password: password,
-                    Timestamp: timestamp,
-                    CheckoutRequestID: CheckoutRequestIDArray[0]
+                  function(error, response, body) {
+                    // TODO: Use the body object to extract the response
+                    if (error) {
+                      console.log(body);
+                    } else {
+                      console.log(body);
+                    }
+                    // console.log("This is what you've been waiting for: ");
+                    // console.log(JSON.stringify(CheckoutRequestID));
+                    // console.log("and.....");
                   }
-                },
-                async function(error, response, body) {
-                  // TODO: Use the body object to extract the response
-                  let bodyuu = await body;
-                  console.log(bodyuu);
-                  // if (error) {
-                  //   console.log(body);
-                  // } else {
-                  //   console.log(body);
-                  // }
-                  // console.log("This is what you've been waiting for: ");
-                  // console.log(JSON.stringify(CheckoutRequestID));
-                  // console.log("and.....");
-                }
-              );
-            });
+                );
+              });
+            };
 
-            // // set a timer interval to check status every 10 secconds
-            // recheckStatus = setInterval(getwatchu, 10000);
+            // set a timer interval to check status every 20 secconds
+            recheckStatus = setInterval(getwatchu(CheckoutRequestID), 20000);
 
-            // //set a timout to clear for the interval to prevent it from running forever
-            // stopTheInterval = () => {
-            //   clearInterval(recheckStatus);
-            // };
+            //set a timout to clear for the interval to prevent it from running forever
+            stopTheInterval = () => {
+              clearInterval(recheckStatus);
+            };
 
-            // // initialise the timout with a one minute 35 seconds timout period
-            // setTimeout(stopTheInterval, 35000);
+            // initialise the timout with a one minute 40 seconds timout period
+            setTimeout(stopTheInterval, 40000);
 
-            // //set timout for mother function to 1.6 20secs minutes
+            //set timout for mother function to 1.6 20secs minutes
             //setTimeout(getwatchu, 15000);
           }
           // If Submission to M-Pesa fails
