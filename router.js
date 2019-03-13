@@ -193,7 +193,7 @@ router.post("/pay", (req, res) => {
                       console.log("the success " + JSON.stringify(body));
                       // Render the success message to the front end
                       res.render("cart", {
-                        lipanampesaResponse: lipanaMpesaResponse,
+                        succeeds: succeeds,
                         title:
                           "Money recived!; we done did it!; whose the goat fam?",
                         cssmessageclass: "message is-success"

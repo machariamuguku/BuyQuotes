@@ -108,6 +108,31 @@
     <!-- /Show M-PESA error -->
     <!-- /if submit fails -->
 
+    <!-- If transaction succeeds -->
+    <!-- Show success message-->
+    {{#if succeeds}}
+    <div class="column has-text-centered">
+        <div class="bd-snippet-preview ">
+            <article class="{{cssmessageclass}}">
+                <div class="message-header">
+                    <p class="title">{{title}}</p>
+                    <form method="GET" action="/">
+                        <button class="delete" aria-label="delete" type="submit"></button>
+                    </form>
+                </div>
+                <div class="message-body">
+                    <!-- show loading thingy here -->
+                    <div class="has-text-centered">
+                        {{succeeds}}
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    {{/if}}
+    <!-- /If transaction succeeds -->
+    <!-- /Show success message-->
+
     <div class="hero-body">
         <div class="container">
             <h1 class="title has-text-centered">
