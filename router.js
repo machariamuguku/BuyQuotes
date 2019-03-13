@@ -166,8 +166,7 @@ router.post("/pay", (req, res) => {
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
 
-            // set a timer interval to check status every 20 secconds
-            recheckStatus = setInterval(
+            getwatchu = () => {
               getToken(function(token) {
                 let request = require("request"),
                   oauth_token = token,
@@ -192,7 +191,7 @@ router.post("/pay", (req, res) => {
                   function(error, response, body) {
                     // TODO: Use the body object to extract the response
                     if (error) {
-                      console.log(body);
+                      console.log(error);
                     } else {
                       console.log(body);
                     }
@@ -201,20 +200,22 @@ router.post("/pay", (req, res) => {
                     // console.log("and.....");
                   }
                 );
-              }),
-              20000
-            );
-
-            //set a timout to clear for the interval to prevent it from running forever
-            stopTheInterval = () => {
-              clearInterval(recheckStatus);
+              });
             };
 
-            // initialise the timout with a one minute 40 seconds timout period
-            setTimeout(stopTheInterval, 40000);
+            // // set a timer interval to check status every 10 secconds
+            // recheckStatus = setInterval(getwatchu, 10000);
 
-            //set timout for mother function to 1.6 20secs minutes
-            //setTimeout(getwatchu, 15000);
+            // //set a timout to clear for the interval to prevent it from running forever
+            // stopTheInterval = () => {
+            //   clearInterval(recheckStatus);
+            // };
+
+            // // initialise the timout with a one minute 35 seconds timout period
+            // setTimeout(stopTheInterval, 35000);
+
+            // //set timout for mother function to 1.6 20secs minutes
+            setTimeout(getwatchu, 15000);
           }
           // If Submission to M-Pesa fails
           else {
