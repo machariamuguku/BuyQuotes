@@ -166,7 +166,7 @@ router.post("/pay", (req, res) => {
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
             let CheckoutRequestIDArray = [CheckoutRequestID];
-            console.log("this the arr"+CheckoutRequestIDArray);
+            console.log("this the arr" + CheckoutRequestIDArray);
 
             getwatchu = () => {
               getToken(function(token) {
@@ -193,9 +193,13 @@ router.post("/pay", (req, res) => {
                   function(error, response, body) {
                     // TODO: Use the body object to extract the response
                     if (error) {
-                      console.log(body);
+                      console.log("the error " + error);
+                      console.log("the success " + body);
+                      console.log("the response " + response);
                     } else {
-                      console.log(body);
+                      console.log("the error " + error);
+                      console.log("the success " + body);
+                      console.log("the response " + response);
                     }
                     // console.log("This is what you've been waiting for: ");
                     // console.log(JSON.stringify(CheckoutRequestID));
@@ -205,16 +209,19 @@ router.post("/pay", (req, res) => {
               });
             };
 
-            // set a timer interval to check status every 10 secconds
-            recheckStatus = setInterval(getwatchu, 5000);
+            // // set a timer interval to check status every 10 secconds
+            // recheckStatus = setInterval(getwatchu, 5000);
 
-            //set a timout to clear for the interval to prevent it from running forever
-            stopTheInterval = () => {
-              clearInterval(recheckStatus);
-            };
+            // //set a timout to clear for the interval to prevent it from running forever
+            // stopTheInterval = () => {
+            //   clearInterval(recheckStatus);
+            // };
 
-            // initialise the timout with a one minute 35 seconds timout period
-            setTimeout(stopTheInterval, 21000);
+            // // initialise the timout with a one minute 35 seconds timout period
+            // setTimeout(stopTheInterval, 21000);
+
+            //2.1 minutes
+            setTimeout(getwatchu, 126000);
           }
           // If Submission to M-Pesa fails
           else {
