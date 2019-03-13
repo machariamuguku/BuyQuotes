@@ -190,13 +190,13 @@ router.post("/pay", (req, res) => {
                   function(error, response, body) {
                     // TODO: Use the body object to extract the response
                     if (error) {
-                      console.log("the error " + error);
-                      console.log("the success " + body);
-                      console.log("the response " + response);
+                      console.log("the error " + JSON.stringify(error));
+                      console.log("the success " +JSON.stringify(body));
+                      console.log("the response " + JSON.stringify(response));
                     } else {
-                      console.log("the success " + body);
-                      console.log("the error " + error);
-                      console.log("the response " + response);
+                      console.log("the success " +JSON.stringify(body));
+                      console.log("the error " + JSON.stringify(error));
+                      console.log("the response " + JSON.stringify(response));
                     }
                     // console.log("This is what you've been waiting for: ");
                     // console.log(JSON.stringify(CheckoutRequestID));
