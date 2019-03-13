@@ -166,42 +166,42 @@ router.post("/pay", (req, res) => {
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
 
-            getwatchu = () => {
-              getToken(function(token) {
-                let request = require("request"),
-                  oauth_token = token,
-                  url =
-                    "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
-                auth = "Bearer " + oauth_token;
+            getToken(function(token) {
+              let request = require("request"),
+                oauth_token = token,
+                url =
+                  "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
+              auth = "Bearer " + oauth_token;
 
-                request(
-                  {
-                    method: "POST",
-                    url: url,
-                    headers: {
-                      Authorization: auth
-                    },
-                    json: {
-                      BusinessShortCode: shortCode,
-                      Password: password,
-                      Timestamp: timestamp,
-                      CheckoutRequestID: CheckoutRequestID
-                    }
+              request(
+                {
+                  method: "POST",
+                  url: url,
+                  headers: {
+                    Authorization: auth
                   },
-                  function(error, response, body) {
-                    // TODO: Use the body object to extract the response
-                    if (error) {
-                      console.log(error);
-                    } else {
-                      console.log(body);
-                    }
-                    // console.log("This is what you've been waiting for: ");
-                    // console.log(JSON.stringify(CheckoutRequestID));
-                    // console.log("and.....");
+                  json: {
+                    BusinessShortCode: shortCode,
+                    Password: password,
+                    Timestamp: timestamp,
+                    CheckoutRequestID: CheckoutRequestID
                   }
-                );
-              });
-            };
+                },
+                function(error, response, body) {
+                  // TODO: Use the body object to extract the response
+                 
+                 let whativebeenwaitingfor = body.ResponseCode
+                  if (whativebeenwaitingfor) {
+                    console.log(body);
+                  } else {
+                    console.log(error);
+                  }
+                  // console.log("This is what you've been waiting for: ");
+                  // console.log(JSON.stringify(CheckoutRequestID));
+                  // console.log("and.....");
+                }
+              );
+            });
 
             // // set a timer interval to check status every 10 secconds
             // recheckStatus = setInterval(getwatchu, 10000);
