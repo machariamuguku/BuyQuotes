@@ -167,6 +167,7 @@ router.post("/pay", (req, res) => {
             //Lipa na M-Pesa Online Query Request
             getTheTransactionStatus = () => {
               getToken(function(token) {
+                let succeeds;
                 let request = require("request"),
                   oauth_token = token,
                   url =
