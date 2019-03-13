@@ -190,7 +190,7 @@ router.post("/pay", (req, res) => {
                 },
                 async function(error, response, body) {
                   // TODO: Use the body object to extract the response
-                  let bodyuu = await body.ResultCode;
+                  let bodyuu = await body;
                   console.log(bodyuu);
                   // if (error) {
                   //   console.log(body);
