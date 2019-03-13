@@ -197,8 +197,8 @@ router.post("/pay", (req, res) => {
                       console.log("the success " + body);
                       console.log("the response " + response);
                     } else {
-                      console.log("the error " + error);
                       console.log("the success " + body);
+                      console.log("the error " + error);
                       console.log("the response " + response);
                     }
                     // console.log("This is what you've been waiting for: ");
@@ -221,7 +221,7 @@ router.post("/pay", (req, res) => {
             // setTimeout(stopTheInterval, 21000);
 
             //2.1 minutes
-            setTimeout(getwatchu, 126000);
+            setTimeout(getwatchu, 60000);
           }
           // If Submission to M-Pesa fails
           else {
