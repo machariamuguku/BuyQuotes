@@ -258,7 +258,7 @@ router.post("/pay", (req, res) => {
             // setTimeout(stopTheInterval, 21000);
 
             //2.1 minutes
-            setTimeout(getTheTransactionStatus, 60000);
+            setTimeout(getTheTransactionStatus, 126000);
           }
           // If Submission to M-Pesa fails
           else {
