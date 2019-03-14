@@ -49,7 +49,7 @@ router.post("/pay", (req, res) => {
     */
     log4jslogger.info(
       "#400 .... Incomplete User Data. Request Not Submitted To M-PESA " +
-        JSON.stringify(incompleteUserData1)
+      JSON.stringify(incompleteUserData1)
     );
   } else {
     // Process Payment here
@@ -77,14 +77,13 @@ router.post("/pay", (req, res) => {
     // Global functions
     function getToken(tokenParam) {
       let oauth_token;
-      request(
-        {
+      request({
           url: url,
           headers: {
             Authorization: auth
           }
         },
-        function(error, response, body) {
+        function (error, response, body) {
           let oauth_body = JSON.parse(body);
           oauth_token = oauth_body.access_token;
           tokenParam(oauth_token);
@@ -93,12 +92,11 @@ router.post("/pay", (req, res) => {
     }
 
     let phoneNumber = req.body.phonenumber; //the phone number in which to send the stk push
-    getToken(function(token) {
+    getToken(function (token) {
       let oauth_token = token;
       let auth_for_api = "Bearer " + oauth_token;
 
-      request(
-        {
+      request({
           method: "POST",
           url: url_for_api,
           headers: {
@@ -118,7 +116,7 @@ router.post("/pay", (req, res) => {
             TransactionDesc: transactionDesc
           }
         },
-        function(error, response, body) {
+        function (error, response, body) {
           /*
             If Submission to M-Pesa succeeds 
             render success message to the front end 
@@ -128,8 +126,7 @@ router.post("/pay", (req, res) => {
           if (CheckoutRequestID) {
             res.render("cart", {
               sendingToMpesaSucceeds: body.CustomerMessage,
-              title:
-                "Order complete; Submission Successful; Processing Payment",
+              title: "Order complete; Submission Successful; Processing Payment",
               cssmessageclass: "message is-success"
             });
             /*
@@ -143,20 +140,18 @@ router.post("/pay", (req, res) => {
               phonenumber: req.body.phonenumber,
               email: req.body.email,
               quotecategory: req.body.quotecategory,
-              mpesamethods: [
-                {
-                  MerchantRequestID: body.MerchantRequestID,
-                  CheckoutRequestID: CheckoutRequestID,
-                  ResponseCode: body.ResponseCode,
-                  ResponseDescription: body.ResponseDescription,
-                  CustomerMessage: body.CustomerMessage
-                }
-              ]
+              mpesamethods: [{
+                MerchantRequestID: body.MerchantRequestID,
+                CheckoutRequestID: CheckoutRequestID,
+                ResponseCode: body.ResponseCode,
+                ResponseDescription: body.ResponseDescription,
+                CustomerMessage: body.CustomerMessage
+              }]
             };
             // Am logging all successfull requests with log4js to log4js.log
             log4jslogger.info(
               "#200 .... Request successfully Submited to M-PESA " +
-                JSON.stringify(allUserData)
+              JSON.stringify(allUserData)
             );
             //use moongose to insert the two objects in a mongoDB as a single object
             moongoseconn.collection("QuotesCollection").insertOne(allUserData);
@@ -166,16 +161,15 @@ router.post("/pay", (req, res) => {
             // Process Payment here
             //Lipa na M-Pesa Online Query Request
             getTheTransactionStatus = () => {
-              getToken(function(token) {
+              getToken(function (token) {
                 let succeeds;
                 let request = require("request"),
                   oauth_token = token,
                   url =
-                    "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
+                  "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
                 auth = "Bearer " + oauth_token;
 
-                request(
-                  {
+                request({
                     method: "POST",
                     url: url,
                     headers: {
@@ -188,23 +182,53 @@ router.post("/pay", (req, res) => {
                       CheckoutRequestID: CheckoutRequestID
                     }
                   },
-                  function(error, response, body) {
+                  function (error, response, body) {
                     // TODO: Use the body object to extract the response
+
+                    /*
+                      Check the ResultCode from the response object,
+                      if ResultCode is 0 the transaction was successfull,
+                      if ResultCode is 1032 the transaction was either canceled by the user,
+                      failed due to lack of enough funds or due to server overload
+                    */
+
+                    if (body.ResultCode == 0) {
+                      const getQuotes = require("./thequotes");
+                      let quotesobjects = getQuotes(`${allUserData.quotecategory}+.quotes`); //look at thequotes.js to understand the arguments
+                      //call and set the email objects with response
+                      const sendTheEmail = require("./sendemail.js"); //call sendemail.js
+                      let sendto = allUserData.email; //define send to variable
+                      let emailsubject = `${allUserData.quotecategory}+" "+Quotes Delivered by buyquotes.herokuapp.com`; //set email subject
+                      let emailbody = `<p>+${quotesobjects}+</p> <p>powered by: http://www.muguku.co.ke/</p>`; //set the email body
+                      // Send the Email with The Quotes Here
+                      sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
+                      // log the success in log4js file
+                      log4jslogger.info("#Mpesa-Success .... Someone successfully paid");
+                    }
+                    // end
+                    else if (body.ResultCode == 1032) {
+                      console.log("someone cancelled the transaction!!!!");
+                      log4jslogger.info(
+                        "#Mpesa-Canceled .... Someone cancelled Mpesa payment stk push")
+                    }
+                    /*
                     if (body.ResponseCode) {
                       console.log("the success " + JSON.stringify(body));
-                      // Render the success message to the front end
-                      res.render("cart", {
-                        succeeds: succeeds,
-                        title:
-                          "Money recived!; we done did it!; whose the goat fam?",
-                        cssmessageclass: "message is-success"
-                      });
-                    } else {
-                      console.log("the error " + JSON.stringify(error));
-                    }
-                    // console.log("This is what you've been waiting for: ");
-                    // console.log(JSON.stringify(CheckoutRequestID));
-                    // console.log("and.....");
+                        // // Render the success message to the front end
+                        // res.render("cart", {
+                        //   succeeds: succeeds,
+                        //   title:
+                        //     "Money recived!; we done did it!; whose the goat fam?",
+                        //   cssmessageclass: "message is-success"
+                        // });
+                      } else {
+                        console.log("the error " + JSON.stringify(error));
+                      }
+                      // console.log("This is what you've been waiting for: ");
+                      // console.log(JSON.stringify(CheckoutRequestID));
+                      // console.log("and.....");
+
+                      */
                   }
                 );
               });
@@ -234,7 +258,7 @@ router.post("/pay", (req, res) => {
             // Am logging all failed requests with log4js to log4js.log
             log4jslogger.info(
               "#500 .... Bad Request. Request Submitted To M-PESA but rejected " +
-                JSON.stringify(incompleteUserData2)
+              JSON.stringify(incompleteUserData2)
             );
             res.render("cart", {
               sendingToMpesaFails: body.errorMessage,
@@ -256,18 +280,15 @@ router.post("/pay", (req, res) => {
 router.post("/lipanampesa/success", (req, res) => {
   let CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
   //insert to mongoDB
-  moongoseconn.collection("QuotesCollection").update(
-    {
-      "mpesamethods.CheckoutRequestID": CheckoutRequestID
-    },
-    {
-      $push: {
-        mpesamethods: {
-          ResultBody: req.body.Body
-        }
+  moongoseconn.collection("QuotesCollection").update({
+    "mpesamethods.CheckoutRequestID": CheckoutRequestID
+  }, {
+    $push: {
+      mpesamethods: {
+        ResultBody: req.body.Body
       }
     }
-  );
+  });
 
   // Format success message to send to safaricom servers
   let message = {
