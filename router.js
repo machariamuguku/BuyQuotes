@@ -194,12 +194,12 @@ router.post("/pay", (req, res) => {
 
                     if (body.ResultCode == 0) {
                       const getQuotes = require("./thequotes");
-                      let quotesobjects = getQuotes(`${allUserData.quotecategory}+.quotes`); //look at thequotes.js to understand the arguments
+                      let quotesobjects = getQuotes(`${allUserData.quotecategory}.quotes`); //look at thequotes.js to understand the arguments
                       //call and set the email objects with response
                       const sendTheEmail = require("./sendemail.js"); //call sendemail.js
                       let sendto = allUserData.email; //define send to variable
-                      let emailsubject = `${allUserData.quotecategory}+" "+Quotes Delivered by buyquotes.herokuapp.com`; //set email subject
-                      let emailbody = `<p>+${quotesobjects}+</p> <p>powered by: http://www.muguku.co.ke/</p>`; //set the email body
+                      let emailsubject = `${allUserData.quotecategory} Quotes Delivered by buyquotes.herokuapp.com`; //set email subject
+                      let emailbody = `<p>${quotesobjects}</p> <p>powered by: http://www.muguku.co.ke/</p>`; //set the email body
                       // Send the Email with The Quotes Here
                       sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
                       // log the success in log4js file
