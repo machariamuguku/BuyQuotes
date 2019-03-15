@@ -210,7 +210,7 @@ router.post("/pay", (req, res) => {
                       //call and set the email objects with response
                       const sendTheEmail = require("./sendemail.js"); //call sendemail.js
                       let sendto = allUserData.email; //define send to variable
-                      let emailsubject = `${allUserData.quotecategory} Quotes Delivered by buyquotes.herokuapp.com`; //set email subject
+                      let emailsubject = `${allUserData.quotecategory}: Quotes Delivered by buyquotes.herokuapp.com`; //set email subject
                       let emailbody = `<p>${quotesobjects}</p> <p>powered by: http://www.muguku.co.ke/</p>`; //set the email body
                       // Send the Email with The Quotes Here
                       sendTheEmail.sendEmail(sendto, emailsubject, emailbody);
@@ -246,18 +246,24 @@ router.post("/pay", (req, res) => {
               });
             };
 
-            // // set a timer interval to check status every 10 secconds
-            // recheckStatus = setInterval(getwatchu, 5000);
+            /*
+            // set a timer interval to check status every 10 secconds
+            recheckStatus = setInterval(getwatchu, 5000);
 
-            // //set a timout to clear for the interval to prevent it from running forever
-            // stopTheInterval = () => {
-            //   clearInterval(recheckStatus);
-            // };
+            //set a timout to clear for the interval to prevent it from running forever
+            stopTheInterval = () => {
+              clearInterval(recheckStatus);
+            };
 
-            // // initialise the timout with a one minute 35 seconds timout period
-            // setTimeout(stopTheInterval, 21000);
+            // initialise the timout with a one minute 35 seconds timout period
+            setTimeout(stopTheInterval, 21000);
+            */
 
-            //2.1 minutes
+            /*
+            set a timout to run the function after 2.1 minutes
+            this was informed by the fact that...
+            the stk push time's out after 2 minutes of inactivity
+            */
             setTimeout(getTheTransactionStatus, 126000);
           }
           // If Submission to M-Pesa fails
