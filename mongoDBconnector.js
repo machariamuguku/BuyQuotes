@@ -1,3 +1,5 @@
+//Needless to say, this connects to mongoDB Atlas servers
+
 const mongoose = require("mongoose");
 require('dotenv').config();
 

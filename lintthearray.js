@@ -1,3 +1,9 @@
+/*
+N/B: I only used this file to perfect extracting quote passages 
+from the quotes array in the response object as below
+*/
+
+
 var response = {
     "_id": {
         "$oid": "5c7fa325ded0c7681d8899bc"
@@ -27,10 +33,12 @@ let responseArray = response.quotes;
 //console.log(responseArray[0].quote+" ---"+responseArray[0].author),console.log(responseArray[1].quote+" ---"+responseArray[1].author)
 //solva 1
 
-let joram;
-responseArray.forEach((junior)=>{joram=junior})
+let extracted;
+responseArray.forEach((junior) => {
+    extracted = junior
+})
 
-console.log(joram)
+console.log(extracted)
 // responseArray.forEach((object) => {
 //     return (object.quote+""+object.author);
 // });

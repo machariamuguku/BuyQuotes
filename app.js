@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname, "./src/frontend/resources")));
 // initialize morgan to log output to a file
 var fs = require('fs');
 
+//Logs requests to morganlogs.log file using npm packgage morgan
 app.use(morganlogger('common', {
     stream: fs.createWriteStream('./morganlogs.log', {
         flags: 'a'

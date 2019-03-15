@@ -1,3 +1,8 @@
+/*
+N/B: Use this file to insert quote objects to MongoDB
+It borrows from the mongo connector file
+*/
+
 const moongoseconn = require("./mongoDBconnector");
 
 // The object to insert

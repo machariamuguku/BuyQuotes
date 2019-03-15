@@ -1,3 +1,5 @@
+//Actual nodemailer file
+
 const nodemailer = require("nodemailer");
 const log4jslogger = require("./log4js");
 require('dotenv').config();

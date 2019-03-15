@@ -1,7 +1,7 @@
 {
   "name": "buyquotes",
   "version": "1.0.0",
-  "description": "buy quotes app",
+  "description": "buy quotes with M-PESA app",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
   "keywords": [
     "fullstack"
   ],
-  "author": "http://muguku.co.ke",
+  "author": "http://www.muguku.co.ke",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/machariamuguku/BuyQuotes/issues"
