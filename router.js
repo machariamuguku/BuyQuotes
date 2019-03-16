@@ -262,7 +262,8 @@ router.post("/pay", (req, res) => {
             /*
             set a timout to run the function after 2.1 minutes
             this was informed by the fact that...
-            the stk push time's out after 2 minutes of inactivity
+            the stk push time's out after 2 minutes of inactivity.
+            The transaction will likely either have succeeded or failed at this point
             */
             setTimeout(getTheTransactionStatus, 126000);
           }
