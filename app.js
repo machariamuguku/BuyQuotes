@@ -5,6 +5,7 @@ const morganlogger = require('morgan');
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const expressValidator = require("express-validator");
+const log4jslogger = require("./log4js");
 
 // Require router module here ...
 const router = require('./router');
@@ -71,5 +72,6 @@ app.use((err, req, res) => {
 const server = http.createServer(app);
 server.listen(port);
 server.on('listening', () => {
+    log4jslogger.info("#Node-200 .... The Node-Express app started successfuly");
     console.log('The Node-Express app started successfuly');
 });

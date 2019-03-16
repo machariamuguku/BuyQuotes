@@ -2,6 +2,7 @@
 
 const mongoose = require("mongoose");
 require('dotenv').config();
+const log4jslogger = require("./log4js");
 
 /*
   add moongose and connect to db
@@ -31,9 +32,11 @@ mongoose
   .then(
     () => {
       console.log("The Database connection is successful");
+      log4jslogger.info("#Mongo-200 .... The Database connection is successful");
     },
     err => {
       console.log("Error when connecting to the database " + err);
+      log4jslogger.info("#Mongo-400 .... Error when connecting to the database " + err);
     }
   );
 //set moongoose connection
