@@ -4,7 +4,7 @@ BuyQuotes is a Nodejs eCommerce app that enables you to buy quotes [online](http
 
 ## Tech Stack
 
-Nodejs, Express, Handlebars, MongoDB, Nodemailer, Other [npm](https://www.npmjs.com/) packages
+Nodejs, Express, Handlebars, Bulma, MongoDB, Nodemailer, Other [npm](https://www.npmjs.com/) packages
 
 ## Installation
 
@@ -52,22 +52,21 @@ git push heroku master
 - Press the Order button.
 - If no errors, a success message is rendered to the site
  ![picture alt](src/frontend/resources/images/screenshots/homepage_success.png "homepage with success message")
- and an stk push message is sent to your phone with preset payment options.
+- And an stk push message is sent to your phone with preset payment options.
  ![picture alt](src/frontend/resources/images/screenshots/STK_push_phone_message.png "STK Push Mpesa Phone message")
 - Enter your M-PESA pin and press OK.
 
 - If everything is successful, after two minutes, your quotes are delivered to your email inbox.
 
 ## Screenshots
-1. MongoDB Atlas Document entry
- ![picture alt](src/frontend/resources/images/screenshots/Mongo_atlas_document.png "Mongo atlas document")
-
-2. Successful Email Sent
+1. Successful Email Sent
  ![picture alt](src/frontend/resources/images/screenshots/Successfull_email_sent.png "Successfull email sent")
 
-3. Error handling
+2. Error handling
 ![picture alt](src/frontend/resources/images/screenshots/homepage_with_errors.png "homepage with error message")
 
+3. MongoDB Atlas Document entry
+ ![picture alt](src/frontend/resources/images/screenshots/Mongo_atlas_document.png "Mongo atlas document")
 
 ## Contributing
 
