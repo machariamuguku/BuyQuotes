@@ -21,15 +21,15 @@ let sendTheEmail = {
             secure: true,
             auth: {
                 type: 'OAuth2',
-                clientId: '833392259723-ij0tsn3m6vi3kbtspq0nhtvcbcbgmmfq.apps.googleusercontent.com',
-                clientSecret: '0il4HxucpWXGRJxVUzJdR-16'
+                clientId: 'YOUR_CLIENT_ID_HERE',
+                clientSecret: 'YOUR_CLIENT_SECRET_HERE'
             }
         });
 
         // send the email
         transporter.sendMail({
                 // sender's email address (same as transporter's user)
-                from: '"Macharia Muguku" <machariamuguku@gmail.com>',
+                from: '"YOUR USERNAME" <your_address@gmail.com>',
                 // list of receivers
                 to: sendto,
                 // The Email Subject
@@ -37,9 +37,9 @@ let sendTheEmail = {
                 //The Email message (Email body)
                 html: emailbody,
                 auth: {
-                    user: "machariamuguku@gmail.com",
-                    refreshToken: "1/gk2_eNGDxf71iFzLIHSd0kfZ6fmUOUfwRRlAYpLIlx8-tiG4kkxX3tWb1JSu0dgb",
-                    accessToken: "ya29.GlvDBotl6_i5Uaw1Q-U9sIecjeewkly6eVKQjbvTrKPxKYjaWAm6yhYdhiZ-ifli7YZtoLVJMsu2N1ZYR0mLqhrDzXJuUCddd-a8RBKPqJVjWGfi-oTP97Ko8RHr",
+                    user: "your_address@gmail.com",
+                    refreshToken: "YOUR_REFRESH_TOKEN_HERE",
+                    accessToken: "YOUR_ACCESS_TOKEN_HERE",
                     expires: 3600
                 }
             },

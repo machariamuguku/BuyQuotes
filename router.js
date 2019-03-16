@@ -55,8 +55,8 @@ router.post("/pay", (req, res) => {
     // Process Payment here
 
     // Global variables
-    const consumer_key = "9cTmL66nSbBGUHpnDJoxzjpiGV7SAd9N";
-    const consumer_secret = "TEYbiahbnSmUErPV";
+    const consumer_key = "YOUR_CONSUMER_KEY_HERE";
+    const consumer_secret = "YOUR_CONSUMER_SECRET_HERE";
     const url =
       "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"; //change this after going live
     let auth =
@@ -64,13 +64,12 @@ router.post("/pay", (req, res) => {
       new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
     const url_for_api =
       "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"; //change this after going live
-    const shortCode = "174379"; //this is the testing shortcode change it to your own after going live
-    const passkey =
-      "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"; //change this after going live
-    const amount = "1";
-    const callBackURL = "https://buyquotes.herokuapp.com/lipanampesa/success"; //your callback url for which to pick the json data returned
-    const accountReference = "muguku.co.ke"; //any specific reference
-    const transactionDesc = "Buy quotes from muguku.co.ke";
+    const shortCode = "YOUR_TEST_SHORTCODE_HERE"; //this is the testing shortcode change it to your own after going live
+    const passkey = "YOUR_PASSKEY_HERE"; //change this after going live
+    const amount = "10";
+    const callBackURL = "YOUR_CALLBACK_URL_HERE"; //your callback url for which to pick the json data returned
+    const accountReference = "YOUR_ACCOUNT_REFERENCE_HERE"; //any specific reference
+    const transactionDesc = "YOUR_TRANSACTION_DESCRIPTION_HERE";
     let timestamp = moment().format("YYYYMMDDHHmmss");
     let password = base64.encode(shortCode + passkey + timestamp);
 
@@ -320,36 +319,6 @@ router.post("/lipanampesa/success", (req, res) => {
 });
 
 // //Process the payments here
-// router.post("/sendquotes", (req, res) => {
-//     // Process Payment here
-//   //Lipa na M-Pesa Online Query Request
-//   getToken(function(token) {
-//     let request = require("request"),
-//     oauth_token = token,
-//     url = "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
-//     auth = "Bearer " + oauth_token;
-
-//     request(
-//       {
-//         method: "POST",
-//         url: url,
-//         headers: {
-//           Authorization: auth
-//         },
-//         json: {
-//           BusinessShortCode: shortCode,
-//           Password: password,
-//           Timestamp: timestamp,
-//           CheckoutRequestID: " "
-//         }
-//       },
-//       function(error, response, body) {
-//         // TODO: Use the body object to extract the response
-//         console.log(body);
-//       }
-//     );
-//   },
-
 //   /*
 //     Check the ResultCode from the response object,
 //     if ResultCode is 0 the transaction was successfull,

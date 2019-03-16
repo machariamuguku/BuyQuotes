@@ -10,21 +10,19 @@ const log4jslogger = require("./log4js");
 */
 
 // let mongoport = 27017; //mongo port for local connection
-// let mongourl = "mongodb://localhost:"+mongoport+"/buyquotes" || process.env.MongoDBAtlasConnectionURL;
+// let mongourl = "mongodb://localhost:"+mongoport+"/buyquotes" || The_ONLINE_MongoDB_Atlas_ConnectionURL_HERE;
 
 /*
   N/B change characters reserved for URL's in conection string password
   with their respective encoding 
-  eg # with %23 and @ with %40 
+  eg encoding the '#' with %23 and '@' with %40 
 */
 //MOngo Atlas
-// let mongourl = process.env.MongoDBAtlasConnectionURL;
+// let mongourl = The_ONLINE_MongoDB_Atlas_ConnectionURL_HERE;
 
-//Mongo Clever Cloud
+//You can also use Mongo Clever Cloud
 
-//old
-
-let mongourl = "mongodb+srv://muguku:%40chiever%231@muguku-ddg7d.mongodb.net/buyquotes?retryWrites=true";
+let mongourl = "The_ONLINE_MongoDB_Atlas_ConnectionURL_HERE";
 mongoose
   .connect(mongourl, {
     useNewUrlParser: true
