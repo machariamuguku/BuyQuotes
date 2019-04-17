@@ -2,6 +2,9 @@
 
 BuyQuotes is a Nodejs eCommerce app that enables you to buy quotes [online](https://buyquotes.herokuapp.com) using [MPESA](https://en.wikipedia.org/wiki/M-Pesa) on your phone and have them delivered to your email.
 
+## Demo Site
+[buyquotes.herokuapp.com](https://buyquotes.herokuapp.com)
+
 ## Tech Stack
 
 Nodejs, Express, Handlebars, Bulma, MongoDB, Nodemailer, Other [npm](https://www.npmjs.com/) packages
