@@ -2,6 +2,10 @@
 
 BuyQuotes is a Nodejs eCommerce app that enables you to buy quotes [online](https://buyquotes.herokuapp.com) using [MPESA](https://en.wikipedia.org/wiki/M-Pesa) on your phone and have them delivered to your email.
 
+## Demo Site
+
+[buyquotes.herokuapp.com](https://buyquotes.herokuapp.com)
+
 ## Tech Stack
 
 Nodejs, Express, Handlebars, Bulma, MongoDB, Nodemailer, Other [npm](https://www.npmjs.com/) packages
@@ -41,14 +45,15 @@ git push heroku master
 ```
 
 ## Usage
+
 - Go to [The site url](https://buyquotes.herokuapp.com/).
 ![picture alt](src/frontend/resources/images/screenshots/homepage.png "Landing page")
 - Select a quote category from the drop down.
 - Enter your email address.
 - Enter a valid, M-Pesa registered, Kenyan phone number in the following format
-```
-254712345678
-```
+
+> 254712345678
+
 - Press the Order button.
 - If no errors, a success message is rendered to the site
  ![picture alt](src/frontend/resources/images/screenshots/homepage_success.png "homepage with success message")
@@ -59,6 +64,7 @@ git push heroku master
 - If everything is successful, after two minutes, your quotes are delivered to your email inbox.
 
 ## Screenshots
+
 1. Successful Email Sent
  ![picture alt](src/frontend/resources/images/screenshots/Successfull_email_sent.png "Successfull email sent")
 
