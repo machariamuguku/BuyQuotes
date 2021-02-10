@@ -2,6 +2,8 @@
 
 BuyQuotes is a Nodejs eCommerce app that enables you to buy quotes [online](https://buyquotes.herokuapp.com) using [MPESA](https://en.wikipedia.org/wiki/M-Pesa) on your phone and have them delivered to your email.
 
+<a href="https://www.linkedin.com/posts/machariamuguku_nodejs-express-mpesa-activity-6512662936660516865-EXb3">Linked-in post on the motivation and what I learnt doing this Project</a>
+
 ## Demo Site
 
 [buyquotes.herokuapp.com](https://buyquotes.herokuapp.com)
@@ -47,7 +49,7 @@ git push heroku master
 ## Usage
 
 - Go to [The site url](https://buyquotes.herokuapp.com/).
-![picture alt](src/frontend/resources/images/screenshots/homepage.png "Landing page")
+  ![picture alt](src/frontend/resources/images/screenshots/homepage.png "Landing page")
 - Select a quote category from the drop down.
 - Enter your email address.
 - Enter a valid, M-Pesa registered, Kenyan phone number in the following format
@@ -56,9 +58,9 @@ git push heroku master
 
 - Press the Order button.
 - If no errors, a success message is rendered to the site
- ![picture alt](src/frontend/resources/images/screenshots/homepage_success.png "homepage with success message")
+  ![picture alt](src/frontend/resources/images/screenshots/homepage_success.png "homepage with success message")
 - And an stk push message is sent to your phone with preset payment options.
- ![picture alt](src/frontend/resources/images/screenshots/STK_push_phone_message.png "STK Push Mpesa Phone message")
+  ![picture alt](src/frontend/resources/images/screenshots/STK_push_phone_message.png "STK Push Mpesa Phone message")
 - Enter your M-PESA pin and press OK.
 
 - If everything is successful, after two minutes, your quotes are delivered to your email inbox.
@@ -66,13 +68,13 @@ git push heroku master
 ## Screenshots
 
 1. Successful Email Sent
- ![picture alt](src/frontend/resources/images/screenshots/Successfull_email_sent.png "Successfull email sent")
+   ![picture alt](src/frontend/resources/images/screenshots/Successfull_email_sent.png "Successfull email sent")
 
 2. Error handling
-![picture alt](src/frontend/resources/images/screenshots/homepage_with_errors.png "homepage with error message")
+   ![picture alt](src/frontend/resources/images/screenshots/homepage_with_errors.png "homepage with error message")
 
 3. MongoDB Atlas Document entry
- ![picture alt](src/frontend/resources/images/screenshots/Mongo_atlas_document.png "Mongo atlas document")
+   ![picture alt](src/frontend/resources/images/screenshots/Mongo_atlas_document.png "Mongo atlas document")
 
 ## Contributing
 
