@@ -21,11 +21,11 @@
   "homepage": "https://github.com/machariamuguku/BuyQuotes#readme",
   "dependencies": {
     "base-64": "^0.1.0",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "expect.js": "^0.3.1",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "express-validator": "^5.3.1",
     "hbs": "^4.0.2",
     "i": "^0.3.6",
